@@ -2,6 +2,10 @@ using ABSystem.WebApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
+/**
+ * @Author Julius.B
+ * @Added 09/11/2024
+ */
 namespace ABSystem.WebApp.Controllers
 {
     public class HomeController : Controller
@@ -21,6 +25,13 @@ namespace ABSystem.WebApp.Controllers
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        [HttpGet]
+        [Route("/admin/dashboard")]
+        public IActionResult AdminDashboard()
+        {
+            return PartialView("~/Views/Admin/Dashboard.cshtml");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

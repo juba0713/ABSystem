@@ -1,0 +1,27 @@
+﻿.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background: #1B4965;
+    padding: 10px;
+    box-sizing: border-box; 
+}
+
+.header div {
+    display: flex;
+    align-items: center; 
+    gap: 20px;
+}
+
+.header img {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.header div:nth-child(1) img{
+    width: 60px;
+    height: 60px;
+}
