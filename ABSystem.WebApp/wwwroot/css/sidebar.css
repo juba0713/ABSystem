@@ -1,0 +1,120 @@
+﻿.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
+    height: 100%;
+    width: 15%;
+}
+
+
+
+.sidebar-1,
+.sidebar-2 {
+    background: #ffffff;
+    border-radius: 0.521vw;
+    width: 100%;
+    padding: 0.521vw;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: #A9A9A9;
+}
+
+.sidebar-1 div:nth-child(2){
+    font-size: 1.2vw;
+}
+
+.sidebar-1 {
+    height: 7%;
+    box-sizing: border-box;
+    padding: 0;
+    justify-content: center;
+}
+
+.sidebar-2 {
+    height: 93%;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 1vw 1vw;
+    color: #A9A9A9;
+    box-sizing: border-box;
+}
+
+.sidebar-2 div {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    cursor: pointer;
+}
+
+.sidebar-2 div:nth-child(1) {
+    flex-direction: column;
+    gap: 1vw;
+}
+
+.sidebar-2 div:nth-child(1) a {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1vw;
+    cursor: pointer;
+    padding: 0.156vw 0.156vw;
+    box-sizing: border-box;
+    border-radius: 0.521vw;
+    width: 100%;
+}
+
+.sidebar-2 div:nth-child(1) a:hover {
+    background: #62B6CB;
+    color: #000;
+}
+
+.sidebar-2 div:nth-child(1) a:hover div {
+    color: #000;
+}
+
+.sidebar-2 div:nth-child(1) a:hover svg path {
+    stroke: #000;
+}
+
+.sidebar-2 div:nth-child(1) a:hover .users-list path {
+    fill: #000;
+}
+
+.sidebar-2 div:nth-child(2) a {
+    display: flex;
+    gap: 1vw;
+    flex-direction: row;
+    align-items: center;
+    padding: 0.156vw 0.156vw;
+    box-sizing: border-box;
+    border-radius: 0.521vw;
+    width: 100%;
+}
+
+.sidebar-2 div:nth-child(2) a:hover {
+    background: #62B6CB;
+    color: #000;
+}
+
+.sidebar-2 div:nth-child(2) a:hover a {
+    color: #000;
+}
+
+.sidebar-2 div:nth-child(2) a:hover svg path {
+    stroke: #000;
+}
+
+.sidebar svg{
+    width: 1.2vw;
+    height: 1.2vw;
+}
+
+
+

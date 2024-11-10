@@ -1,0 +1,107 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@using ABSystem.Services.Objects;
+@model IEnumerable<UserObj>;
+
+<html>
+<head>
+    <title>Users List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/common.css" />
+    <link rel="stylesheet" href="~/css/header.css" />
+    <link rel="stylesheet" href="~/css/sidebar.css" />
+    <link rel="stylesheet" href="~/css/admin/userslist.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css"/>
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <partial name="Header" />
+        <div class="content">
+            <partial name="Sidebar" />
+            <div class="main-content">
+                <div class="sub-header">
+                    <div>Users</div>
+                    <a class="action-btn">Back</a>
+                </div>
+                <div class="sub-content">
+                    <div class="create-buttons">
+                        <a href="/admin/users-list/add-user" class="action-btn">Add User</a>
+                        <div class="filters">
+                            <div class="search-field">
+                                <label>Search</label>
+                                <input type="text" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-content">
+                        <table id="user-table">
+                            
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Role</th>                                  
+                                    <th>Created Date</th>
+                                    <th>Updated Date</th>
+                                    <th>Status</th>
+                                    <th></th>
+                                </tr>                          
+                            </thead>
+                            <tbody>                         
+                                @if (Model != null && Model.Any())
+                                {
+                                    foreach (var user in Model)
+                                    {
+                                        <tr>
+                                            <td>@($"{user.FirstName} {user.LastName}")</td>
+                                            <td>@user.EmailAddress</td>
+                                            <td>@user.Role</td>
+                                            <td>@user.CreatedDate.ToString("MMM d, yyyy")</td>
+                                            <td>@user.UpdatedDate.ToString("MMM d, yyyy")</td>
+                                            <td><div class="status active">Active</div></td>
+                                            <td class="group-button">
+                                                <a class="edit-btn">
+                                                    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M16 2.0003C16.2626 1.73766 16.5744 1.52932 16.9176 1.38718C17.2608 1.24503 17.6286 1.17188 18 1.17188C18.3714 1.17187 18.7392 1.24503 19.0824 1.38718C19.4256 1.52932 19.7374 1.73766 20 2.0003C20.2626 2.26295 20.471 2.57475 20.6131 2.91791C20.7553 3.26107 20.8284 3.62887 20.8284 4.0003C20.8284 4.37174 20.7553 4.73953 20.6131 5.08269C20.471 5.42585 20.2626 5.73766 20 6.0003L6.5 19.5003L1 21.0003L2.5 15.5003L16 2.0003Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                    </svg>
+                                                </a>
+                                                <div class="delete-btn">
+                                                    <svg width="16" height="22" viewBox="0 0 16 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M15 5V19C15 19.5304 14.7893 20.0391 14.4142 20.4142C14.0391 20.7893 13.5304 21 13 21H3C2.46957 21 1.96086 20.7893 1.58579 20.4142C1.21071 20.0391 1 19.5304 1 19V5M4 5V3C4 2.46957 4.21071 1.96086 4.58579 1.58579C4.96086 1.21071 5.46957 1 6 1H10C10.5304 1 11.0391 1.21071 11.4142 1.58579C11.7893 1.96086 12 2.46957 12 3V5" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                    </svg>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="7" class="text-center">No users found.</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <div class="group-button prev-next">
+                            <button class="action-btn">Prev</button>
+                            <select>
+                                <option>1</option>
+                            </select>
+                            <button class="action-btn">Next</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+
+    </script>
+</body>
+</html>

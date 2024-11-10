@@ -1,0 +1,71 @@
+﻿@using ABSystem.Services.Dto;
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model UserDto
+<html>
+<head>
+    <title>Users List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/common.css" />
+    <link rel="stylesheet" href="~/css/header.css" />
+    <link rel="stylesheet" href="~/css/sidebar.css" />
+    <link rel="stylesheet" href="~/css/admin/adduser.css" />
+</head>
+<body>
+    <div class="container">
+        <partial name="Header" />
+        <div class="content">
+            <partial name="Sidebar" />
+            <div class="main-content">
+                <div class="sub-header">
+                    <div>User - Add</div>
+                    <a class="action-btn" href="/admin/users-list">Back</a>
+                </div>
+                <div class="sub-content">
+                    <form asp-controller="User" asp-action="AddUser" method="POST">
+                        <div class="error">
+                            All fields are required!
+                        </div>
+                        <div class="outer-container">
+                            <div class="input-group">
+                                <div>
+                                    <label>Email</label>
+                                    <input type="text" name="EmailAddress" />
+                                </div>
+                                <div>
+                                    <label>First Name</label>
+                                    <input type="text" name="FirstName" />
+                                </div>
+                                <div>
+                                    <label>Last Name</label>
+                                    <input type="text" name="LastName" />
+                                </div>
+                                <div>
+                                    <label>Password</label>
+                                    <input type="password" name="Password" />
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <div>
+                                    <label>User Role</label>
+                                    <select name="Role">
+                                        <option value="USER">User</option>
+                                        <option value="ADMIN">Admin</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <button type="submit" class="action-btn">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
