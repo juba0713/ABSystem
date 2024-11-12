@@ -9,6 +9,8 @@ namespace ABSystem.WebApp
         public Program()
         {
             CreateMap<UserDto, User>();
+
+            CreateMap<User, UserDto>();
         }        
     }
 }

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ABSystem.Data\ABSystem.Data.csproj" />
+    <ProjectReference Include="..\ABSystem.Resources\ABSystem.Resources.csproj" />
     <ProjectReference Include="..\ABSystem.Services\ABSystem.Services.csproj" />
   </ItemGroup>
 

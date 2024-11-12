@@ -16,5 +16,9 @@ namespace ABSystem.Data.Interfaces
         public void AddUser(User user);
 
         public IEnumerable<User> GetUsers();
+
+        public void DeleteUser(int userId);
+
+        public User? GetUserById(int userId);
     }
 }

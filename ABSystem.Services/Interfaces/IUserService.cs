@@ -1,4 +1,5 @@
-﻿using ABSystem.Services.Dto;
+﻿using ABSystem.Data.Models;
+using ABSystem.Services.Dto;
 using ABSystem.Services.Objects;
 using System;
 using System.Collections.Generic;
@@ -17,5 +18,9 @@ namespace ABSystem.Services.Interfaces
         public void AddUser(UserDto dto);
 
         public IEnumerable<UserObj> GetUsers();
+
+        public void DeleteUser(int userId);
+
+        public UserDto? GetUserById(int userId);
     }
 }

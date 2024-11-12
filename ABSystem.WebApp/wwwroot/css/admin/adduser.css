@@ -6,7 +6,6 @@
     box-sizing: border-box;
     width: 100%;
     background: #fff;
-    border-radius: 0.521vw;
     font-size: 1.2vw;
     height: 7%;
 }
@@ -18,7 +17,6 @@
     justify-content: center;
     width: 100%;
     background: #fff;
-    border-radius: 0.521vw;
     height: 93%;
     padding: 1vw;
     box-sizing: border-box;
@@ -57,7 +55,6 @@ form {
 .input-group input,
 .input-group select {
     width: 100%;
-    border-radius: 1vw;
     padding: 0.521vw;
     border: 0.052vw solid #A9A9A9;
 }

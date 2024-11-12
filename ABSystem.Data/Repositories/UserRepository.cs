@@ -27,6 +27,26 @@ namespace ABSystem.Data.Repositories
             _context.SaveChanges();
         }
 
+        public void DeleteUser(int userId)
+        {
+            var user = _context.Users.Find(userId);
+
+            if (user != null) { 
+                _context.Users.Remove(user);
+                _context.SaveChanges();
+            }
+        }
+
+        public User? GetUserById(int userId)
+        {
+
+            var user = _context.Users.Find(userId);
+
+            Console.WriteLine("EMAIL EMAIL: " + user?.EmailAddress);
+
+            return user;
+        }
+
         public IEnumerable<User> GetUsers()
         {
             return _context.Users.ToList();

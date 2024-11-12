@@ -39,6 +39,27 @@ namespace ABSystem.Services.Services
             _userRepository.AddUser(user);
         }
 
+        public void DeleteUser(int userId)
+        {
+            _userRepository.DeleteUser(userId);
+        }
+
+        public UserDto? GetUserById(int userId)
+        {
+            var user = _userRepository.GetUserById(userId);
+
+            if(user == null)
+            {
+                return null;
+            }
+
+            var userDto = new UserDto();
+
+             _mapper.Map(user, userDto);
+
+            return userDto;
+        }
+
         public IEnumerable<UserObj> GetUsers()
         {
             var users = _userRepository.GetUsers();

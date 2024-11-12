@@ -6,9 +6,8 @@
     box-sizing: border-box;
     width: 100%;
     background: #fff;
-    border-radius: 0.521vw;
     font-size: 1.2vw;
-    height: 7%;
+    height: 3vw;
 }
 
 .sub-content {
@@ -16,7 +15,6 @@
     flex-direction: column;
     width: 100%;
     background: #fff;
-    border-radius: 0.521vw;
     height: 93%;
     padding: 1vw;
     box-sizing: border-box;
@@ -25,14 +23,17 @@
 
 .create-buttons{
     width: 100%;
-    height: 5%;
+    height: 3vw;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .filters{
     height: 100%;
     width: 20%;
+    display: flex;
+    align-items: center;
 }
 
 .search-field{
@@ -43,10 +44,15 @@
 
 .create-buttons input {
     width: 100%;
-    border-radius: 1vw;
     padding: 0.4vw 0.521vw;
     border: 0.052vw solid #A9A9A9;
     box-sizing: border-box;
+    height: 2vw;
+}
+
+label{
+    margin: 0;
+    padding: 0;
 }
 
 .table-content {
@@ -62,7 +68,7 @@
 
 table {
     width: 100%;
-
+    font-size: 1vw;
     border-collapse: collapse;
 }
 
@@ -78,11 +84,17 @@ th{
 
 td {
     white-space: nowrap;
+    font-size: 1vw !important;
 }
 
 td {
     padding: 0.3vw 0;
     box-sizing: border-box;
+}
+
+.centered{
+    display: flex;
+    justify-content: center;
 }
 
 .edit-btn,
@@ -91,7 +103,6 @@ td {
     display: flex;
     justify-content: center;
     align-items: center;   
-    border-radius: 0.5vw;
     padding: 0.3vw;
     box-sizing: border-box;
 }
@@ -124,10 +135,14 @@ td svg {
 }
 
 .status {
-    border-radius: 1vw;
     padding: 0.3vw;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     box-sizing: border-box;
+    height: 1.5vw;
+    width: 6vw;
 }
 
 .active {
@@ -136,6 +151,12 @@ td svg {
 
 .inactive {
     background: #FD4F4F;
+}
+
+
+thead tr {
+    background: #1B4965;
+    color: #fff;
 }
 
 tbody tr:nth-child(odd) {
@@ -152,7 +173,6 @@ tbody tr:nth-child(odd) {
     font-size: 0.8vw;
     padding: 0.3vw;
     box-sizing: border-box;
-    border-radius: 0.5vw;
     border: 0.052vw solid #A9A9A9;
     height: 100%;
 }

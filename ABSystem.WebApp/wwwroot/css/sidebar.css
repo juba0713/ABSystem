@@ -11,7 +11,6 @@
 .sidebar-1,
 .sidebar-2 {
     background: #ffffff;
-    border-radius: 0.521vw;
     width: 100%;
     padding: 0.521vw;
     box-sizing: border-box;
@@ -31,7 +30,7 @@
 }
 
 .sidebar-1 {
-    height: 7%;
+    height: 3vw;
     box-sizing: border-box;
     padding: 0;
     justify-content: center;
@@ -94,7 +93,6 @@
     align-items: center;
     padding: 0.156vw 0.156vw;
     box-sizing: border-box;
-    border-radius: 0.521vw;
     width: 100%;
 }
 

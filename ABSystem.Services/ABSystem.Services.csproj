@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ABSystem.Data\ABSystem.Data.csproj" />
+    <ProjectReference Include="..\ABSystem.Resources\ABSystem.Resources.csproj" />
   </ItemGroup>
 
 </Project>
