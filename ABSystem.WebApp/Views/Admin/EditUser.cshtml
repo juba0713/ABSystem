@@ -52,16 +52,17 @@
             <partial name="Sidebar" />
             <div class="main-content">
                 <div class="sub-header border-radius-5">
-                    <div>User - Add</div>
+                    <div>User - Edit</div>
                     <a class="action-btn border-radius-5" href="/admin/users-list">Back</a>
                 </div>
                 <div class="sub-content border-radius-5">
-                    <form asp-controller="User" asp-action="AddUser" method="POST">
+                    <form asp-controller="User" asp-action="EditUser" method="POST">
+                        <input type="hidden" asp-for="Id";
                         <div class="outer-container">
                             <div class="input-group">
                                 <div>
                                     <label>Email</label>
-                                    <input type="text" asp-for="EmailAddress" class="border-radius-5"  />
+                                    <input type="text" asp-for="EmailAddress" class="border-radius-5"/>
 
                                     <span asp-validation-for="EmailAddress" class="error"></span>
                                 </div>

@@ -5,23 +5,24 @@
     align-items: center;
     width: 100%;
     background: #1B4965;
-    padding: 10px;
-    box-sizing: border-box; 
+    padding: 0.521vw;
+    box-sizing: border-box;
+    height: 4vw;
 }
 
 .header div {
     display: flex;
-    align-items: center; 
-    gap: 20px;
+    align-items: center;
+    gap: 1.042vw;
 }
 
 .header img {
-    width: 40px;
-    height: 40px;
+    width: 2.083vw;
+    height: 2.083vw;
     cursor: pointer;
 }
 
-.header div:nth-child(1) img{
-    width: 60px;
-    height: 60px;
+.header div:nth-child(1) img {
+    width: 3.125vw;
+    height: 3.125vw;
 }
