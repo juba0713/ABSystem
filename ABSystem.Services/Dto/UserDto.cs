@@ -1,5 +1,5 @@
-﻿using ABSystem.Resources.Annotations;
-using ABSystem.Resources.Constants;
+﻿using ABSystem.Resources.Constants;
+using ABSystem.Services.Annotations;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -22,7 +22,7 @@ namespace ABSystem.Services.Dto
         [EmailAddress(ErrorMessage = "*" + MessageConstant.EMAIL_FORMAT)]
         public string? EmailAddress { get; set; }
 
-        [Required(ErrorMessage = "*" + MessageConstant.PASSWORD_REQUIRED)]
+        [PasswordRequiredOnCreate(ErrorMessage = "*" + MessageConstant.PASSWORD_REQUIRED)]
         [StringLength(100, MinimumLength = 6, ErrorMessage = "*" + MessageConstant.PASSWORD_LENGTH)]
         public string? Password { get; set; }
 

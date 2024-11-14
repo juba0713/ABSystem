@@ -27,6 +27,24 @@ namespace ABSystem.Data.Repositories
             _context.SaveChanges();
         }
 
+        public void EditUser(User user)
+        {
+            var existingUser = _context.Users.FirstOrDefault(s => s.Id.Equals(user.Id));
+
+            if (existingUser == null)
+            {
+                throw new Exception("Student not found");
+            }
+
+            existingUser.EmailAddress = user.EmailAddress;
+            existingUser.FirstName = user.FirstName;
+            existingUser.LastName = user.LastName;
+            existingUser.Role = user.Role;
+            existingUser.UpdatedDate = user.UpdatedDate;
+
+            _context.SaveChanges();
+        }
+
         public void DeleteUser(int userId)
         {
             var user = _context.Users.Find(userId);
