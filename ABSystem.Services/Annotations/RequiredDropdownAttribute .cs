@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ABSystem.Resources.Annotations
+namespace ABSystem.Services.Annotations
 {
     public class RequiredDropdownAttribute : ValidationAttribute
     {

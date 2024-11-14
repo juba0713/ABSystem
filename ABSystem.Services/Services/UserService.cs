@@ -44,6 +44,16 @@ namespace ABSystem.Services.Services
             _userRepository.DeleteUser(userId);
         }
 
+        public void EditUser(UserDto dto)
+        {
+            var user = new User();
+
+            _mapper.Map(dto, user);
+            user.UpdatedDate = DateTime.Now;
+
+            _userRepository.EditUser(user);
+        }
+
         public UserDto? GetUserById(int userId)
         {
             var user = _userRepository.GetUserById(userId);

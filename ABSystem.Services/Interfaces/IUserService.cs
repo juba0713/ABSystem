@@ -17,6 +17,8 @@ namespace ABSystem.Services.Interfaces
     {
         public void AddUser(UserDto dto);
 
+        public void EditUser(UserDto dto);
+
         public IEnumerable<UserObj> GetUsers();
 
         public void DeleteUser(int userId);

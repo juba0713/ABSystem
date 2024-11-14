@@ -48,9 +48,6 @@ namespace ABSystem.WebApp.Controllers
                 return RedirectToAction("UsersList");
             }
 
-            Console.WriteLine("Id: " + userDto.Id);
-            Console.WriteLine("Email: " + userDto.EmailAddress);
-
             return PartialView("~/Views/Admin/EditUser.cshtml", userDto);
         }
 
@@ -69,6 +66,24 @@ namespace ABSystem.WebApp.Controllers
             _userService.AddUser(dto);
 
             TempData["SuccessMessage"] = MessageConstant.ADDED_USER;
+
+            return RedirectToAction("UsersList");
+        }
+
+        [HttpPost]
+        [Route("/admin/users-list/edit-user")]
+        public IActionResult EditUser(UserDto dto)
+        {
+
+            if (!ModelState.IsValid)
+            {
+
+                return PartialView("~/Views/Admin/EditUser.cshtml", dto);
+            }
+
+            _userService.EditUser(dto);
+
+            TempData["SuccessMessage"] = MessageConstant.EDITED_USER;
 
             return RedirectToAction("UsersList");
         }
