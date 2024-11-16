@@ -1,0 +1,125 @@
+﻿body, html {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    font-family: 'Montserrat', sans-serif; /* Set your default font */
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.left-content{
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+    gap: 1vw;
+    font-size: 2vw;
+    width: 50%;
+}
+
+
+
+.left-content img{
+    width: 100%;
+}
+
+.right-content {
+    background: #BEE9E8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+
+.login-content {
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
+    justify-content: center;
+    align-items: center;
+    width: 30vw;
+    height: 30vw;
+    border-radius: 0.26vw;
+}
+
+.title{
+    font-size: 2vw;
+}
+
+.fields{
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
+}
+
+.input-field{
+    display: flex;
+    flex-direction: column;
+    gap: 0.2vw;
+}
+
+.input-field input {
+    padding: 0.5vw;
+    width: 20vw;
+    box-sizing: border-box;
+    border: 0.052vw solid #A9A9A9;
+    outline: none;
+    border-radius: 0.26vw;
+}
+
+.button-group {
+    width: 20vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1vw;
+}
+
+a {
+    text-decoration: none;
+}
+
+.button-group a{
+    font-weight: 600;   
+}
+
+.action-btn{
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+    background: #90F0EE;
+    border-radius: 0.26vw;
+    padding: 0.521vw;
+    box-sizing: border-box;
+    width: 100%;
+    height: 2vw;
+    cursor: pointer;
+    font-size: 1vw;
+    color: #000;
+    border: none;
+    box-sizing: border-box;
+    align-items: center;
+}
+
+.action-btn:hover {
+    background: #62B6CB;
+    text-decoration: none;
+    color: #000;
+}
+
+.demo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.accounts{
+    display: flex;
+}

@@ -85,7 +85,7 @@ namespace ABSystem.Services.Services
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Role = user.Role,
-                EmailAddress = user.EmailAddress,
+                Email = user.Email,
                 CreatedDate = user.CreatedDate,
                 UpdatedDate = user.UpdatedDate
             });

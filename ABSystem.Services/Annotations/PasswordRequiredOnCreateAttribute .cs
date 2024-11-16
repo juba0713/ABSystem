@@ -15,8 +15,6 @@ namespace ABSystem.Services.Annotations
             // Access the object instance being validated
             var instance = validationContext.ObjectInstance as UserDto;
 
-            Console.WriteLine("ID: " + instance.Id);
-
             // Assume that Id == 0 means it's a new record (create operation)
             if (instance != null && instance.Id == 0)
             {
