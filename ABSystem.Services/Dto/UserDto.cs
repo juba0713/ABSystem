@@ -4,8 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 /**
  * @Author Julius.B
@@ -20,7 +18,7 @@ namespace ABSystem.Services.Dto
 
         [Required(ErrorMessage = "*" + MessageConstant.EMAIL_REQUIRED)]
         [EmailAddress(ErrorMessage = "*" + MessageConstant.EMAIL_FORMAT)]
-        public string? EmailAddress { get; set; }
+        public string? Email { get; set; }
 
         [PasswordRequiredOnCreate(ErrorMessage = "*" + MessageConstant.PASSWORD_REQUIRED)]
         [StringLength(100, MinimumLength = 6, ErrorMessage = "*" + MessageConstant.PASSWORD_LENGTH)]

@@ -22,5 +22,7 @@ namespace ABSystem.Data.Interfaces
         public void DeleteUser(int userId);
 
         public User? GetUserById(int userId);
+
+        public User? GetUserByEmail(string email);
     }
 }
