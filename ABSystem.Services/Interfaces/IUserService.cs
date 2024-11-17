@@ -18,11 +18,11 @@ namespace ABSystem.Services.Interfaces
 
         public Task RegisterUser(RegisterDto dto);
 
-        public Task<bool> AddUser(UserDto dto);
+        public Task AddUser(UserDto dto);
 
-        public void EditUser(UserDto dto);
+        public Task EditUser(UserDto dto);
 
-        public IEnumerable<UserObj> GetUsers();
+        public Task<IEnumerable<UserObj>> GetUsers();
 
         public Task DeleteUser(string userId);
 

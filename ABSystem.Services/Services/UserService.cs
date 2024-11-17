@@ -8,6 +8,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,6 +47,8 @@ namespace ABSystem.Services.Services
             user.IsDeleted = 0;
             user.LockoutEnabled = false;
 
+            Console.WriteLine("-------------Id: " + user.Id);
+
             var creationResult = await _userManager.CreateAsync(user, dto.Password);
 
             if(!creationResult.Succeeded)
@@ -62,7 +65,7 @@ namespace ABSystem.Services.Services
 
         }
 
-        public async Task<bool> AddUser(UserDto dto)
+        public async Task AddUser(UserDto dto)
         {
             var user = new User();
 
@@ -70,12 +73,27 @@ namespace ABSystem.Services.Services
             user.CreatedDate = DateTime.Now;
             user.UpdatedDate = DateTime.Now;
             user.IsDeleted = 0;
+            user.LockoutEnabled = false;
 
-            /*_userRepository.AddUser(user);*/
+            Console.WriteLine("-------------Id 1: " + user.Id);
+        
+            user.Id = Guid.NewGuid().ToString(); // Assign a new ID if not auto-generated
+           
+            Console.WriteLine("-------------Id 2: " + user.Id);
 
-            var result = await _userManager.CreateAsync(user, dto.Password);
+            var creationResult = await _userManager.CreateAsync(user, dto.Password);
 
-            return result.Succeeded;
+            if (!creationResult.Succeeded)
+            {
+                throw new Exception($"User creation failed. Errors");
+            }
+
+            var roleResult = await _userManager.AddToRoleAsync(user, dto.Role);
+
+            if (!roleResult.Succeeded)
+            {
+                throw new Exception($"Role creation failed. Errors");
+            }
         }
 
         public async Task DeleteUser(string userId)
@@ -96,14 +114,50 @@ namespace ABSystem.Services.Services
         }
 
 
-        public void EditUser(UserDto dto)
+        public async Task EditUser(UserDto dto)
         {
-            var user = new User();
+            // Fetch the existing user by ID
+            var user = await _userManager.FindByIdAsync(dto.Id);
+
+            if (user == null)
+            {
+                throw new Exception("User not found.");
+            }
 
             _mapper.Map(dto, user);
             user.UpdatedDate = DateTime.Now;
 
-            _userRepository.EditUser(user);
+            // Optionally update the password
+            if (!string.IsNullOrEmpty(dto.Password))
+            {
+                var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+                var passwordResult = await _userManager.ResetPasswordAsync(user, token, dto.Password);
+
+                if (!passwordResult.Succeeded)
+                {
+                    throw new Exception("Failed to update the password.");
+                }
+            }
+
+            // Update the user in the database
+            var updateResult = await _userManager.UpdateAsync(user);
+
+            if (!updateResult.Succeeded)
+            {
+                throw new Exception("Failed to update the user.");
+            }
+
+            if (!string.IsNullOrEmpty(dto.Role))
+            {
+                var currentRoles = await _userManager.GetRolesAsync(user);
+                await _userManager.RemoveFromRolesAsync(user, currentRoles);
+                var roleResult = await _userManager.AddToRoleAsync(user, dto.Role);
+
+                if (!roleResult.Succeeded)
+                {
+                    throw new Exception("Failed to update the role.");
+                }
+            }
         }
 
         public async Task<UserDto> GetUserById(string userId)
@@ -119,30 +173,46 @@ namespace ABSystem.Services.Services
 
              _mapper.Map(user, userDto);
 
+            var roles = await _userManager.GetRolesAsync(user);
+
+            userDto.Role = string.Join(", ", roles);
+
             return userDto;
         }
 
-        public IEnumerable<UserObj> GetUsers()
+        public async Task<IEnumerable<UserObj>> GetUsers()
         {
-            var users = _userRepository.GetUsers();
+            var users = _userRepository.GetUsers(); // Assuming this fetches all users from the database.
 
             if (!users.Any())
             {
                 return new List<UserObj>();
             }
 
-            var usersList = users.Select(user => new UserObj
+            var usersList = new List<UserObj>();
+
+            foreach (var user in users)
             {
-                Id = user.Id,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                //Role = user.Role,
-                Email = user.Email,
-                CreatedDate = user.CreatedDate,
-                UpdatedDate = user.UpdatedDate
-            });
+                // Retrieve roles for the user
+                var roles = await _userManager.GetRolesAsync(user);
+
+                // Map user and roles to UserObj
+                var userObj = new UserObj
+                {
+                    Id = user.Id,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Role = string.Join(", ", roles), // Concatenate roles if there are multiple
+                    Email = user.Email,
+                    CreatedDate = user.CreatedDate,
+                    UpdatedDate = user.UpdatedDate
+                };
+
+                usersList.Add(userObj);
+            }
 
             return usersList;
         }
+
     }
 }

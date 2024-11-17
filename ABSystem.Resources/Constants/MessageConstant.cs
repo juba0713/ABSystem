@@ -33,7 +33,7 @@ namespace ABSystem.Resources.Constants
 
         public const string DELETED_USER = "A user has been deleted successfully";
 
-        public const string EDITED_USER = "A has been edited successfully";
+        public const string EDITED_USER = "A user has been edited successfully";
 
         
     }

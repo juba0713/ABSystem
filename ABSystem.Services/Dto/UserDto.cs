@@ -14,7 +14,7 @@ namespace ABSystem.Services.Dto
     public class UserDto
     {
 
-        public Guid? Id { get; set; }
+        public String? Id { get; set; }
 
         [Required(ErrorMessage = "*" + MessageConstant.EMAIL_REQUIRED)]
         [EmailAddress(ErrorMessage = "*" + MessageConstant.EMAIL_FORMAT)]

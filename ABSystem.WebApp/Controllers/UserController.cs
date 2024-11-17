@@ -23,40 +23,24 @@ namespace ABSystem.WebApp.Controllers
 
         [HttpGet]
         [Route("/admin/users-list")]
-        public IActionResult UsersList()
+        public async Task<IActionResult> UsersListScreen()
         {
 
-            var users = _userService.GetUsers();
+            var users = await this._userService.GetUsers();
 
             return PartialView("~/Views/Admin/UsersList.cshtml", users);
         }
 
         [HttpGet]
         [Route("/admin/users-list/add-user")]
-        public IActionResult AddUser()
+        public IActionResult AddUserScreen()
         {
             return PartialView("~/Views/Admin/AddUser.cshtml");
         }
 
-        [HttpGet]
-        [Route("/admin/users-list/edit-user")]
-        public async Task<IActionResult> EditUser(string userId)
-        {
-
-            UserDto? userDto = await this._userService.GetUserById(userId);
-
-            if(userDto == null)
-            {
-                return RedirectToAction("UsersList");
-            }
-
-            return PartialView("~/Views/Admin/EditUser.cshtml", userDto);
-        }
-
-
         [HttpPost]
         [Route("/admin/users-list/add-user")]
-        public IActionResult AddUser(UserDto dto)
+        public async Task<IActionResult> AddUser(UserDto dto)
         {
 
             if (!ModelState.IsValid)
@@ -65,16 +49,39 @@ namespace ABSystem.WebApp.Controllers
                 return PartialView("~/Views/Admin/AddUser.cshtml", dto);
             }
 
-            _userService.AddUser(dto);
-
+            try
+            {
+                await _userService.AddUser(dto);
+            }
+            catch (Exception ex)
+            {
+                ViewData["Error"] = MessageConstant.ERROR;
+                return PartialView("~/Views/Admin/AddUser.cshtml", dto);
+            }
             TempData["SuccessMessage"] = MessageConstant.ADDED_USER;
+            return RedirectToAction("UsersListScreen");
 
-            return RedirectToAction("UsersList");
+
+        }
+
+        [HttpGet]
+        [Route("/admin/users-list/edit-user")]
+        public async Task<IActionResult> EditUserScreen([FromQuery] string userId)
+        {
+
+            UserDto? userDto = await this._userService.GetUserById(userId);
+
+            if(userDto == null)
+            {
+                return RedirectToAction("UsersListScreen");
+            }
+
+            return PartialView("~/Views/Admin/EditUser.cshtml", userDto);
         }
 
         [HttpPost]
         [Route("/admin/users-list/edit-user")]
-        public IActionResult EditUser(UserDto dto)
+        public async Task<IActionResult> EditUser(UserDto dto)
         {
 
             if (!ModelState.IsValid)
@@ -83,11 +90,17 @@ namespace ABSystem.WebApp.Controllers
                 return PartialView("~/Views/Admin/EditUser.cshtml", dto);
             }
 
-            _userService.EditUser(dto);
-
+            try
+            {
+                await _userService.EditUser(dto);
+            }
+            catch (Exception ex)
+            {
+                ViewData["Error"] = MessageConstant.ERROR;
+                return PartialView("~/Views/Admin/EditUser.cshtml", dto);
+            }
             TempData["SuccessMessage"] = MessageConstant.EDITED_USER;
-
-            return RedirectToAction("UsersList");
+            return RedirectToAction("UsersListScreen");
         }
 
         [HttpPost]
@@ -98,7 +111,7 @@ namespace ABSystem.WebApp.Controllers
 
             TempData["SuccessMessage"] = MessageConstant.DELETED_USER;
 
-            return RedirectToAction("UsersList");
+            return RedirectToAction("UsersListScreen");
         }
     }
 }

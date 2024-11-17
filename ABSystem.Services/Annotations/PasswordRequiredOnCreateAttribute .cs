@@ -15,14 +15,20 @@ namespace ABSystem.Services.Annotations
             // Access the object instance being validated
             var instance = validationContext.ObjectInstance as UserDto;
 
-            // Assume that Id == 0 means it's a new record (create operation)
-            if (instance != null && instance.Id.HasValue)
+            if (instance != null)
             {
-                Console.WriteLine("AWAW");
-                // Check if the password is null or empty
-                if (string.IsNullOrEmpty(value as string))
+                Console.WriteLine("=====Id: " + (instance.Id ?? "null"));
+
+                // Check if the Id is for a new user
+                if (string.IsNullOrEmpty(instance.Id) || instance.Id.Trim() == "0")
                 {
-                    return new ValidationResult(ErrorMessage ?? "Password is required for new users.");
+                    Console.WriteLine("AWAW");
+
+                    // Check if the password is null or empty
+                    if (string.IsNullOrEmpty(value as string))
+                    {
+                        return new ValidationResult(ErrorMessage ?? "Password is required for new users.");
+                    }
                 }
             }
 
