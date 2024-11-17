@@ -89,7 +89,7 @@
                                             <td>@user.UpdatedDate.ToString("MMM d, yyyy")</td>
                                             <td><div class="centered"><div class="status active border-radius-5">ACTIVE</div></div></td>
                                             <td class="group-button">
-                                                <a class="edit-btn action-btn border-radius-5" href="/admin/users-list/edit-user?userId=@user.Id">
+                                                <a class="edit-btn action-btn border-radius-5" asp-controller="User" asp-action="EditUserScreen" asp-route-userId="@user.Id">
                                                     <img src="~/icons/edit.svg" alt="edit"/>
                                                     <div>EDIT</div>
                                                 </a>
