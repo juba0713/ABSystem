@@ -29,12 +29,12 @@
     align-items: center;
 }
 
-.filters{
+.filters {
     height: 100%;
     width: 50%;
     display: flex;
     align-items: center;
-    gap: 1vw; 
+    gap: 1vw;
 }
 
 .search-field{
