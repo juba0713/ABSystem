@@ -4,7 +4,7 @@
 @{
 }
 @using ABSystem.Services.Objects;
-@model IEnumerable<UserObj>;
+
 
 <html>
 <head>
@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="~/css/common.css" />
     <link rel="stylesheet" href="~/css/header.css" />
     <link rel="stylesheet" href="~/css/sidebar.css" />
-    <link rel="stylesheet" href="~/css/admin/userslist.css" />
+    <link rel="stylesheet" href="~/css/admin/roomslist.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css"/>
     <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
@@ -43,8 +43,8 @@
             <partial name="Sidebar" />
             <div class="main-content">
                 <div class="sub-header border-radius-5">
-                    <div>Users</div>
-                    <a asp-controller="User" asp-action="AddUserScreen" class="action-btn"><img src="~/icons/add.svg" alt="add"/>ADD USER</a>
+                    <div>Rooms</div>
+                    <a asp-controller="Room" asp-action="AddRoomScreen" class="action-btn"><img src="~/icons/add.svg" alt="add" />ADD ROOM</a>
                 </div>
                 <div class="sub-content border-radius-5">
                     <div class="filter-container">
@@ -52,17 +52,17 @@
                             <div class="search-field">
                                 <span><img src="~/icons/search.svg" alt="search" /></span>
                                 <input type="text" class="border-radius-5" placeholder="Search..." />
-                            </div>   
+                            </div>        
                             <div class="search-field">
                                 <select>
                                     <option value="All">All</option>
                                     <option value="User">User</option>
                                     <option value="Admin">Admin</option>
-                                    <option value="Super">Super</option> 
+                                    <option value="Super">Super</option>
                                     <option value="Active">Active</option>
                                     <option value="Inactive">Inactive</option>
                                 </select>
-                                
+
                             </div>
                         </div>
                         <div class="group-button prev-next">
@@ -79,16 +79,16 @@
                             <thead>
                                 <tr>
                                     <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Role</th>                                  
+                                    <th>Facility</th>
+                                    <th>Capacity</th>                                  
+                                    <th>Address</th>                                  
                                     <th>Created Date</th>
                                     <th>Updated Date</th>
-                                    <th>Status</th>
                                     <th></th>
                                 </tr>                          
                             </thead>
                             <tbody>                         
-                                @if (Model != null && Model.Any())
+                                @* @if (Model != null && Model.Any())
                                 {
                                     foreach (var user in Model)
                                     {
@@ -117,7 +117,25 @@
                                     <tr>
                                         <td colspan="7" class="text-center">No users found.</td>
                                     </tr>
-                                }
+                                } *@
+                                <tr>
+                                    <td>Test</td>
+                                    <td>Test</td>
+                                    <td>Test</td>
+                                    <td>Test</td>
+                                    <td>Test</td>
+                                    <td>Test</td>
+                                    <td class="group-button">
+                                        <a class="edit-btn action-btn border-radius-5" asp-controller="User" asp-action="EditUserScreen" >
+                                            <img src="~/icons/edit.svg" alt="edit" />
+                                            <div>EDIT</div>
+                                        </a>
+                                        <div class="delete-btn action-btn border-radius-5" data-toggle="modal" data-target="#exampleModalCenter" >
+                                            <img src="~/icons/delete.svg" alt="delete" />
+                                            <div>DELETE</div>
+                                        </div>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                        
