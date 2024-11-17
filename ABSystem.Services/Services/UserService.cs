@@ -78,10 +78,23 @@ namespace ABSystem.Services.Services
             return result.Succeeded;
         }
 
-        public void DeleteUser(int userId)
+        public async Task DeleteUser(string userId)
         {
-            _userRepository.DeleteUser(userId);
+            var user = await _userManager.FindByIdAsync(userId);
+
+            if (user == null)
+            {
+                throw new Exception("No user found");
+            }
+
+            var result = await _userManager.DeleteAsync(user);
+
+            if (!result.Succeeded)
+            {
+                throw new Exception("Failed to delete user");
+            }
         }
+
 
         public void EditUser(UserDto dto)
         {
@@ -93,9 +106,9 @@ namespace ABSystem.Services.Services
             _userRepository.EditUser(user);
         }
 
-        public UserDto? GetUserById(int userId)
+        public async Task<UserDto> GetUserById(string userId)
         {
-            var user = _userRepository.GetUserById(userId);
+            var user = await _userManager.FindByIdAsync(userId);
 
             if(user == null)
             {

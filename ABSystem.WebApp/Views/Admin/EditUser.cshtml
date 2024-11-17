@@ -10,10 +10,11 @@
 <head>
     <title>Users List</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/admin/adduser.css" />
     <link rel="stylesheet" href="~/css/common.css" />
     <link rel="stylesheet" href="~/css/header.css" />
     <link rel="stylesheet" href="~/css/sidebar.css" />
-    <link rel="stylesheet" href="~/css/admin/adduser.css" />
+    
 </head>
 <body>
     <div class="container">
@@ -53,11 +54,11 @@
             <div class="main-content">
                 <div class="sub-header border-radius-5">
                     <div>User - Edit</div>
-                    <a class="action-btn border-radius-5" href="/admin/users-list">Back</a>
+                    <a class="action-btn back-btn border-radius-5" href="/admin/users-list"><img src="~/icons/back.svg" alt="add" />BACK</a>
                 </div>
                 <div class="sub-content border-radius-5">
                     <form asp-controller="User" asp-action="EditUser" method="POST">
-                        <input type="hidden" asp-for="Id" />;
+                        <input type="hidden" asp-for="Id" />
                         <div class="outer-container">
                             <div class="input-group">
                                 <div>
@@ -96,12 +97,13 @@
                             </div>
                         </div>
                         <div>
-                            <button type="submit" class="action-btn">Submit</button>
+                            <button type="submit" class="action-btn">SAVE</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+    <script src="~/js/dark-mode.js"></script>
 </body>
 </html>

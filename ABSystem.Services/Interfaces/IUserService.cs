@@ -24,8 +24,8 @@ namespace ABSystem.Services.Interfaces
 
         public IEnumerable<UserObj> GetUsers();
 
-        public void DeleteUser(int userId);
+        public Task DeleteUser(string userId);
 
-        public UserDto? GetUserById(int userId);
+        public Task<UserDto> GetUserById(string userId);
     }
 }

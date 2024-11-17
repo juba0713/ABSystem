@@ -40,10 +40,10 @@ namespace ABSystem.WebApp.Controllers
 
         [HttpGet]
         [Route("/admin/users-list/edit-user")]
-        public IActionResult EditUser(int userId)
+        public async Task<IActionResult> EditUser(string userId)
         {
 
-            UserDto? userDto = _userService.GetUserById(userId);
+            UserDto? userDto = await this._userService.GetUserById(userId);
 
             if(userDto == null)
             {
@@ -92,9 +92,9 @@ namespace ABSystem.WebApp.Controllers
 
         [HttpPost]
         [Route("/admin/users-list/delete-user")]
-        public IActionResult DeleteUser(int userId)
+        public async Task<IActionResult> DeleteUser(string userId)
         {
-            _userService.DeleteUser(userId);
+            await this._userService.DeleteUser(userId);
 
             TempData["SuccessMessage"] = MessageConstant.DELETED_USER;
 

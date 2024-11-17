@@ -27,7 +27,7 @@
                         <path d="M12 17H12.01" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                 </div>
-                <p>@TempData["SuccessMessage"]</p>
+                <p>@TempData["SuccessMessage"]</p> 
                 <span class="mdi mdi-open-in-new open"></span>
                 <span class="mdi mdi-close close"></span>
             </div>
@@ -42,7 +42,7 @@
                         <path d="M12 17H12.01" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                 </div>
-                <p>@TempData["ErrorMessage"]</p>
+                <p>@TempData["ErrorMessage"]</p> 
                 <span class="mdi mdi-open-in-new open"></span>
                 <span class="mdi mdi-close close"></span>
             </div>
@@ -53,7 +53,7 @@
             <div class="main-content">
                 <div class="sub-header border-radius-5">
                     <div>User - Add</div>
-                    <a class="action-btn border-radius-5" href="/admin/users-list">Back</a>
+                    <a class="action-btn back-btn border-radius-5" href="/admin/users-list"><img src="~/icons/back.svg" alt="add" />BACK</a>
                 </div>
                 <div class="sub-content border-radius-5">
                     <form asp-controller="User" asp-action="AddUser" method="POST">
@@ -95,12 +95,13 @@
                             </div>
                         </div>
                         <div>
-                            <button type="submit" class="action-btn">Submit</button>
+                            <button type="submit" class="action-btn">SAVE</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+    <script src="~/js/dark-mode.js"></script>
 </body>
 </html>
