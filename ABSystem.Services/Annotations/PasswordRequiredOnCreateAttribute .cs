@@ -16,7 +16,7 @@ namespace ABSystem.Services.Annotations
             var instance = validationContext.ObjectInstance as UserDto;
 
             // Assume that Id == 0 means it's a new record (create operation)
-            if (instance != null && instance.Id == 0)
+            if (instance != null && instance.Id.HasValue)
             {
                 Console.WriteLine("AWAW");
                 // Check if the password is null or empty

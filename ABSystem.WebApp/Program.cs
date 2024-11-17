@@ -5,7 +5,9 @@ using ABSystem.Data.Repositories;
 using ABSystem.Services.Interfaces;
 using ABSystem.Services.Services;
 using Microsoft.AspNetCore.Cors.Infrastructure;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,11 +21,30 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<ABSystemDbContext>(
     options => options.UseSqlServer(connectionString));
 
+builder.Services.AddIdentity<User, IdentityRole>(
+    options =>
+    {
+        options.Password.RequiredUniqueChars = 0;
+        options.Password.RequireUppercase = false;
+        options.Password.RequiredLength = 6;
+        options.Password.RequireNonAlphanumeric = false;
+        options.Password.RequireLowercase = false;
+    }
+    )
+    .AddEntityFrameworkStores<ABSystemDbContext>().AddDefaultTokenProviders();
+
 //Adding  Services and Repository
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = new PathString("/");
+    options.AccessDeniedPath = new PathString("/");
+    //other properties
+});
 
 var app = builder.Build();
 
@@ -59,40 +80,135 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Account}/{action=Login}/{id?}");
+
+app.MapControllerRoute(
+    name: "register",
+    pattern: "register",
+    defaults: new { controller = "Account", action = "Register" });
+
 
 app.Run();
 
 void SeedAdminUser(ABSystemDbContext context)
 {
+
+    // Check if the 'Admin' role exists
+    if (!context.Roles.Any(r => r.Name == "Admin"))
+    {
+        var adminRole = new IdentityRole
+        {
+            Name = "Admin",
+            NormalizedName = "ADMIN"
+        };
+        context.Roles.Add(adminRole);
+        context.SaveChanges();
+        Console.WriteLine("Admin role seeded successfully.");
+    }
+
+
+    // Check if the 'SuperAdmin' role exists
+    if (!context.Roles.Any(r => r.Name == "SuperAdmin"))
+    {
+        var superAdminRole = new IdentityRole
+        {
+            Name = "SuperAdmin",
+            NormalizedName = "SUPERADMIN"
+        };
+        context.Roles.Add(superAdminRole);
+        context.SaveChanges();
+        Console.WriteLine("SuperAdmin role seeded successfully.");
+    }
+
+    if (!context.Roles.Any(r => r.Name == "User"))
+    {
+        var superAdminRole = new IdentityRole
+        {
+            Name = "User",
+            NormalizedName = "USER"
+        };
+        context.Roles.Add(superAdminRole);
+        context.SaveChanges();
+        Console.WriteLine("User role seeded successfully.");
+    }
+
+
+    // Check if the admin user exists
     if (!context.Users.Any(u => u.Email == "demo@admin.com"))
     {
+        var passwordHasher = new PasswordHasher<User>();
+
         var admin = new User
         {
-            Id = Guid.NewGuid().ToString(),
             FirstName = "Admin",
             LastName = "Admin",
             Email = "demo@admin.com",
-            NormalizedEmail = "demo@admin.com",
+            NormalizedEmail = "DEMO@ADMIN.COM",
             UserName = "demo@admin.com",
-            NormalizedUserName = "demo@admin.com",
-            PasswordHash = BCrypt.Net.BCrypt.HashPassword("Admin@123"),
-            Role = "Admin",
+            NormalizedUserName = "DEMO@ADMIN.COM",
             CreatedDate = DateTime.Now,
             UpdatedDate = DateTime.Now,
             IsDeleted = 0
         };
 
+        admin.PasswordHash = passwordHasher.HashPassword(admin, "Admin@123");
+
         context.Users.Add(admin);
         context.SaveChanges();
         Console.WriteLine("Admin user seeded successfully.");
+
+        // Assign the 'Admin' role to the newly created admin user
+        var adminRoleId = context.Roles.First(r => r.Name == "Admin").Id;
+        var adminUserId = context.Users.First(u => u.Email == "demo@admin.com").Id;
+
+        context.UserRoles.Add(new IdentityUserRole<string>
+        {
+            UserId = adminUserId,
+            RoleId = adminRoleId
+        });
+        context.SaveChanges();
+        Console.WriteLine("Admin user assigned to Admin role successfully.");
     }
-    else
+
+    // Check if the SuperAdmin user exists
+    if (!context.Users.Any(u => u.Email == "superadmin@admin.com"))
     {
-        Console.WriteLine("Admin user already exists.");
+        var passwordHasher = new PasswordHasher<User>();
+
+        var superAdmin = new User
+        {
+            FirstName = "SuperAdmin",
+            LastName = "SuperAdmin",
+            Email = "superadmin@admin.com",
+            NormalizedEmail = "SUPERADMIN@ADMIN.COM",
+            UserName = "superadmin@admin.com",
+            NormalizedUserName = "SUPERADMIN@ADMIN.COM",
+            CreatedDate = DateTime.Now,
+            UpdatedDate = DateTime.Now,
+            IsDeleted = 0
+        };
+
+        superAdmin.PasswordHash = passwordHasher.HashPassword(superAdmin, "SuperAdmin@123");
+
+        context.Users.Add(superAdmin);
+        context.SaveChanges();
+        Console.WriteLine("SuperAdmin user seeded successfully.");
+
+        // Assign the 'SuperAdmin' role to the newly created SuperAdmin user
+        var superAdminRoleId = context.Roles.First(r => r.Name == "SuperAdmin").Id;
+        var superAdminUserId = context.Users.First(u => u.Email == "superadmin@admin.com").Id;
+
+        context.UserRoles.Add(new IdentityUserRole<string>
+        {
+            UserId = superAdminUserId,
+            RoleId = superAdminRoleId
+        });
+        context.SaveChanges();
+        Console.WriteLine("SuperAdmin user assigned to SuperAdmin role successfully.");
     }
 }

@@ -36,10 +36,10 @@ namespace ABSystem.Data.Repositories
                 throw new Exception("Student not found");
             }
 
-            existingUser.EmailAddress = user.EmailAddress;
+            existingUser.Email = user.Email;
             existingUser.FirstName = user.FirstName;
             existingUser.LastName = user.LastName;
-            existingUser.Role = user.Role;
+            //existingUser.Role = user.Role;
             existingUser.UpdatedDate = user.UpdatedDate;
 
             _context.SaveChanges();
@@ -60,14 +60,24 @@ namespace ABSystem.Data.Repositories
 
             var user = _context.Users.Find(userId);
 
-            Console.WriteLine("EMAIL EMAIL: " + user?.EmailAddress);
-
             return user;
         }
 
         public IEnumerable<User> GetUsers()
         {
             return _context.Users.ToList();
+        }
+
+        public User? GetUserByEmail(string email)
+        {
+            var user = _context.Users.FirstOrDefault(s => s.Email.Equals(email));
+
+            if (user == null)
+            {
+                throw new Exception("Student not found");
+            }
+
+            return user;
         }
     }
 }

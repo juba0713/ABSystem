@@ -6,7 +6,7 @@
     box-sizing: border-box;
     width: 100%;
     background: #fff;
-    font-size: 1.2vw;
+    font-size: 1vw;
     height: 3vw;
 }
 
@@ -21,7 +21,7 @@
     gap: 0.521vw;
 }
 
-.create-buttons{
+.filter-container {
     width: 100%;
     height: 3vw;
     display: flex;
@@ -38,19 +38,33 @@
 
 .search-field{
     display: flex;
-    gap: 0.5vw;
     align-items: center;
 }
 
-.create-buttons input {
+.filter-container input {
     width: 100%;
-    padding: 0.4vw 0.521vw;
+    padding: 0.3vw 0.6vw;
     border: 0.052vw solid #A9A9A9;
     box-sizing: border-box;
-    height: 2vw;
+    border-radius: 0 0.26vw 0.26vw 0;
 }
 
-label{
+.filter-container select {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-field span {
+    background: #1B4965;
+    padding: 0.3vw 0.6vw;
+    box-sizing: border-box;
+    border: 0.052vw solid #1B4965;
+}
+
+
+label {
     margin: 0;
     padding: 0;
 }
@@ -62,13 +76,8 @@ label{
     gap: 0.521vw;
 }
 
-.prev-next{
-    height: 5%;
-}
-
 table {
     width: 100%;
-    font-size: 1vw;
     border-collapse: collapse;
 }
 
@@ -80,12 +89,9 @@ th {
 td,
 th{
     text-align: center;
+   width: 12vw;
 }
 
-td {
-    white-space: nowrap;
-    font-size: 1vw !important;
-}
 
 td {
     padding: 0.3vw 0;
@@ -95,29 +101,6 @@ td {
 .centered{
     display: flex;
     justify-content: center;
-}
-
-.edit-btn,
-.delete-btn{
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;   
-    padding: 0.3vw;
-    box-sizing: border-box;
-}
-
-.edit-btn {
-    background: #57ED61;
-}
-
-.delete-btn {
-    background: #FD4F4F;
-}
-
-.edit-btn:hover,
-.delete-btn:hover{
-    background: #62B6CB;
 }
 
 td svg {
@@ -130,23 +113,35 @@ td svg {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 1vw;
+    gap: 0.5vw;
     
 }
 
+td:nth-child(last) {
+    width: 50%;
+}
+
 .status {
-    padding: 0.3vw;
-    text-align: center;
     display: flex;
     justify-content: center;
-    align-items: center;
+    text-decoration: none;
+    background: #1B4965;
+    border-radius: 0.26vw;
+    padding: 0.521vw;
     box-sizing: border-box;
-    height: 1.5vw;
-    width: 6vw;
+    min-width: 5.208vw;
+    width: auto;
+    height: 2vw;
+    font-size: 0.8vw;
+    color: #fff;
+    border: none;
+    box-sizing: border-box;
+    align-items: center;
+    gap: 0.5vw;
 }
 
 .active {
-    background: #57ED61;
+    background: #008000;
 }
 
 .inactive {
@@ -159,20 +154,5 @@ thead tr {
     color: #fff;
 }
 
-tbody tr:nth-child(odd) {
-    background: #BEE9E8 !important;
-}
 
-.prev-next button{
-    font-size: 0.8vw;
-    padding: 0.3vw;
-    box-sizing: border-box;
-}
 
-.prev-next select {
-    font-size: 0.8vw;
-    padding: 0.3vw;
-    box-sizing: border-box;
-    border: 0.052vw solid #A9A9A9;
-    height: 100%;
-}

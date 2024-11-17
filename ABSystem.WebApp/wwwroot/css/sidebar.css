@@ -4,8 +4,22 @@
     gap: 1vw;
     height: 100%;
     width: 15%;
+    font-size: 0.8rem;
 }
 
+/*
+    Dark mode
+*/
+/* Dark Mode */
+body.dark-mode .sidebar-1,
+body.dark-mode .sidebar-2 {
+    background-color: #191919;
+    color: #ffffff;
+}
+
+body.dark-mode .a-text {
+    color: #fff !important
+}
 
 
 .sidebar-1,
@@ -25,8 +39,12 @@
     color: #A9A9A9;
 }
 
+.sidebar-1 div{
+    font-size: 0.8vw;
+}
+
 .sidebar-1 div:nth-child(2){
-    font-size: 1.2vw;
+    font-size: 1vw;
 }
 
 .sidebar-1 {
@@ -57,7 +75,8 @@
     gap: 1vw;
 }
 
-.sidebar-2 div:nth-child(1) a {
+.sidebar-2 div:nth-child(1) a,
+.sidebar-2 div:nth-child(2) a {
     display: flex;
     flex-direction: row;
     align-items: center;

@@ -1,4 +1,5 @@
 ﻿using ABSystem.Data.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace ABSystem.Data
 {
-    public class ABSystemDbContext : DbContext
+    public class ABSystemDbContext : IdentityDbContext<User>
     {
         public ABSystemDbContext(DbContextOptions<ABSystemDbContext> options)
             : base(options) { }
 
-        public virtual DbSet<User> Users { get; set; }
+        //public virtual DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

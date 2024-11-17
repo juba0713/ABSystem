@@ -1,4 +1,6 @@
+using ABSystem.Resources.Constants;
 using ABSystem.WebApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -27,11 +29,20 @@ namespace ABSystem.WebApp.Controllers
             return View();
         }
 
+        [Authorize(Roles = CommonConstant.Admin)]
         [HttpGet]
         [Route("/admin/dashboard")]
         public IActionResult AdminDashboard()
         {
             return PartialView("~/Views/Admin/Dashboard.cshtml");
+        }
+
+        [Authorize(Roles = CommonConstant.Super)]
+        [HttpGet]
+        [Route("/super/dashboard")]
+        public IActionResult SuperDashboard()
+        {
+            return PartialView("~/Views/Super/Dashboard.cshtml");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

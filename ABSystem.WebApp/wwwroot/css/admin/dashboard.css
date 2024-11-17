@@ -2,20 +2,21 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
+    padding: 0.521vw;
     box-sizing: border-box;
     width: 100%;
     background: #fff;
-    border-radius: 10px;
-    font-size: 1.2vw;
-    height: 7%;
+    font-size: 1vw;
+    height: 3vw;
 }
 
 .sub-content {
     display: flex;
+    flex-direction: column;
     width: 100%;
     background: #fff;
-    border-radius: 10px;
     height: 93%;
+    padding: 1vw;
     box-sizing: border-box;
+    gap: 0.521vw;
 }

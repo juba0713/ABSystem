@@ -8,6 +8,11 @@ namespace ABSystem.Resources.Constants
 {
     public class MessageConstant
     {
+
+        public const string ERROR = "Error";
+
+        public const string LOGIN_ERROR = "These credentials do not match our records";
+
         public const string ALL_FIELDS_REQUIRED = "All fields are required";
 
         public const string EMAIL_REQUIRED = "Email address is required";

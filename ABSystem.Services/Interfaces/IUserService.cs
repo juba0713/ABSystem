@@ -15,14 +15,17 @@ namespace ABSystem.Services.Interfaces
 {
     public interface IUserService
     {
-        public void AddUser(UserDto dto);
+
+        public Task RegisterUser(RegisterDto dto);
+
+        public Task<bool> AddUser(UserDto dto);
 
         public void EditUser(UserDto dto);
 
         public IEnumerable<UserObj> GetUsers();
 
-        public void DeleteUser(int userId);
+        public Task DeleteUser(string userId);
 
-        public UserDto? GetUserById(int userId);
+        public Task<UserDto> GetUserById(string userId);
     }
 }

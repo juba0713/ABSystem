@@ -11,9 +11,9 @@
     height: 100%;
 }
 
-.left-content{
+.left-content {
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 1vw;
@@ -21,18 +21,18 @@
     width: 60%;
 }
 
-.left-content div:nth-child(2){
-    font-size: 1vw;
-    color: dimgray;
-    text-align: center;
-    padding: 0 5vw;
-}
+    .left-content div:nth-child(2) {
+        font-size: 1vw;
+        color: dimgray;
+        text-align: center;
+        padding: 0 5vw;
+    }
 
 
 
-.left-content img{
-    width: 80%;
-}
+    .left-content img {
+        width: 80%;
+    }
 
 .right-content {
     background: #BEE9E8;
@@ -50,22 +50,29 @@
     justify-content: center;
     align-items: center;
     width: 30vw;
-    height: 30vw;
+    height: 35vw;
     border-radius: 0.26vw;
     font-size: 0.8vw;
+    margin: 0;
 }
 
-.title{
+.title {
     font-size: 2vw;
 }
 
-.fields{
+.fields {
     display: flex;
     flex-direction: column;
     gap: 1vw;
 }
 
 .input-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2vw;
+}
+
+.input-field div{
     display: flex;
     flex-direction: column;
     gap: 0.2vw;
@@ -85,6 +92,8 @@
     font-size: 0.8vw;
 }
 
+
+
 .button-group {
     width: 20vw;
     display: flex;
@@ -98,8 +107,8 @@ a {
     text-decoration: none;
 }
 
-.button-group a{
-    font-weight: 600;   
+.button-group a {
+    font-weight: 600;
 }
 
 .action-btn {
@@ -127,33 +136,22 @@ a {
     color: #000;
 }
 
-.demo{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5vw;
-}
-
-.accounts{
-    display: flex;
-    gap: 0.5vw;
-}
-
-.accounts button {
-    font-weight: 400 !important;
-}
-
-.see-password {
+.see-password{
     position: absolute;
     right: 0.8vw;
     top: 2.2vw;
     cursor: pointer;
 }
 
-.error{
+.error {
     padding: 0.5vw;
     box-sizing: border-box;
     border: 0.2vw solid #ff3232;
     background: #ff9999;
+}
+
+
+.error-message {
+    color: #FF0000;
+    font-size: 0.8vw;
 }
