@@ -7,36 +7,43 @@
 <html>
     <head>
         <title>Login</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
         <link rel="stylesheet" href="~/css/login.css" />
     </head>
     <body>
         <div class="container">
             <div class="left-content">
-                <div>Welcome to our AB Booking</div>
+                <div>Welcome To Our AB Booking</div>
+                <div>Effortless Meeting Room Booking: Organizing, Scheduling, and Streamlining Your Meetings with Simplicity, Empowering Productivity, One Room at a Time.</div>
                 <img src="~/images/image_1.png"/>
             </div>
             <div class="right-content">
                 <form asp-controller="Account" asp-action="Login" method="POST"  class="login-content">
                     
                     <div class="title">Sign In</div>
+                    @if (ViewData["Error"] != null)
+                        {
+                        <div class="error">@ViewData["Error"]</div>
+                        }
                     <div class="fields">
                         <div class="input-field">
-                            <label>Email</label>
-                            <input type="text" asp-for="Email" />
+                        <label>Email <span style="color: red;">*</span></label>
+                            <input type="email" asp-for="Email" required/>
                         </div>
                         <div class="input-field">
-                                <label>Password</label>
-                                <input type="password" asp-for="Password" />
+                                <label>Password <span style="color: red;">*</span></label>
+                                <input type="password" asp-for="Password" required />
+                            <i class="see-password fa fa-eye fa-lg"></i>
                             </div>
                          <div>
-                            <a href="/forgot-password">Forgot Password?</a>
+                            <a asp-controller="Account" asp-action="Register">Forgot Password?</a>
                          </div>
                     </div>
                     <div class="button-group">
                         <button class="action-btn" type="submit">Login</button>
                         <div>
-                            <div>Don't have an account? <a href="/register">Sign Up</a></div>
+                            <div>Don't have an account? <a asp-action="Register">Sign Up</a></div>
                         </div>
                     </div>
                     @if (isDevelopment)
@@ -45,8 +52,8 @@
                             <div>Demo Accounts</div>
                             <div class="accounts">
                                 <form asp-controller="Account" asp-action="Login" method="POST">
-                                    <input type="hidden" asp-for="Email" value="demo@super.com" />
-                                    <input type="hidden" asp-for="Password" value="Super@123" />
+                                <input type="hidden" asp-for="Email" value="superadmin@admin.com" />
+                                <input type="hidden" asp-for="Password" value="SuperAdmin@123" />
                                     <button class="action-btn" type="submit">Super</button>
                                 </form>
                                 <form asp-controller="Account" asp-action="Login" method="POST">
@@ -64,4 +71,20 @@
             </div>
         </div>
     </body>
+    <script>
+        document.querySelectorAll('.see-password').forEach(ic => ic.addEventListener('click', function () {
+            console.log(this);
+            passwordField = this.parentElement.querySelector('input');
+            if (passwordField.type === 'password') {
+
+                passwordField.type = 'text';
+                this.classList.remove('fa-eye');
+                this.classList.add('fa-eye-slash');
+            } else {
+                passwordField.type = 'password';
+                this.classList.remove('fa-eye-slash');
+                this.classList.add('fa-eye');
+            }
+        }));
+    </script>
 </html>

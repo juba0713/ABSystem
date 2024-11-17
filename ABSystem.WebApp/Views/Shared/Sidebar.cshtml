@@ -1,12 +1,27 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using Microsoft.AspNetCore.Identity
+@using ABSystem.Data.Models
+@inject SignInManager<User> signInManager
+@inject UserManager<User> userManager
+@inject RoleManager<IdentityRole> roleManager
+
 @{
+    // Get the logged-in user using UserManager
+    User loggedInUser = await userManager.FindByEmailAsync(User.Identity.Name ?? "");
+
+    // Combine the first and last name to create the full name
+    string fullName = loggedInUser?.FirstName + " " + loggedInUser?.LastName;
+
+    // Get the roles assigned to the logged-in user
+    var roles = await userManager.GetRolesAsync(loggedInUser);
+
+    // Assuming the user can have one role, you can take the first role (or handle as needed)
+    string roleName = roles.FirstOrDefault() ?? "No Role Assigned"; // Default value if no role assigned
 }
+    
 <div class="sidebar ">
     <div class="sidebar-1 border-radius-5">
-        <div>User</div>
-        <div>Super Admin</div>
+        <div>@roleName</div>
+        <div>@fullName</div>
     </div>
     <div class="sidebar-2 border-radius-5">
         <div>
@@ -43,7 +58,8 @@
                     <path d="M16 17L21 12L16 7" stroke="#A9A9A9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                     <path d="M21 12H9" stroke="#A9A9A9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
-                <div>Logout</div>
+                <a asp-action="Logout" asp-controller="Account">Logout
+            </a>
             </a>
         </div>
     </div>

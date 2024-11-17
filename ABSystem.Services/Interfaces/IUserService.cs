@@ -15,7 +15,10 @@ namespace ABSystem.Services.Interfaces
 {
     public interface IUserService
     {
-        public void AddUser(UserDto dto);
+
+        public Task RegisterUser(RegisterDto dto);
+
+        public Task<bool> AddUser(UserDto dto);
 
         public void EditUser(UserDto dto);
 

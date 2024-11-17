@@ -1,9 +1,11 @@
 ﻿using ABSystem.Data.Interfaces;
 using ABSystem.Data.Models;
+using ABSystem.Resources.Constants;
 using ABSystem.Services.Dto;
 using ABSystem.Services.Interfaces;
 using ABSystem.Services.Objects;
 using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,14 +22,47 @@ namespace ABSystem.Services.Services
     {
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
+        private readonly UserManager<User> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public UserService(IUserRepository userRepository, IMapper mapper)
+        public UserService(IUserRepository userRepository, 
+            IMapper mapper, 
+            UserManager<User> userManager, 
+            RoleManager<IdentityRole> roleManager)
         {
             _userRepository = userRepository;
             _mapper = mapper;
+            _userManager = userManager;
+            _roleManager = roleManager;
         }
 
-        public void AddUser(UserDto dto)
+        public async Task RegisterUser(RegisterDto dto)
+        {
+            var user = new User();
+
+            _mapper.Map(dto, user);
+            user.CreatedDate = DateTime.Now;
+            user.UpdatedDate = DateTime.Now;
+            user.IsDeleted = 0;
+            user.LockoutEnabled = false;
+
+            var creationResult = await _userManager.CreateAsync(user, dto.Password);
+
+            if(!creationResult.Succeeded)
+            {
+                throw new Exception($"User creation failed. Errors");
+            }
+
+            var roleResult = await _userManager.AddToRoleAsync(user, CommonConstant.User);
+
+            if (!roleResult.Succeeded)
+            {
+                throw new Exception($"Role creation failed. Errors");
+            }
+
+        }
+
+        public async Task<bool> AddUser(UserDto dto)
         {
             var user = new User();
 
@@ -36,7 +71,11 @@ namespace ABSystem.Services.Services
             user.UpdatedDate = DateTime.Now;
             user.IsDeleted = 0;
 
-            _userRepository.AddUser(user);
+            /*_userRepository.AddUser(user);*/
+
+            var result = await _userManager.CreateAsync(user, dto.Password);
+
+            return result.Succeeded;
         }
 
         public void DeleteUser(int userId)
@@ -84,7 +123,7 @@ namespace ABSystem.Services.Services
                 Id = user.Id,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
-                Role = user.Role,
+                //Role = user.Role,
                 Email = user.Email,
                 CreatedDate = user.CreatedDate,
                 UpdatedDate = user.UpdatedDate

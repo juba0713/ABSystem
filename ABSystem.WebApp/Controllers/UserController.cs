@@ -3,6 +3,7 @@ using ABSystem.Services.Dto;
 using ABSystem.Services.Interfaces;
 using ABSystem.Services.Objects;
 using ABSystem.Services.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 /**
@@ -11,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
  */
 namespace ABSystem.WebApp.Controllers
 {
+    [Authorize]
     public class UserController : Controller
     {
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,11 +11,11 @@ using System.Threading.Tasks;
  */
 namespace ABSystem.Data.Models
 {
-    public class User
+    public class User : IdentityUser
     {
-        public int Id { get; set; }
+        //public int Id { get; set; }
 
-        public string? EmailAddress {  get; set; }
+        //public string? EmailAddress {  get; set; }
 
         public string? Password { get; set; }
 
@@ -22,7 +23,7 @@ namespace ABSystem.Data.Models
 
         public string? LastName { get; set; }
 
-        public string? Role { get; set; }
+        //public string? Role { get; set; }
 
         public DateTime CreatedDate {  get; set; }
 
