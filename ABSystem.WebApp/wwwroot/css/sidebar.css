@@ -1,5 +1,5 @@
 ﻿.main-content {
-    padding: 1vw;
+    padding: 5vw;
     box-sizing: border-box;
 }
 
@@ -17,7 +17,7 @@
 /*
     Dark mode
 */
-/* Dark Mode */
+/* Dark Mode */ 
 body.dark-mode .sidebar-1,
 body.dark-mode .sidebar-2 {
     background-color: #191919;
