@@ -6,9 +6,13 @@
     box-sizing: border-box;
     width: 100%;
     background: #fff; 
-    font-size: 1vw; 
+    font-size: 1vw !important; 
     height: 3vw;
 }
+
+    .sub-header div {
+        font-size: 1vw !important;
+    }
 
 .sub-content {
     display: flex;

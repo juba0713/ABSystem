@@ -10,6 +10,7 @@ using System.Diagnostics;
  */
 namespace ABSystem.WebApp.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -43,6 +44,14 @@ namespace ABSystem.WebApp.Controllers
         public IActionResult SuperDashboard()
         {
             return PartialView("~/Views/Super/Dashboard.cshtml");
+        }
+
+        [Authorize(Roles = CommonConstant.User)]
+        [HttpGet]
+        [Route("/dashboard")]
+        public IActionResult Dashboard()
+        {
+            return PartialView("~/Views/User/Dashboard.cshtml");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

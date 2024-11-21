@@ -45,29 +45,31 @@
                         <div>
                             <div>Don't have an account? <a asp-action="Register">Sign Up</a></div>
                         </div>
-                    </div>
-                    @if (isDevelopment)
-                    {
-                        <div class="demo">
-                            <div>Demo Accounts</div>
-                            <div class="accounts">
-                                <form asp-controller="Account" asp-action="Login" method="POST">
-                                <input type="hidden" asp-for="Email" value="superadmin@admin.com" />
-                                <input type="hidden" asp-for="Password" value="SuperAdmin@123" />
-                                    <button class="action-btn" type="submit">Super</button>
-                                </form>
-                                <form asp-controller="Account" asp-action="Login" method="POST">
-                                    <input type="hidden" asp-for="Email" value="demo@admin.com" />
-                                    <input type="hidden" asp-for="Password" value="Admin@123" />
-                                    <button class="action-btn" type="submit">Admin</button>
-                                </form>
-                                <form asp-controller="Account" asp-action="Login" method="POST">
-                                    <button class="action-btn" type="submit">User</button>
-                                </form>
-                            </div>                          
-                        </div>
-                    }
+                    </div>                  
                 </form>
+                @if (isDevelopment)
+                {
+                    <div class="demo">
+                        <div>Demo Accounts</div>
+                        <div class="accounts">
+                            <form asp-controller="Account" asp-action="Login" method="POST">
+                                <input type="hidden" asp-for="Email" value="demo@superadmin.com" />
+                                <input type="hidden" asp-for="Password" value="12345678" />
+                                <button class="action-btn" type="submit">Super</button>
+                            </form>
+                            <form asp-controller="Account" asp-action="Login" method="POST">
+                                <input type="hidden" asp-for="Email" value="demo@admin.com" />
+                                <input type="hidden" asp-for="Password" value="12345678" />
+                                <button class="action-btn" type="submit">Admin</button>
+                            </form>
+                            <form asp-controller="Account" asp-action="Login" method="POST">
+                                <input type="hidden" asp-for="Email" value="demo@user.com" />
+                                <input type="hidden" asp-for="Password" value="12345678" />
+                                <button class="action-btn" type="submit">User</button>
+                            </form>
+                        </div>
+                    </div>
+                }
             </div>
         </div>
     <script>

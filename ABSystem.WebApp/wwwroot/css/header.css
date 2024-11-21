@@ -17,12 +17,29 @@
 }
 
 .header img {
-    width: 2.083vw;
-    height: 2.083vw;
+    width: 2vw;
+    height: 2vw;
     cursor: pointer;
 }
 
-.header div:nth-child(1) img {
-    width: 3.125vw;
-    height: 3.125vw;
+.header div:nth-child(1){
+    display: flex;
+    gap: 0.5vw; 
+    align-items: center;
 }
+
+.header div:nth-child(1) img {
+    width: 2.5vw;
+    height: 2.5vw;
+}
+
+.title{
+    font-size: 2vw;
+    color: #fff;    
+}
+
+.header div:nth-child(2) {
+    padding: 0 0.5vw 0 0;
+    box-sizing: border-box;
+}
+

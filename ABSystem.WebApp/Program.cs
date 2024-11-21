@@ -156,7 +156,7 @@ void SeedAdminUser(ABSystemDbContext context)
             IsDeleted = 0
         };
 
-        admin.PasswordHash = passwordHasher.HashPassword(admin, "Admin@123");
+        admin.PasswordHash = passwordHasher.HashPassword(admin, "12345678");
 
         context.Users.Add(admin);
         context.SaveChanges();
@@ -184,16 +184,16 @@ void SeedAdminUser(ABSystemDbContext context)
         {
             FirstName = "SuperAdmin",
             LastName = "SuperAdmin",
-            Email = "superadmin@admin.com",
-            NormalizedEmail = "SUPERADMIN@ADMIN.COM",
-            UserName = "superadmin@admin.com",
-            NormalizedUserName = "SUPERADMIN@ADMIN.COM",
+            Email = "demo@superadmin.com",
+            NormalizedEmail = "DEMO@SUPERADMIN.COM",
+            UserName = "demo@superadmin.com",
+            NormalizedUserName = "DEMO@SUPERADMIN.COM",
             CreatedDate = DateTime.Now,
             UpdatedDate = DateTime.Now,
             IsDeleted = 0
         };
 
-        superAdmin.PasswordHash = passwordHasher.HashPassword(superAdmin, "SuperAdmin@123");
+        superAdmin.PasswordHash = passwordHasher.HashPassword(superAdmin, "12345678");
 
         context.Users.Add(superAdmin);
         context.SaveChanges();
@@ -201,7 +201,7 @@ void SeedAdminUser(ABSystemDbContext context)
 
         // Assign the 'SuperAdmin' role to the newly created SuperAdmin user
         var superAdminRoleId = context.Roles.First(r => r.Name == "SuperAdmin").Id;
-        var superAdminUserId = context.Users.First(u => u.Email == "superadmin@admin.com").Id;
+        var superAdminUserId = context.Users.First(u => u.Email == "demo@superadmin.com").Id;
 
         context.UserRoles.Add(new IdentityUserRole<string>
         {
@@ -210,5 +210,41 @@ void SeedAdminUser(ABSystemDbContext context)
         });
         context.SaveChanges();
         Console.WriteLine("SuperAdmin user assigned to SuperAdmin role successfully.");
+    }
+
+    if (!context.Users.Any(u => u.Email == "demo@user.com"))
+    {
+        var passwordHasher = new PasswordHasher<User>();
+
+        var user = new User
+        {
+            FirstName = "User",
+            LastName = "User",
+            Email = "demo@user.com",
+            NormalizedEmail = "DEMO@USER.COM",
+            UserName = "demo@user.com",
+            NormalizedUserName = "DEMO@USER.COM",
+            CreatedDate = DateTime.Now,
+            UpdatedDate = DateTime.Now,
+            IsDeleted = 0
+        };
+
+        user.PasswordHash = passwordHasher.HashPassword(user, "12345678");
+
+        context.Users.Add(user);
+        context.SaveChanges();
+        Console.WriteLine("User user seeded successfully.");
+
+        // Assign the 'User' role to the newly created User user
+        var userRoleId = context.Roles.First(r => r.Name == "User").Id;
+        var userUserId = context.Users.First(u => u.Email == "demo@user.com").Id;
+
+        context.UserRoles.Add(new IdentityUserRole<string>
+        {
+            UserId = userUserId,
+            RoleId = userRoleId
+        });
+        context.SaveChanges();
+        Console.WriteLine("User assigned to User role successfully.");
     }
 }

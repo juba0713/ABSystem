@@ -8,7 +8,7 @@ namespace ABSystem.Resources.Constants
 {
     public class CommonConstant
     {
-        public const string Super = "Super";
+        public const string Super = "SuperAdmin";
 
         public const string Admin = "Admin";
 
