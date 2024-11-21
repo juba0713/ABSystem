@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
  */
 namespace ABSystem.WebApp.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = CommonConstant.Super + "," + CommonConstant.Admin)]
     public class UserController : Controller
     {
 
