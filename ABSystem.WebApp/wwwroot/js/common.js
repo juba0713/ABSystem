@@ -23,4 +23,15 @@
         }
 
     // Add event listener to a button (or any element you choose) to toggle theme
-    document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+
+let sideBar = document.querySelector(".user-sidebar");
+console.log(sideBar);
+
+sideBar.addEventListener('mouseover', function () {
+    sideBar.style.width = '15vw';
+});
+
+sideBar.addEventListener('mouseout', function () {
+    sideBar.style.width = '3.5vw';
+});

@@ -34,12 +34,21 @@ chatgpt-sidebar, chatgpt-sidebar-popups {
     gap: 1vw;
 }
 
+main { 
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 1vw;
+}
+
+
 .main-content {
     display: flex;
     flex-direction: column;
     gap: 1vw;
-    width: 85%;
+    width: 100%; 
     background: none;
+
 }
 
 .action-btn {
@@ -146,6 +155,14 @@ th{
 td {
     border-bottom: 0.1vw dashed #A9A9A9;
 }
+
+tr{
+    cursor: pointer;
+}
+
+tbody tr:hover {
+    background: #D3D3D3;
+} 
 
 
 

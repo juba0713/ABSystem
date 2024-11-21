@@ -70,13 +70,13 @@ namespace ABSystem.WebApp.Controllers
             {
                 return RedirectToAction("AdminDashboard", "Home");
             }
-            else if (roles.Contains("Super"))
+            else if (roles.Contains("SuperAdmin"))
             {
                 return RedirectToAction("SuperDashboard", "Home");
             }
 
             // Default redirect if no roles match
-            return RedirectToAction("UserDashboard", "Home");
+            return RedirectToAction("Dashboard", "Home");
         }
 
         [HttpGet]

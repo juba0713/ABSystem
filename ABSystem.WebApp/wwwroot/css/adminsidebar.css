@@ -1,17 +1,10 @@
-﻿.main-content {
-    padding: 1vw;
-    box-sizing: border-box;
-}
-
-.sidebar {
+﻿.sidebar {
     display: flex;
     flex-direction: column;
     gap: 1vw;
     height: 100%;
-    width: 3.5vw;
-    font-size: 0.8vw;
-    overflow: hidden;
-    transition: 1s width;
+    width: 15%;
+    font-size: 0.8rem;
 }
 
 /*
@@ -32,8 +25,9 @@ body.dark-mode .a-text {
 .sidebar-1,
 .sidebar-2 {
     background: #ffffff;
+    width: 100%;
     padding: 0.521vw;
-    box-sizing: border-box; 
+    box-sizing: border-box;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -72,6 +66,7 @@ body.dark-mode .a-text {
 .sidebar-2 div {
     display: flex;
     flex-direction: row;
+    width: 100%;
     cursor: pointer;
 }
 
