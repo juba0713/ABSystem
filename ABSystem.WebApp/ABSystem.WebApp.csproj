@@ -27,4 +27,8 @@
     <ProjectReference Include="..\ABSystem.Services\ABSystem.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Room\" />
+  </ItemGroup>
+
 </Project>

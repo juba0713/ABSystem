@@ -14,8 +14,9 @@ namespace ABSystem.Data
         public ABSystemDbContext(DbContextOptions<ABSystemDbContext> options)
             : base(options) { }
 
-        //public virtual DbSet<User> Users { get; set; }
 
+        //public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Room> Rooms { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
