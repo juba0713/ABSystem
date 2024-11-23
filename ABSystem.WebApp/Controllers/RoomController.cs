@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using ABSystem.Resources.Constants;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ABSystem.WebApp.Controllers
@@ -16,6 +17,14 @@ namespace ABSystem.WebApp.Controllers
         public IActionResult AddRoomScreen()
         {
             return PartialView("~/Views/Admin/AddRoom.cshtml");
+        }
+
+        [Authorize(Roles = CommonConstant.User)]
+        [Route("/room")]
+        public IActionResult RoomListScreen()
+        {
+
+            return PartialView("~/Views/User/RoomList.cshtml");
         }
     }
 }

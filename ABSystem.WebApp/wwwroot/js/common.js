@@ -35,3 +35,5 @@ sideBar.addEventListener('mouseover', function () {
 sideBar.addEventListener('mouseout', function () {
     sideBar.style.width = '3.5vw';
 });
+
+     

@@ -50,6 +50,7 @@ main {
     width: 100%; 
     background: none;
     overflow: auto;
+    position: relative;
 
 }
 
@@ -99,7 +100,9 @@ body.dark-mode .sub-header,
 body.dark-mode .sub-content,
 body.dark-mode .booking,
 body.dark-mode .book,
-body.dark-mode .booking-content{
+body.dark-mode .booking-content,
+body.dark-mode .popular-room,
+body.dark-mode .room-details{
     background-color: #191919;
     color: #ffffff;
 }
@@ -110,7 +113,8 @@ body.dark-mode .vertical-line {
 }
 
 body.dark-mode td,
-body.dark-mode th {
+body.dark-mode th,
+body.dark-mode .room-title{
     color: #ffffff;
 }
 
@@ -133,10 +137,14 @@ img,
 textarea,
 .booking,
 .calendar,
-.upcoming{
+.upcoming,
+.book-details,
+.room-header,
+.popular-room,
+.notification-content,
+.notification-details {
     border-radius: 0.2vw;
     font-size: 0.8vw;
-
 }
 
 select {
@@ -388,3 +396,4 @@ tbody tr:hover {
 ::-webkit-scrollbar-button {
     display: none;
 }
+
