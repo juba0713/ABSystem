@@ -16,6 +16,8 @@ namespace ABSystem.Data
 
         //public virtual DbSet<User> Users { get; set; }
 
+        public DbSet<Room> Rooms { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

@@ -77,7 +77,7 @@ namespace ABSystem.Services.Services
 
             Console.WriteLine("-------------Id 1: " + user.Id);
         
-            user.Id = Guid.NewGuid().ToString(); // Assign a new ID if not auto-generated
+            user.Id = Guid.NewGuid().ToString();
            
             Console.WriteLine("-------------Id 2: " + user.Id);
 

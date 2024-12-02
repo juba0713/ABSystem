@@ -10,16 +10,15 @@
     height: 3vw;
 }
 
-    .sub-header div {
-        font-size: 1vw !important;
-    }
+.sub-header div {
+    font-size: 1vw !important;
+}
 
 .sub-content {
     display: flex;
     flex-direction: column;
     width: 100%;
     background: #fff;
-    height: 93%;
     padding: 1vw;
     box-sizing: border-box;
     gap: 0.521vw;
@@ -47,17 +46,13 @@ form {
     width: 100%; 
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     gap: 0.521vw;
+    padding: 0 0 0 5vw;
+    box-sizing: border-box;
 }
 
-.input-center{
-    display: flex;
-    flex-direction: column;
+.input-group div{
     width: 100%;
-    gap: 0.5vw;
-    padding: 0 0 0 4vw;
 }
 
 .input-group .input-center div {
@@ -71,7 +66,7 @@ form {
 
 .input-group input,
 .input-group select {
-    width: 70%;
+    width: 100%;
     padding: 0.521vw;
     border: 0.052vw solid #A9A9A9;
     box-sizing: border-box;
@@ -86,37 +81,59 @@ textarea {
 }
 
 .input-images {
-    width: 90%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.521vw;
-}
-
-.input-images div {
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 0.5vw;
+    padding: 0 5.5vw;
+    box-sizing: border-box;
 }
 
-.small-imgs{
+.input-images img {
+    width: 7vw;
+    height: 7vw;
+    object-fit: cover;
+}
+
+.input-images .scrollable {
+    overflow: auto;
+    width: 28vw;
+    height: 24.5vw;
+    border: 0.052vw solid #A9A9A9;
+}
+
+.input-images .preview-container{
+    padding: 0.5vw;
     display: flex;
-    flex-direction: row !important;
+    box-sizing: border-box;
+    flex-wrap: wrap;
     justify-content: space-between;
+    gap: 0.5vw;
+    height: 100%;
+}
+
+
+.input-images .img-container {
+    padding: 0.5vw;
+    box-sizing: border-box;
+    border: 0.052vw solid #A9A9A9;
+    width: 8vw;
+    height: 8vw;
+}
+
+.input-images .no-img{
     width: 100%;
+    height: 100%;
 }
 
-.small-imgs img{
-    width: 6vw;
-    height: 5vw;
+.upload-img-btn{
+    display: flex;
+    align-items: center;
+    gap: 0.5vw;
 }
 
-.big-img{
-    width: 32vw;
-    height: 20vw;
+
+.upload-img-btn div{
+    width: 8vw;
 }
 
-.modal-dialog{
-    width: 100% !important;
-}

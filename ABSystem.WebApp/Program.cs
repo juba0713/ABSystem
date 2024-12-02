@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
+using ABSystem.WebApp;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -38,6 +40,8 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IRoomService, RoomService>();
+builder.Services.AddScoped<IRoomRepository, RoomRepository>();
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
@@ -46,7 +50,11 @@ builder.Services.ConfigureApplicationCookie(options =>
     //other properties
 });
 
+
+
 var app = builder.Build();
+
+
 
 using (var scope = app.Services.CreateScope())
 {
@@ -56,10 +64,10 @@ using (var scope = app.Services.CreateScope())
         var context = services.GetRequiredService<ABSystemDbContext>();
 
         // Ensure database exists (use only for development/testing environments)
-        context.Database.EnsureCreated();
+        //context.Database.EnsureCreated();
 
         // Seed admin user
-        SeedAdminUser(context);
+        Seeder.Seed(context);
     }
     catch (Exception ex)
     {
@@ -77,6 +85,11 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(@"C:\ABSystem\Rooms"),
+    RequestPath = "/Rooms"
+});
 
 app.UseRouting();
 
@@ -95,7 +108,7 @@ app.MapControllerRoute(
 
 app.Run();
 
-void SeedAdminUser(ABSystemDbContext context)
+/*void SeedAdminUser(ABSystemDbContext context)
 {
 
     // Check if the 'Admin' role exists
@@ -247,4 +260,4 @@ void SeedAdminUser(ABSystemDbContext context)
         context.SaveChanges();
         Console.WriteLine("User assigned to User role successfully.");
     }
-}
+}*/
