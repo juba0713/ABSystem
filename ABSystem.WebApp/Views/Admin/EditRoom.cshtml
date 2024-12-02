@@ -39,7 +39,8 @@
                     <a class="action-btn back-btn border-radius-5" asp-controller="AdminRoom" asp-action="RoomsListScreen"><img src="~/icons/back.svg" alt="add" />BACK</a>
                 </div>
                 <div class="sub-content border-radius-5">
-                    <form asp-controller="AdminRoom" asp-action="AddRoom" method="POST" enctype="multipart/form-data">
+                    <form asp-controller="AdminRoom" asp-action="EditRoom" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" asp-for="Id" />
                         <div class="outer-container">
                             <div class="input-group">
                                 
@@ -74,7 +75,19 @@
                                 <div>@Constant.ctImages</div>
                                 <div class="scrollable">
                                     <div class="preview-container">
-                                        <img src="~/images/noimage.png" class="no-img" />
+                                        @if(Model.ImagesPath.Count != 0)
+                                        {
+                                            foreach(var imagePath in Model.ImagesPath)
+                                            {
+                                                <div class="img-container">
+                                                    <img class="image-preview" src="@imagePath" />
+                                                </div>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <img src="~/images/noimage.png" class="no-img" />
+                                        }                 
                                     </div>
                                 </div>                               
                                 <div class="upload-img-btn">

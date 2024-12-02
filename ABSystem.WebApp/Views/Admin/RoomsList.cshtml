@@ -3,12 +3,12 @@
 *@
 @{
 }
-@using ABSystem.Services.Objects;
-
+@using ABSystem.Data.Models;
+@model IEnumerable<Room>;
 
 <html>
 <head>
-    <title>Users List</title>
+    <title>Rooms List</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="~/css/common.css" />
@@ -37,6 +37,21 @@
                 <span class="mdi mdi-open-in-new open"></span>
                 <span class="mdi mdi-close close"></span>
             </div>
+        } 
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-error">
+                <div class="icon__wrapper">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10.2908 3.8602L1.82075 18.0002C1.64612 18.3026 1.55372 18.6455 1.55274 18.9947C1.55176 19.3439 1.64224 19.6873 1.81518 19.9907C1.98812 20.2941 2.23748 20.547 2.53846 20.7241C2.83944 20.9012 3.18155 20.9964 3.53075 21.0002H20.4708C20.82 20.9964 21.1621 20.9012 21.463 20.7241C21.764 20.547 22.0134 20.2941 22.1863 19.9907C22.3593 19.6873 22.4497 19.3439 22.4488 18.9947C22.4478 18.6455 22.3554 18.3026 22.1808 18.0002L13.7108 3.8602C13.5325 3.56631 13.2815 3.32332 12.9819 3.15469C12.6824 2.98605 12.3445 2.89746 12.0008 2.89746C11.657 2.89746 11.3191 2.98605 11.0196 3.15469C10.72 3.32332 10.469 3.56631 10.2908 3.8602Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M12 9V13" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M12 17H12.01" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <p>@TempData["ErrorMessage"]</p>
+                <span class="mdi mdi-open-in-new open"></span>
+                <span class="mdi mdi-close close"></span>
+            </div>
         }       
         <partial name="Header" />
         <div class="content">
@@ -44,7 +59,7 @@
             <div class="main-content">
                 <div class="sub-header border-radius-5">
                     <div>Rooms</div>
-                    <a asp-controller="Room" asp-action="AddRoomScreen" class="action-btn"><img src="~/icons/add.svg" alt="add" />ADD ROOM</a>
+                    <a asp-controller="AdminRoom" asp-action="AddRoomScreen" class="action-btn"><img src="~/icons/add.svg" alt="add" />ADD ROOM</a>
                 </div>
                 <div class="sub-content border-radius-5">
                     <div class="filter-container">
@@ -88,23 +103,23 @@
                                 </tr>                          
                             </thead>
                             <tbody>                         
-                                @* @if (Model != null && Model.Any())
+                                @if (Model != null && Model.Any())
                                 {
-                                    foreach (var user in Model)
+                                    foreach (var room in Model)
                                     {
                                         <tr>
-                                            <td>@($"{user.FirstName} {user.LastName}")</td>
-                                            <td>@user.Email</td>
-                                            <td>@user.Role</td>
-                                            <td>@user.CreatedDate.ToString("MMM d, yyyy")</td>
-                                            <td>@user.UpdatedDate.ToString("MMM d, yyyy")</td>
-                                            <td><div class="centered"><div class="status active border-radius-5">ACTIVE</div></div></td>
+                                            <td>@room.Name</td>
+                                            <td>@room.Facility</td>
+                                            <td>@room.Capacity</td>
+                                            <td>@room.Address</td>
+                                            <td>@room.CreatedDate.ToString("MMM d, yyyy")</td>
+                                            <td>@room.UpdatedDate.ToString("MMM d, yyyy")</td>
                                             <td class="group-button">
-                                                <a class="edit-btn action-btn border-radius-5" asp-controller="User" asp-action="EditUserScreen" asp-route-userId="@user.Id">
+                                                <a class="edit-btn action-btn border-radius-5" asp-controller="AdminRoom" asp-action="EditRoomScreen" asp-route-roomId="@room.Id">
                                                     <img src="~/icons/edit.svg" alt="edit"/>
                                                     <div>EDIT</div>
                                                 </a>
-                                                <div class="delete-btn action-btn border-radius-5" data-toggle="modal" data-target="#exampleModalCenter" data-id="@user.Id">
+                                                <div class="delete-btn action-btn border-radius-5" data-toggle="modal" data-target="#exampleModalCenter" data-id="@room.Id">
                                                     <img src="~/icons/delete.svg" alt="delete" />
                                                     <div>DELETE</div>
                                                 </div>
@@ -115,27 +130,9 @@
                                 else
                                 {
                                     <tr>
-                                        <td colspan="7" class="text-center">No users found.</td>
+                                        <td colspan="7" class="text-center">No rooms found.</td>
                                     </tr>
-                                } *@
-                                <tr>
-                                    <td>Test</td>
-                                    <td>Test</td>
-                                    <td>Test</td>
-                                    <td>Test</td>
-                                    <td>Test</td>
-                                    <td>Test</td>
-                                    <td class="group-button">
-                                        <a class="edit-btn action-btn border-radius-5" asp-controller="User" asp-action="EditUserScreen" >
-                                            <img src="~/icons/edit.svg" alt="edit" />
-                                            <div>EDIT</div>
-                                        </a>
-                                        <div class="delete-btn action-btn border-radius-5" data-toggle="modal" data-target="#exampleModalCenter" >
-                                            <img src="~/icons/delete.svg" alt="delete" />
-                                            <div>DELETE</div>
-                                        </div>
-                                    </td>
-                                </tr>
+                                }                               
                             </tbody>
                         </table>
                        
@@ -151,10 +148,10 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">             
                 <div class="modal-body">
-                    <form asp-controller="User" asp-action="DeleteUser" method="POST" class="gap-20 flex-column">
-                        <input type="hidden" name="userId" value="0" id="userId" />
+                    <form asp-controller="AdminRoom" asp-action="DeleteRoom" method="POST" class="gap-20 flex-column">
+                        <input type="hidden" name="roomId" value="0" id="roomId" />
                         <div>
-                            <div class="centered">Are you sure you want to delete this user?</div>
+                            <div class="centered">Are you sure you want to delete this room?</div>
                             <div class="centered">This action is permanent and cannot be undone.</div>
                         </div>
                         <div class="group-button">
@@ -171,7 +168,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script>
         document.querySelectorAll('.delete-btn').forEach(btn => btn.addEventListener('click', function () {
-            document.querySelector("#userId").setAttribute('value', btn.getAttribute('data-id'));
+            document.querySelector("#roomId").setAttribute('value', btn.getAttribute('data-id'));
         }));
 
     </script>

@@ -102,6 +102,7 @@ namespace ABSystem.WebApp.Controllers
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 ViewData["Error"] = MessageConstant.ERROR;
                 return PartialView("~/Views/Register.cshtml");
             }

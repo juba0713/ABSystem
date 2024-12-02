@@ -26,14 +26,16 @@
 document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
 
 let sideBar = document.querySelector(".user-sidebar");
-console.log(sideBar);
 
-sideBar.addEventListener('mouseover', function () {
-    sideBar.style.width = '15vw';
-});
+if (sideBar) {
+    sideBar.addEventListener('mouseover', function () {
+        sideBar.style.width = '15vw';
+    });
 
-sideBar.addEventListener('mouseout', function () {
-    sideBar.style.width = '3.5vw';
-});
+    sideBar.addEventListener('mouseout', function () {
+        sideBar.style.width = '3.5vw';
+    });
+}
+
 
      
