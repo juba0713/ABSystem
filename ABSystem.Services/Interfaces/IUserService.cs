@@ -16,6 +16,8 @@ namespace ABSystem.Services.Interfaces
     public interface IUserService
     {
 
+        public string GetLoggedInUserId();
+
         public Task RegisterUser(RegisterDto dto);
 
         public Task AddUser(UserDto dto);

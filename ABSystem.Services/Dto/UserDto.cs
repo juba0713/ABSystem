@@ -30,6 +30,15 @@ namespace ABSystem.Services.Dto
         [Required(ErrorMessage = "*" + MessageConstant.LAST_NAME_REQUIREED)]
         public string? LastName { get; set; }
 
+
+        public string? PhoneNumber {  get; set; }
+
+        public string? Address { get; set; }
+
+        public string? ConfirmPassword {  get; set; }
+
+        public string? Gender {  get; set; }
+
         [Required(ErrorMessage = "*" + MessageConstant.ROLE_REQUIRED)]
         [RequiredDropdown("*" + MessageConstant.ROLE_REQUIRED)]
         public string? Role { get; set; }

@@ -112,11 +112,20 @@ body.dark-mode .vertical-line {
     background-color: #191919;
 }
 
-body.dark-mode td,
-body.dark-mode th,
-body.dark-mode .room-title{
-    color: #ffffff;
-}
+    body.dark-mode td,
+    body.dark-mode th,
+    body.dark-mode .room-title,
+    body.dark-mode .details-container .d-1:nth-child(1),
+    body.dark-mode .details-container .d-1:nth-child(2) div:nth-child(1),
+    body.dark-mode .details-container .d-1:nth-child(2) div:nth-child(2),
+    body.dark-mode .details-container .d-1:nth-child(3) div:nth-child(1),
+    body.dark-mode .details-container .d-1:nth-child(3) div:nth-child(2),
+    body.dark-mode .details-container .d-1:nth-child(4) div:nth-child(1),
+    body.dark-mode .details-container .d-1:nth-child(4) div:nth-child(2),
+    body.dark-mode .details-container .d-1:nth-child(5) div:nth-child(1),
+    body.dark-mode .details-container .d-1:nth-child(5) div:nth-child(2) {
+        color: #ffffff;
+    }
 
 body.dark-mode a {
     color: #90F0EE;
@@ -124,15 +133,17 @@ body.dark-mode a {
 
 body.dark-mode input,
 body.dark-mode textarea,
-body.dark-mode select{
+body.dark-mode select{ 
     background: #2c2c2c;
     border: 0.052vw solid #191919;
     color: #fff;
 }
 
-body.dark-mode .book svg path{
+body.dark-mode .book svg path,
+body.dark-mode .details-container svg path{
     fill: #fff !important;
 }
+
 
 .sub-header,
 .sub-content,
@@ -151,7 +162,8 @@ textarea,
 .notification-content,
 .notification-details,
 .input-images,
-.preview-container {
+.preview-container,
+.modal-body {
     border-radius: 0.2vw;
     font-size: 0.8vw;
 }
@@ -165,11 +177,20 @@ select {
 }
 
 select,
-input {
+input{
     height: 2vw;
+    padding: 0.521vw;
+    border: 0.052vw solid #A9A9A9;
+    box-sizing: border-box;
 }
 
-.left-button{
+textarea {
+    padding: 0.521vw;
+    border: 0.052vw solid #A9A9A9;
+    box-sizing: border-box;
+}
+
+.left-button {
     display: flex;
     justify-content: flex-end;
     width: 100%;
@@ -209,6 +230,35 @@ tbody tr:hover {
     background: #D3D3D3;
 }
 
+a{
+    text-decoration: none;
+    color: #000;
+}
+
+a:hover{
+    text-decoration: none;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 0.3vw;
+    height: 0.3vw;
+}    
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
 
 
 
@@ -284,7 +334,7 @@ tbody tr:hover {
 */
 .error {
     color: #FF0000;
-    font-size: 0.9vw;
+    font-size: 0.8vw; 
 }
 
 

@@ -23,6 +23,10 @@ namespace ABSystem.Data.Models
 
         public string LastName { get; set; } = string.Empty;
 
+        public string Gender {  get; set; } = string.Empty;
+
+        public string Address {  get; set; } = string.Empty;
+
         //public string? Role { get; set; }
 
         public DateTime CreatedDate {  get; set; }

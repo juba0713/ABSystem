@@ -33,24 +33,58 @@ form {
 .outer-container{
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 1vw;
     width: 100%;
 }
 
-.input-group {
-    width: 25%;
+.input-groups {
+    width: 50%;
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
     gap: 0.521vw;
+    height: 100%;
 }
 
 .input-group div {
     display: flex;
     flex-direction: column;
     gap: 0.2vw;
+    width: 100%;
 }
 
-.input-group input {
+.input-groups input {
+    width: 100%;
+    padding: 0.521vw;
+    border: 0.052vw solid #A9A9A9;
+    box-sizing: border-box;
+}
+
+.input-group{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1vw;
+}
+
+.select-groups {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 0.521vw;
+    height: 100%;
+}
+
+.select-groups div {
+    display: flex;
+    flex-direction: column; 
+    gap: 0.3vw;
+    width: 100%;
+}
+
+.select-groups select {
     width: 100%;
     padding: 0.521vw;
     border: 0.052vw solid #A9A9A9;

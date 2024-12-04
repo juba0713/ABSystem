@@ -19,5 +19,7 @@ namespace ABSystem.Services.Interfaces
         public RoomDto GetRoomById(int roomId);
 
         public void DeleteRoom(int roomId);
+
+        public List<RoomDto> GetRoomsWithImage();
     }
 }
