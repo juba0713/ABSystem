@@ -62,6 +62,11 @@ builder.Services.ConfigureApplicationCookie(options =>
     //other properties
 });
 
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = null;
+});
+
 
 
 var app = builder.Build();

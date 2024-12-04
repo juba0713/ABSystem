@@ -198,5 +198,26 @@ namespace ABSystem.Services.Services
             return imageUrls;
         }
 
+        public RoomDto GetRoomByIdWithBookings(int roomId)
+        {
+            RoomDto dto = new RoomDto();
+
+            var room = this._roomRepository.GetRoomByIdWithBookings(roomId);
+
+            if (room == null)
+            {
+                throw new Exception(MessageConstant.ROOM_NOT_FOUND);
+            }
+
+            _mapper.Map(room, dto);
+
+            List<string> imagesPath = GetRoomImagesPath(roomId);
+
+            dto.ImagesPath = imagesPath;
+
+            dto.ImagePath = imagesPath.FirstOrDefault() ?? "";
+
+            return dto;
+        }
     }
 }

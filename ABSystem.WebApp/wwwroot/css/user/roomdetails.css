@@ -210,7 +210,9 @@
     --calendar-nextprev-bg-color: transparent;
     --next-prev-arrow-color: linear-gradient(to bottom, #03a9f4, #2196f3);
     --calendar-border-radius: 0.2vw;
-    --calendar-prevnext-date-color: #484848
+    --calendar-prevnext-date-color: #484848;
+    --calendar-occupied-color: #ff6a00;
+    --calendar-past-date-color: #B2BEB5;
 }
 
 * {
@@ -313,6 +315,16 @@
 
 .calendar .calendar-inner .calendar-body .calendar-today {
     background: var(--calendar-today-color);
+    border-radius: 4px;
+}
+
+.calendar .calendar-inner .calendar-body .calendar-occupied {
+    background: var(--calendar-occupied-color);
+    border-radius: 4px;
+}
+
+.calendar .calendar-inner .calendar-body .calendar-past-date {
+    background: var(--calendar-past-date-color);
     border-radius: 4px;
 }
 

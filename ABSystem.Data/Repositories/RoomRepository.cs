@@ -1,5 +1,6 @@
 ﻿using ABSystem.Data.Interfaces;
 using ABSystem.Data.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,5 +50,14 @@ namespace ABSystem.Data.Repositories
         {
             return this._context.Rooms.ToList();
         }
+
+        public Room GetRoomByIdWithBookings(int roomId)
+        {
+            return this._context.Rooms
+                .Include(r => r.Bookings) // Include the related bookings
+                .Where(r => r.Id == roomId && r.IsDeleted == 0) // Filter by roomId and check for non-deleted rooms
+                .FirstOrDefault(); // Return the first matching room or null if not found
+        }
+
     }
 }

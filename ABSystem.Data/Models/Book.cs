@@ -6,6 +6,7 @@ using System.Linq;
 using System.Security;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
 namespace ABSystem.Data.Models
 {
@@ -36,6 +37,10 @@ namespace ABSystem.Data.Models
         public string? Request { get; set; }
 
         public int RoomId { get; set; }
+
+        [ForeignKey("RoomId")]
+        [JsonIgnore]
+        public Room? Room { get; set; }
 
         public string UserId { get; set; } = string.Empty;
 

@@ -1,4 +1,5 @@
-﻿using ABSystem.Resources.Constants;
+﻿using ABSystem.Data.Models;
+using ABSystem.Resources.Constants;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -37,6 +38,8 @@ namespace ABSystem.Services.Dto
          * First Image is the Image that will be displayed in the Room List of the User
          */
         public string ImagePath { get; set; } = string.Empty;
+
+        public ICollection<Book> Bookings { get; set; } = new List<Book>();
 
 
         /*

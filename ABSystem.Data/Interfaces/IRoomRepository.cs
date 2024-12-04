@@ -34,5 +34,10 @@ namespace ABSystem.Data.Interfaces
          */
         public void DeleteRoom(Room room);
 
+        /*
+         * This method is for getting a room by its id from the database with bookings
+         */
+        public Room GetRoomByIdWithBookings(int roomId);
+
     }
 }
