@@ -14,6 +14,7 @@ namespace ABSystem.Data
         public ABSystemDbContext(DbContextOptions<ABSystemDbContext> options)
             : base(options) { }
 
+
         //public virtual DbSet<User> Users { get; set; }
 
         public DbSet<Room> Rooms { get; set; }

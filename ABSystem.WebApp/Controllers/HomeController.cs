@@ -35,6 +35,13 @@ namespace ABSystem.WebApp.Controllers
         [Route("/admin/dashboard")]
         public IActionResult AdminDashboard()
         {
+            // Get user details from session
+            var userId = HttpContext.Session.GetString("UserId");
+            var userEmail = HttpContext.Session.GetString("UserEmail");
+            var userRoles = HttpContext.Session.GetString("UserRoles");
+            Console.WriteLine("User ID: " + userId);
+            Console.WriteLine("User Email: " + userEmail);
+            Console.WriteLine("User Roles: " + userRoles);
             return PartialView("~/Views/Admin/Dashboard.cshtml");
         }
 

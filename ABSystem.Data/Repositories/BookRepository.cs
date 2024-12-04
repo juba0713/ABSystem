@@ -24,6 +24,8 @@ namespace ABSystem.Data.Repositories
         public void AddBook(Book book)
         {
             this._context.Books.Add(book);
+
+            this._context.SaveChanges();
         }
     }
 }

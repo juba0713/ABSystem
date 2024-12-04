@@ -35,13 +35,25 @@ builder.Services.AddIdentity<User, IdentityRole>(
     )
     .AddEntityFrameworkStores<ABSystemDbContext>().AddDefaultTokenProviders();
 
+builder.Services.AddDistributedMemoryCache();  // Use in-memory cache for sessions
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);  // Set session timeout
+    options.Cookie.HttpOnly = true; // Set HttpOnly flag for session cookie
+    options.Cookie.IsEssential = true;  // Mark cookie as essential
+});
+
 //Adding  Services and Repository
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IRoomService, RoomService>();
 builder.Services.AddScoped<IRoomRepository, RoomRepository>();
+builder.Services.AddScoped<IBookService, BookService>();
+builder.Services.AddScoped<IBookRepository, BookRepository>();
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
@@ -92,7 +104,7 @@ app.UseStaticFiles(new StaticFileOptions
 });
 
 app.UseRouting();
-
+app.UseSession();
 app.UseAuthentication();
 app.UseAuthorization();
 
