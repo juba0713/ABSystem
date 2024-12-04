@@ -1,4 +1,5 @@
 ﻿using ABSystem.Data.Models;
+using ABSystem.Data.Objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +14,10 @@ namespace ABSystem.Data.Interfaces
          * This method is for adding a booking to the database
          */
         public void AddBook(Book book);
+
+        /*
+         * This method is for getting all the booking
+         */
+        public IEnumerable<Book> GetBooks();
     }
 }

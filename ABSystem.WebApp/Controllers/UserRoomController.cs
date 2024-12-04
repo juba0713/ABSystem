@@ -51,7 +51,7 @@ namespace ABSystem.WebApp.Controllers
 
             try
             {
-                var room = this._roomService.GetRoomById(roomId);
+                var room = this._roomService.GetRoomByIdWithBookings(roomId);
 
                 viewDto.RoomDto = room;
             }

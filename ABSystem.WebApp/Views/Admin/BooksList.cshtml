@@ -3,8 +3,10 @@
 *@
 @{
 }
+@using ABSystem.Data.Objects;
 @using ABSystem.Data.Models;
-@model IEnumerable<Room>;
+@using ABSystem.Resources.Constants;
+@model IEnumerable<Book>;
 
 <html>
 <head>
@@ -14,7 +16,7 @@
     <link rel="stylesheet" href="~/css/common.css" />
     <link rel="stylesheet" href="~/css/header.css" />
     <link rel="stylesheet" href="~/css/adminsidebar.css" />
-    <link rel="stylesheet" href="~/css/admin/roomslist.css" />
+    <link rel="stylesheet" href="~/css/admin/bookslist.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css"/>
     <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
@@ -58,7 +60,7 @@
             <partial name="AdminSidebar" />
             <div class="main-content">
                 <div class="sub-header border-radius-5">
-                    <div>Rooms</div>
+                    <div>Bookings</div>
                     <a asp-controller="AdminRoom" asp-action="AddRoomScreen" class="action-btn"><img src="~/icons/add.svg" alt="add" />ADD ROOM</a>
                 </div>
                 <div class="sub-content border-radius-5">
@@ -71,11 +73,11 @@
                             <div class="search-field">
                                 <select>
                                     <option value="All">All</option>
-                                    <option value="User">User</option>
-                                    <option value="Admin">Admin</option>
-                                    <option value="Super">Super</option>
-                                    <option value="Active">Active</option>
-                                    <option value="Inactive">Inactive</option>
+                                    <option value="@CommonConstant.PENDING">@CommonConstant.PENDING</option>
+                                    <option value="@CommonConstant.ACCEPTED">@CommonConstant.ACCEPTED</option>
+                                    <option value="@CommonConstant.REJECTED">@CommonConstant.REJECTED</option>
+                                    <option value="@CommonConstant.CANCELED">@CommonConstant.CANCELED</option>
+                                    <option value="@CommonConstant.COMPLETED">@CommonConstant.COMPLETED</option>
                                 </select>
 
                             </div>
@@ -93,36 +95,56 @@
                             
                             <thead>
                                 <tr>
-                                    <th>Booking Id</th>
-                                    <th>Date</th>
-                                    <th>Room Name</th>                                  
-                                    <th>User Name</th>                                  
-                                    <th>Status</th>                                  
-                                    <th>Created Date</th>
-                                    <th>Updated Date</th>
+                                    <th>Id</th>
+                                    <th>Room</th>
+                                    <th>User</th>                                  
+                                    <th>Date</th>                                                                                                    
+                                    <th>Start Time</th>
+                                    <th>End Time</th>
+                                    <th>Status</th>
                                     <th></th>
                                 </tr>                          
                             </thead>
                             <tbody>                         
                                 @if (Model != null && Model.Any())
                                 {
-                                    foreach (var room in Model)
+                                    foreach (var book in Model)
                                     {
                                         <tr>
-                                            <td>@room.Name</td>
-                                            <td>@room.Facility</td>
-                                            <td>@room.Capacity</td>
-                                            <td>@room.Address</td>
-                                            <td>@room.CreatedDate.ToString("MMM d, yyyy")</td>
-                                            <td>@room.UpdatedDate.ToString("MMM d, yyyy")</td>
+                                            <td>@book.Id</td>
+                                            <td>@book.Room.Name</td>
+                                            <td>@book.FirstName @book.LastName</td>
+                                            <td>@book.BookDate.ToString("MMM dd, yyyy")</td>
+                                            <td>@(new DateTime(book.StartTime.Ticks).ToString("hh:mm tt"))</td>
+                                            <td>@(new DateTime(book.EndTime.Ticks).ToString("hh:mm tt"))</td>
+                                            <td>
+                                                @if(book.Status == CommonConstant.PENDING)
+                                                { 
+                                                    <div class="status pending">@CommonConstant.PENDING</div>
+                                                }else if(book.Status == CommonConstant.ACCEPTED)
+                                                {
+                                                    <div class="status accepted">@CommonConstant.ACCEPTED</div>
+                                                }
+                                                else if (book.Status == CommonConstant.REJECTED)
+                                                {
+                                                    <div class="status rejected">@CommonConstant.REJECTED</div>
+                                                }
+                                                else if (book.Status == CommonConstant.CANCELED)
+                                                {
+                                                    <div class="status pending">@CommonConstant.CANCELED</div>
+                                                }else if (book.Status == CommonConstant.COMPLETED)
+                                                {
+                                                    <div class="status pending">@CommonConstant.COMPLETED</div>
+                                                }
+                                            </td>
                                             <td class="group-button">
-                                                <a class="edit-btn action-btn border-radius-5" asp-controller="AdminRoom" asp-action="EditRoomScreen" asp-route-roomId="@room.Id">
+                                                <a class="edit-btn action-btn border-radius-5" asp-controller="AdminRoom" asp-action="EditRoomScreen" asp-route-roomId="@book.Id">
                                                     <img src="~/icons/edit.svg" alt="edit"/>
-                                                    <div>EDIT</div>
+                                                    <div>APPROVE</div>
                                                 </a>
-                                                <div class="delete-btn action-btn border-radius-5" data-toggle="modal" data-target="#exampleModalCenter" data-id="@room.Id">
+                                                <div class="delete-btn action-btn border-radius-5" data-toggle="modal" data-target="#exampleModalCenter" data-id="@book.Id">
                                                     <img src="~/icons/delete.svg" alt="delete" />
-                                                    <div>DELETE</div>
+                                                    <div>REJECT</div>
                                                 </div>
                                             </td>
                                         </tr>

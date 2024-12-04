@@ -1,4 +1,5 @@
 ﻿using ABSystem.Data.Models;
+using ABSystem.Data.Objects;
 using ABSystem.Services.Dto;
 using AutoMapper;
 
@@ -26,6 +27,8 @@ namespace ABSystem.WebApp
             CreateMap<Room, Room>();
             CreateMap<Room, RoomDto>();
             CreateMap<UserBookDto, Book>();
+            CreateMap<Book, BookObj>();
+
         }        
     }
 }

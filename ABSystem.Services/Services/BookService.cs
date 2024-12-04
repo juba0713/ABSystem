@@ -1,5 +1,6 @@
 ﻿using ABSystem.Data.Interfaces;
 using ABSystem.Data.Models;
+using ABSystem.Data.Objects;
 using ABSystem.Resources.Constants;
 using ABSystem.Services.Dto;
 using ABSystem.Services.Interfaces;
@@ -50,6 +51,11 @@ namespace ABSystem.Services.Services
             Notification notification = new Notification();
 
 
+        }
+
+        public IEnumerable<Book> GetBooks()
+        {
+            return this._bookRepository.GetBooks();
         }
     }
 }
