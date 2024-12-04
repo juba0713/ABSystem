@@ -64,6 +64,9 @@ namespace ABSystem.WebApp.Controllers
                 return PartialView("~/Views/Login.cshtml");
             }
 
+            HttpContext.Session.SetString("UserId", user.Id);
+            HttpContext.Session.SetString("UserEmail", user.Email);
+
             var roles = await _userManager.GetRolesAsync(user);
 
             if (roles.Contains("Admin"))
@@ -74,7 +77,7 @@ namespace ABSystem.WebApp.Controllers
             {
                 return RedirectToAction("SuperDashboard", "Home");
             }
-
+            Console.WriteLine("HELLO");
             // Default redirect if no roles match
             return RedirectToAction("Dashboard", "Home");
         }
@@ -115,6 +118,7 @@ namespace ABSystem.WebApp.Controllers
         public async Task<IActionResult> Logout()
         {
             await this._signInManager.SignOutAsync();
+            HttpContext.Session.Clear();
             return RedirectToAction("Login", "Account");
         }
     }

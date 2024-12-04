@@ -33,7 +33,7 @@ namespace ABSystem.Data.Models
         
         public TimeSpan EndTime { get; set; }
 
-        public string Request { get; set; } = string.Empty;
+        public string? Request { get; set; }
 
         public int RoomId { get; set; }
 
