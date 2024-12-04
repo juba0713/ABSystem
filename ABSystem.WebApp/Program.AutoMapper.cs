@@ -25,6 +25,7 @@ namespace ABSystem.WebApp
             CreateMap<RoomDto, Room>();
             CreateMap<Room, Room>();
             CreateMap<Room, RoomDto>();
+            CreateMap<UserBookDto, Book>();
         }        
     }
 }

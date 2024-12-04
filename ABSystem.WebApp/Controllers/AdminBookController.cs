@@ -1,13 +1,14 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using ABSystem.Resources.Constants;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ABSystem.WebApp.Controllers
 {
-    [Authorize]
-    public class BookController : Controller
+    [Authorize(Roles = CommonConstant.Admin + "," + CommonConstant.Super)]
+    public class AdminBookController : Controller
     {
         [HttpGet]
-        [Route("/book")]
+        [Route("/admin/book")]
         public IActionResult BookingListScreen()
         {
             return PartialView("~/Views/User/RoomList.cshtml");

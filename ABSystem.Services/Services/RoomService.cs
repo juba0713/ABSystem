@@ -73,7 +73,34 @@ namespace ABSystem.Services.Services
 
             dto.ImagesPath = imagesPath;
 
+            dto.ImagePath = imagesPath.FirstOrDefault() ?? "";
+
             return dto;
+        }
+
+        public List<RoomDto> GetRoomsWithImage()
+        {
+            List<RoomDto> roomsDto = new List<RoomDto>();
+
+            var rooms = this._roomRepository.GetRooms();
+
+            if (rooms == null)
+            {
+                throw new Exception(MessageConstant.ROOM_NOT_FOUND);
+            }
+
+            foreach(var room in rooms)
+            {
+                RoomDto dto = new RoomDto();
+
+                _mapper.Map(room, dto);
+
+                dto.ImagePath = GetRoomImagesPath(room.Id).FirstOrDefault() ?? "";
+
+                roomsDto.Add(dto);
+            }
+
+            return roomsDto;
         }
 
         public IEnumerable<Room> GetRooms()
@@ -170,5 +197,6 @@ namespace ABSystem.Services.Services
 
             return imageUrls;
         }
+
     }
 }

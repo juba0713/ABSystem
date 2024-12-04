@@ -32,5 +32,16 @@ namespace ABSystem.Services.Dto
         public List<IFormFile>? Images { get; set; }
 
         public List<string>? ImagesPath { get; set; }
+
+        /*
+         * First Image is the Image that will be displayed in the Room List of the User
+         */
+        public string ImagePath { get; set; } = string.Empty;
+
+
+        /*
+         *  This is DTO for booking
+         */
+        public UserBookDto UserBookDto { get; set; } = new UserBookDto();
     }
 }

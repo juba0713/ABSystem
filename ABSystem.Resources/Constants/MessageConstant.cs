@@ -11,6 +11,8 @@ namespace ABSystem.Resources.Constants
 
         public const string ERROR = "Error";
 
+        public const string NO_USER_LOGIN = "No user is logged in";
+
         /*
          *  INPUT
          */
@@ -43,6 +45,8 @@ namespace ABSystem.Resources.Constants
 
         public const string ROOM_DESCRIPTION_REQUIRED = "Description is required";
 
+        public const string BOOK_DATE_REQUIRED = "Complete all the required fields";
+
 
         /*
          *  AFTER ACTION
@@ -71,5 +75,7 @@ namespace ABSystem.Resources.Constants
         public const string ROOM_EDITED_ERROR = "Error occurred while editing a room";
 
         public const string ROOM_DELETED_ERROR = "Error occured while deleting a room";
+
+        public const string BOOK_ADDED_ERROR = "Error occured while adding a book";
     }
 }
