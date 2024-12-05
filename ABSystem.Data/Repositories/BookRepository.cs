@@ -33,12 +33,23 @@ namespace ABSystem.Data.Repositories
             this._context.SaveChanges();
         }
 
+        public Book GetBookById(int bookId)
+        {
+            return this._context.Books.Find(bookId);
+        }
+
         public IEnumerable<Book> GetBooks()
         {
 
             return this._context.Books
                 .Include(b => b.Room) 
                 .ToList();
+        }
+
+        public void UpdateBookStatus(Book book)
+        {
+            this._context.Books.Update(book);
+            this._context.SaveChanges();
         }
     }
 }

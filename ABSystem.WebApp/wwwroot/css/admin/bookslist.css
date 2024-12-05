@@ -148,8 +148,20 @@ td:nth-child(last) {
     background: #FFA500;
 }
 
-.inactive {
-    background: #FD4F4F;
+.accepted {
+    background: #4CAF50;
+}
+
+.rejected {
+    background: #F44336;
+}
+
+.canceled {
+    background: #9E9E9E;
+}
+
+.completed {
+    background: #2196F3;
 }
 
 
