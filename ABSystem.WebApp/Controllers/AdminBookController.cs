@@ -1,7 +1,9 @@
 ﻿using ABSystem.Resources.Constants;
+using ABSystem.Services.Dto;
 using ABSystem.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace ABSystem.WebApp.Controllers
 {
@@ -25,6 +27,40 @@ namespace ABSystem.WebApp.Controllers
             var books = this._bookService.GetBooks();
 
             return PartialView(CommonConstant.A_BOOKS_LIST_HTML, books);
+        }
+
+        [HttpPost]
+        [Route("/book/approve")]
+        public IActionResult ApproveBook(int bookId)
+        {
+            Console.WriteLine("Book Id: " + bookId);
+            try
+            {
+                this._bookService.UpdateBookStatus(bookId, CommonConstant.ACCEPTED);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, MessageConstant.BOOK_APPROVED_ERROR);
+            }
+
+            return RedirectToAction("BookingsListScreen");
+        }
+
+        [HttpPost]
+        [Route("/book/reject")]
+        public IActionResult RejectBook(int bookId)
+        {
+            Console.WriteLine("Book Id: " + bookId);
+            try
+            {
+                this._bookService.UpdateBookStatus(bookId, CommonConstant.REJECTED);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, MessageConstant.BOOK_REJECTED_ERROR);
+            }
+
+            return RedirectToAction("BookingsListScreen");
         }
     }
 }

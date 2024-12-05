@@ -61,7 +61,6 @@
             <div class="main-content">
                 <div class="sub-header border-radius-5">
                     <div>Bookings</div>
-                    <a asp-controller="AdminRoom" asp-action="AddRoomScreen" class="action-btn"><img src="~/icons/add.svg" alt="add" />ADD ROOM</a>
                 </div>
                 <div class="sub-content border-radius-5">
                     <div class="filter-container">
@@ -137,16 +136,26 @@
                                                     <div class="status pending">@CommonConstant.COMPLETED</div>
                                                 }
                                             </td>
-                                            <td class="group-button">
-                                                <a class="edit-btn action-btn border-radius-5" asp-controller="AdminRoom" asp-action="EditRoomScreen" asp-route-roomId="@book.Id">
-                                                    <img src="~/icons/edit.svg" alt="edit"/>
-                                                    <div>APPROVE</div>
-                                                </a>
-                                                <div class="delete-btn action-btn border-radius-5" data-toggle="modal" data-target="#exampleModalCenter" data-id="@book.Id">
-                                                    <img src="~/icons/delete.svg" alt="delete" />
-                                                    <div>REJECT</div>
-                                                </div>
-                                            </td>
+                                            @if(book.Status == CommonConstant.PENDING){
+                                                <td class="group-button">
+                                                    <form asp-controller="AdminBook" asp-action="ApproveBook" method="POST">
+                                                        <input type="hidden" name="bookId" value="@book.Id" />
+                                                        <button class="edit-btn action-btn border-radius-5" name="approve">
+                                                            <img src="~/icons/edit.svg" alt="edit" />
+                                                            APPROVE
+                                                        </button>
+                                                    </form>
+                                                    <form asp-controller="AdminBook" asp-action="RejectBook" method="POST">
+                                                        <input type="hidden" name="bookId" value="@book.Id" />
+                                                        <button class="delete-btn action-btn border-radius-5" name="reject">
+                                                            <img src="~/icons/delete.svg" alt="delete" />
+                                                            REJECT
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            }else{
+                                                <td></td>
+                                            }                                       
                                         </tr>
                                     }
                                 }

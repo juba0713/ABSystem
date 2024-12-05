@@ -1,4 +1,5 @@
 ﻿using ABSystem.Data.Interfaces;
+using ABSystem.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,9 +17,10 @@ namespace ABSystem.Data.Repositories
             _context = context;
         }
 
-        public void AddNotification()
+        public void AddNotification(Notification notification)
         {
-
+            _context.Notifications.Add(notification);
+            _context.SaveChanges();
         }
     }
 }

@@ -58,14 +58,15 @@ namespace ABSystem.WebApp.Controllers
             }
 
             // Get the logged-in user
-            var user = await _userManager.FindByEmailAsync(dto.Email);
+            var user = await _userManager.FindByEmailAsync(dto.Email!);
             if (user == null)
             {
                 return PartialView("~/Views/Login.cshtml");
             }
 
             HttpContext.Session.SetString("UserId", user.Id);
-            HttpContext.Session.SetString("UserEmail", user.Email);
+            HttpContext.Session.SetString("UserEmail", user.Email!);
+            HttpContext.Session.SetString("UserFullName", user.FirstName + ' ' + user.LastName);
 
             var roles = await _userManager.GetRolesAsync(user);
 

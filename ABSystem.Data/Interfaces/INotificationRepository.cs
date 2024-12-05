@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ABSystem.Data.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,6 @@ namespace ABSystem.Data.Interfaces
         /*
          * This method is to add a notification to the database
          */
-        public void AddNotification();
+        public void AddNotification(Notification notification);
     }
 }
