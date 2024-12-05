@@ -53,7 +53,7 @@ namespace ABSystem.Services.Services
             book.IsDeleted = 0;
             book.UserId = loggedInUserId;
 
-            this._bookRepository.AddBook(book);
+            int bookId = this._bookRepository.AddBook(book);
 
             var room = this._roomRepository.GetRoomById(dto.RoomId);
 
@@ -62,7 +62,8 @@ namespace ABSystem.Services.Services
             DateTime startDateTime = DateTime.Today.Add(dto.StartTime);
             DateTime endDateTime = DateTime.Today.Add(dto.EndTime);
 
-            notification.UserId = loggedInUserId;
+            //notification.UserId = loggedInUserId;
+            notification.BookingId = bookId;
             notification.RoomId = room.Id;
             notification.Message = loggedInUserFullName + " has booked " +
                                    room.Name + " on " +
@@ -77,6 +78,17 @@ namespace ABSystem.Services.Services
 
             this._notificationRepository.AddNotification(notification);
 
+        }
+
+        public UserBookDto GetBookById(int bookId)
+        {
+            UserBookDto userBookDto = new UserBookDto();
+
+            var book = this._bookRepository.GetBookById(bookId);
+
+            _mapper.Map(book, userBookDto);
+
+            return userBookDto;
         }
 
         public IEnumerable<Book> GetBooks()

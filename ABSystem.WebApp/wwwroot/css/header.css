@@ -8,9 +8,14 @@
     padding: 0.521vw;
     box-sizing: border-box;
     height: 4vw;
+    position: relative;
 }
 
-.header div {
+.header-icons{
+    position: relative;
+}
+
+.header .header-icons {
     display: flex;
     align-items: center;
     gap: 1.042vw;
@@ -22,13 +27,13 @@
     cursor: pointer;
 }
 
-.header div:nth-child(1){
+.header .header-icons:nth-child(1) {
     display: flex;
-    gap: 0.5vw; 
+    gap: 0.5vw;
     align-items: center;
 }
 
-.header div:nth-child(1) img {
+.header .header-icons:nth-child(1) img {
     width: 2.5vw;
     height: 2.5vw;
 }
@@ -38,8 +43,92 @@
     color: #fff;    
 }
 
-.header div:nth-child(2) {
+.header .header-icons:nth-child(2) {
     padding: 0 0.5vw 0 0;
     box-sizing: border-box;
 }
 
+.new-notification-count {
+    background: #FFFF00;
+    padding: 0.2vw;
+    position: absolute;
+    right: 3.6vw;
+    top: -0.3vw;
+    font-size: 0.6vw;
+    border-radius: 1vw;
+    width: 1vw;
+    text-align: center;
+}
+
+.notification-content {
+    background: #fff;
+    width: 25vw;
+    height: 25vw;
+    position: absolute;
+    right: 4vw;
+    top: 4vw;
+    border: 0.05vw solid #000;
+    padding: 0.5vw;
+    box-sizing: border-box;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5vw;
+    font-size: 0.8vw;
+}
+
+.notification-list {
+    width: 100%;
+    display: flex !important;
+    flex-direction: column;
+    gap: 0.5vw;
+    font-size: 0.8vw;
+}
+
+.notification-title {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-size: 1vw;
+    font-weight: 600;
+    background: #1B4965;
+    color: #fff;
+    padding: 0.5vw 0;
+    box-sizing: border-box;
+}
+
+.notification-details {
+    background: #EAE7E6;
+    width: 100%;
+    display: flex;
+    flex-direction: column !important;
+    justify-content: flex-start;
+    font-size: 1vw;
+    font-weight: 600;
+    padding: 0.5vw;
+    box-sizing: border-box;
+    
+}
+
+.notification-details div:nth-child(1) {
+    text-align: right;
+    font-size: 0.8vw;
+}
+
+.notification-details div:nth-child(2) {
+    font-size: 0.8vw;
+}
+
+.notification-show {
+    display: flex;
+}
+
+.notification-details.unread {
+    background: #007BFF !important; /* Light Blue for unread notifications */
+    color: white; /* Text color */
+}
+ 
+.notification-details.read {
+    background: #F8F9FA !important; /* Light gray for read notifications */
+    color: black; /* Text color */
+}

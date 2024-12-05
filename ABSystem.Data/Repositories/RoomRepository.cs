@@ -43,7 +43,7 @@ namespace ABSystem.Data.Repositories
 
         public Room GetRoomById(int roomId)
         {
-            return this._context.Rooms.Find(roomId);
+            return this._context.Rooms.Find(roomId)!;
         }
 
         public IEnumerable<Room> GetRooms()
@@ -54,9 +54,9 @@ namespace ABSystem.Data.Repositories
         public Room GetRoomByIdWithBookings(int roomId)
         {
             return this._context.Rooms
-                .Include(r => r.Bookings) // Include the related bookings
-                .Where(r => r.Id == roomId && r.IsDeleted == 0) // Filter by roomId and check for non-deleted rooms
-                .FirstOrDefault(); // Return the first matching room or null if not found
+                .Include(r => r.Bookings) 
+                .Where(r => r.Id == roomId && r.IsDeleted == 0) 
+                .FirstOrDefault()!;
         }
 
     }

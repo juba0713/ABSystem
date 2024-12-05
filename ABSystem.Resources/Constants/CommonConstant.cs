@@ -53,6 +53,7 @@
         public const string A_ROOMS_EDIT_HTML = "~/Views/Admin/EditRoom.cshtml";
 
         public const string A_BOOKS_LIST_HTML = "~/Views/Admin/BooksList.cshtml";
+        public const string A_BOOK_DETAILS_HTML = "~/Views/Admin/BookDetails.cshtml";
         
 
         public const string U_ROOMS_DETAILS_HTML = "~/Views/User/RoomDetails.cshtml";

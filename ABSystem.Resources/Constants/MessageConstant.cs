@@ -81,5 +81,9 @@ namespace ABSystem.Resources.Constants
         public const string BOOK_APPROVED_ERROR = "Error occured while approving a book";
 
         public const string BOOK_REJECTED_ERROR = "Error occured while rejecting a book";
+
+        public const string BOOK_RETRIEVAL_ERROR = "Error occured while retrieving a book";
+
+        public const string NOTIFICATION_RETRIEVAL_ERROR = "Error occured while retrieving a notifications";
     }
 }

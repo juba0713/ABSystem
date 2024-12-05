@@ -11,44 +11,6 @@
     <link rel="stylesheet" href="~/css/header.css" />
     <link rel="stylesheet" href="~/css/sidebar.css" />
     <link rel="stylesheet" href="~/css/user/dashboard.css" />
-    <style>
-        .notification-content {
-            background: #fff;
-            width: 30vw;
-            height: 20vw;
-            position: absolute;
-            right: 4vw;
-            top: 0.5vw;
-            border: 0.05vw solid #000;
-            padding: 0.5vw;
-            box-sizing: border-box;
-            z-index: 100;
-            display: none;
-            flex-direction: column;
-            gap: 0.5vw;
-        }
-
-        .notification-details{
-            background: #EAE7E6;
-            padding: 0.5vw;
-            box-sizing: border-box;
-        }
-
-        .notification-details div:nth-child(1){
-            text-align: right;
-        }
-        .notification-details div:nth-child(2){
-            font-size: 1vw;
-        }
-
-        .notification-details div:nth-child(3) {
- 
-        }
-
-        .notification-show{
-            display: flex;
-        }
-    </style>
 </head>
 <body>
     <div class="container">
@@ -56,23 +18,7 @@
         <main>
             <partial name="Sidebar" />
             <div class="main-content">
-                <div class="notification-content">
-                    <div class="notification-details">
-                        <div>11/10/2024</div>
-                        <div>Book Confirmed</div>
-                        <div>Room1</div>                     
-                    </div>
-                    <div class="notification-details">
-                        <div>11/10/2024</div>
-                        <div>Book Rejected</div>
-                        <div>Room1</div>
-                    </div>
-                    <div class="notification-details">
-                        <div>11/10/2024</div>
-                        <div>Book Confirmed</div>
-                        <div>Room1</div>
-                    </div>
-                </div>
+                
                 <div class="details">
                     <div class="upcoming">
                         <span>Upcoming</span>
@@ -516,10 +462,7 @@
 
         const calendarControl = new CalendarControl();
 
-        document.querySelector(".notification-icon").addEventListener('click', function () {
-            console.log("HELLO");
-            document.querySelector(".notification-content").classList.toggle('notification-show'); 
-        });
+        
     </script>
 </body>
 </html>
