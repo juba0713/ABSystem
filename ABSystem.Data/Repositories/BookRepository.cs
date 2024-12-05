@@ -26,16 +26,20 @@ namespace ABSystem.Data.Repositories
         /*
          * This method is for adding a booking to the database
          */
-        public void AddBook(Book book)
+        public int AddBook(Book book)
         {
             this._context.Books.Add(book);
 
             this._context.SaveChanges();
+
+            return book.Id;
         }
 
         public Book GetBookById(int bookId)
         {
-            return this._context.Books.Find(bookId);
+            return this._context.Books
+                .Include(b => b.Room)
+                .FirstOrDefault(b => b.Id == bookId)!;
         }
 
         public IEnumerable<Book> GetBooks()

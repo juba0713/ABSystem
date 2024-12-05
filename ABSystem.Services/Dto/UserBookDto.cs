@@ -1,4 +1,5 @@
-﻿using ABSystem.Resources.Constants;
+﻿using ABSystem.Data.Models;
+using ABSystem.Resources.Constants;
 using ABSystem.Services.Annotations;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,10 @@ namespace ABSystem.Services.Dto
 {
     public class UserBookDto
     {
+
+        public int Id { get; set; }
+
+        public string Status { get; set; } = string.Empty;
 
         public int RoomId { get; set; }
 
@@ -34,6 +39,10 @@ namespace ABSystem.Services.Dto
         public TimeSpan EndTime { get; set; }
 
         public string Request { get; set; } = string.Empty;
+
+        public Room? Room { get; set; }
+
+        
 
     }
 }

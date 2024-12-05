@@ -1,4 +1,5 @@
-﻿using ABSystem.Resources.Constants;
+﻿using ABSystem.Data.Models;
+using ABSystem.Resources.Constants;
 using ABSystem.Services.Dto;
 using ABSystem.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -12,12 +13,16 @@ namespace ABSystem.WebApp.Controllers
     {
 
         private readonly IBookService _bookService;
+        private readonly INotificationService _notificationService;
         private readonly ILogger<AdminBookController> _logger;
 
-        public AdminBookController(IBookService bookService, ILogger<AdminBookController> logger)
+        public AdminBookController(IBookService bookService, 
+            ILogger<AdminBookController> logger,
+            INotificationService notificationService)
         {
             _bookService = bookService;
             _logger = logger;
+            _notificationService = notificationService;
         }
 
         [HttpGet]
@@ -30,7 +35,7 @@ namespace ABSystem.WebApp.Controllers
         }
 
         [HttpPost]
-        [Route("/book/approve")]
+        [Route("/admin/book/approve")]
         public IActionResult ApproveBook(int bookId)
         {
             Console.WriteLine("Book Id: " + bookId);
@@ -47,7 +52,7 @@ namespace ABSystem.WebApp.Controllers
         }
 
         [HttpPost]
-        [Route("/book/reject")]
+        [Route("/admin/book/reject")]
         public IActionResult RejectBook(int bookId)
         {
             Console.WriteLine("Book Id: " + bookId);
@@ -61,6 +66,31 @@ namespace ABSystem.WebApp.Controllers
             }
 
             return RedirectToAction("BookingsListScreen");
+        }
+
+        [HttpGet]
+        [Route("/admin/books-list/book-details")]
+        public IActionResult BookingDetailsScreen(int bookId, int notifyId = 0,  bool read = false)
+        {
+
+            UserBookDto book = null!;
+
+            try
+            {
+                book = this._bookService.GetBookById(bookId);
+
+                if (read)
+                {
+                    this._notificationService.UpdateNotificationRead(notifyId);
+                }
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError(ex, MessageConstant.BOOK_RETRIEVAL_ERROR);
+            }
+            
+
+            return PartialView(CommonConstant.A_BOOK_DETAILS_HTML, book);
         }
     }
 }

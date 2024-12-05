@@ -31,6 +31,7 @@ builder.Services.AddIdentity<User, IdentityRole>(
         options.Password.RequiredLength = 6;
         options.Password.RequireNonAlphanumeric = false;
         options.Password.RequireLowercase = false;
+        options.User.RequireUniqueEmail = true;
     }
     )
     .AddEntityFrameworkStores<ABSystemDbContext>().AddDefaultTokenProviders();

@@ -163,7 +163,8 @@ textarea,
 .notification-details,
 .input-images,
 .preview-container,
-.modal-body {
+.modal-body,
+.notification-title {
     border-radius: 0.2vw;
     font-size: 0.8vw;
 }
@@ -260,6 +261,15 @@ a:hover{
     background: #555;
 }
 
+.red-btn {
+    background: #90F0EE;
+    color: #000;
+}
+
+.blue-btn {
+    background: #FD4F4F;
+    color: #000;
+}
 
 
 
@@ -327,6 +337,7 @@ a:hover{
 .modal-body .group-button{
     display: flex;
     gap: 1vw;
+    justify-content: center; 
 }
 
 /*
