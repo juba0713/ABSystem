@@ -105,9 +105,27 @@ namespace ABSystem.Services.Services
             return roomsDto;
         }
 
-        public IEnumerable<Room> GetRooms()
+        public List<RoomDto> GetRooms()
         {
-            return this._roomRepository.GetRooms();
+            List<RoomDto> roomsDto = new List<RoomDto>();
+
+            var rooms = this._roomRepository.GetRooms();
+
+            if (rooms == null)
+            {
+                throw new Exception(MessageConstant.ROOM_NOT_FOUND);
+            }
+
+            foreach (var room in rooms)
+            {
+                RoomDto dto = new RoomDto();
+
+                _mapper.Map(room, dto);
+
+                roomsDto.Add(dto);
+            }
+
+            return roomsDto;
         }
 
         public void DeleteRoom(int roomId)

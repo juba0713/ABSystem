@@ -1,0 +1,156 @@
+﻿<html>
+<head>
+    <title>Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/common.css" />
+    <link rel="stylesheet" href="~/css/header.css" />
+    <link rel="stylesheet" href="~/css/adminsidebar.css" />
+    <link rel="stylesheet" href="~/css/admin/dashboard.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<style>
+    .settings-container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding: 1vw;
+        box-sizing: border-box;
+        gap: 1vw;
+    }
+
+    .sub-content {
+        font-size: 1vw;
+        color: #333;
+    }
+
+    .section {
+        display: flex;
+        flex-direction: column;
+        gap: 1vw;
+    }
+
+    h2 {
+        font-size: 1.4vw;
+        color: #333;
+    }
+
+    .info-row {
+        display: flex;
+        gap: 0.5vw;
+    }
+
+    .info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 0.3vw;
+    }
+
+    label {
+        font-size: 0.9vw;
+        color: #555;
+    }
+
+    input[type="text"], input[type="email"], input[type="password"], input[type="tel"] {
+        width: 100%;
+        max-width: 400px;
+        padding: 0.8vw;
+        font-size: 0.9vw;
+        border: 0.2vw solid #ccc;
+        border-radius: 0.5vw;
+        background-color: #f9f9f9;
+        box-sizing: border-box;
+    }
+
+        input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus, input[type="tel"]:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+
+    .save-btn {
+        align-self: flex-start;
+        width: auto;
+        padding: 0.8vw 1.5vw;
+        font-size: 1vw;
+        color: #fff;
+        background-color: #62B6CB;
+        border: none;
+        border-radius: 0.5vw;
+        cursor: pointer;
+    }
+
+        .save-btn:hover {
+            background-color: #4CAF50;
+        }
+</style>
+
+<body>
+    <div class="container">
+        <partial name="Header" />
+        <div class="content">
+            <partial name="AdminSidebar" />
+            <div class="main-content">
+                <div class="sub-header">
+                    <div>Settings</div>
+                </div>
+                <div class="sub-content">
+                    <div class="settings-container">
+                        <!-- User Information Section -->
+                        <div class="section">
+                            <h2>User Information</h2>
+                            <div class="info-row">
+                                <div class="info">
+                                    <label for="first-name">First Name:</label>
+                                    <input type="text" id="first-name" placeholder="Enter your first name">
+                                </div>
+                                <div class="info">
+                                    <label for="last-name">Last Name:</label>
+                                    <input type="text" id="last-name" placeholder="Enter your last name">
+                                </div>
+                            </div>
+                            <div class="info-row">
+                                <div class="info">
+                                    <label for="email">Email:</label>
+                                    <input type="email" id="email" placeholder="Enter your email">
+                                </div>
+                                <div class="info">
+                                    <label for="phone">Phone Number:</label>
+                                    <input type="tel" id="phone" placeholder="Enter your phone number">
+                                </div>
+                            </div>
+                            <!-- Added Address Section -->
+                            <div class="info">
+                                <label for="address">Address:</label>
+                                <input type="text" id="address" placeholder="Enter your address">
+                            </div>
+                        </div>
+                        <br><br>
+                        <!-- Change Password Section -->
+                        <div class="section">
+                            <h2>Change Password</h2>
+                            <div class="info-row">
+                                <div class="info">
+                                    <label for="current-password">Current Password:</label>
+                                    <input type="password" id="current-password" placeholder="Enter your current password">
+                                </div>
+                                <div class="info">
+                                    <label for="new-password">New Password:</label>
+                                    <input type="password" id="new-password" placeholder="Enter a new password">
+                                </div>
+                            </div>
+                            <div class="info">
+                                <label for="confirm-password">Confirm New Password:</label>
+                                <input type="password" id="confirm-password" placeholder="Confirm your new password">
+                            </div>
+                        </div>
+
+                        <!-- Save Changes Button -->
+                        <button class="save-btn">Save Changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
