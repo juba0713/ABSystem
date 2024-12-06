@@ -1,5 +1,5 @@
 ﻿
-    // Check local storage for saved theme preference
+  
     window.onload = function () {
             const savedMode = localStorage.getItem('theme');
     if (savedMode === 'dark') {
@@ -7,22 +7,21 @@
             }
         }
 
-    // Toggle dark/light mode
+    
     function toggleTheme() {
             const currentMode = document.body.classList.contains('dark-mode');
 
     if (currentMode) {
-        // Switch to light mode
+        
         document.body.classList.remove('dark-mode');
     localStorage.setItem('theme', 'light');
             } else {
-        // Switch to dark mode
+    
         document.body.classList.add('dark-mode');
     localStorage.setItem('theme', 'dark');
             }
         }
 
-    // Add event listener to a button (or any element you choose) to toggle theme
 document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
 
 let sideBar = document.querySelector(".user-sidebar");
@@ -36,6 +35,27 @@ if (sideBar) {
         sideBar.style.width = '3.5vw';
     });
 }
+
+const notificationIcon = document.querySelector(".notification-icon");
+const notificationContent = document.querySelector(".notification-content");
+
+notificationIcon.addEventListener("click", () => {
+    if (notificationContent.style.display === "none" || !notificationContent.style.display) {
+        notificationContent.style.display = "flex";
+    } else {
+        notificationContent.style.display = "none";
+    }
+});
+
+document.addEventListener("click", (e) => {
+    if (!notificationIcon.contains(e.target) && !notificationContent.contains(e.target)) {
+        notificationContent.style.display = "none";
+    }
+});
+
+
+
+
 
 
      

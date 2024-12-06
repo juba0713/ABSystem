@@ -20,5 +20,15 @@ namespace ABSystem.Services.Interfaces
          * This method is for getting all the booking
          */
         public IEnumerable<Book> GetBooks();
+
+        /*
+         * This method is for updating the booking status
+         */
+        public void UpdateBookStatus(int bookId, string status);
+
+        /*
+         * This method is for getting the book by its id
+         */
+        public UserBookDto GetBookById(int bookId);
     }
 }

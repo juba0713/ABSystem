@@ -56,7 +56,7 @@ namespace ABSystem.WebApp.Controllers
         [Route("/admin/rooms-list/edit-room")]
         public IActionResult EditRoomScreen([FromQuery] int roomId)
         {
-            RoomDto roomDto = null;
+            RoomDto roomDto = null!;
 
             try
             {

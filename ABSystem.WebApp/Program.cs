@@ -31,6 +31,7 @@ builder.Services.AddIdentity<User, IdentityRole>(
         options.Password.RequiredLength = 6;
         options.Password.RequireNonAlphanumeric = false;
         options.Password.RequireLowercase = false;
+        options.User.RequireUniqueEmail = true;
     }
     )
     .AddEntityFrameworkStores<ABSystemDbContext>().AddDefaultTokenProviders();
@@ -54,6 +55,8 @@ builder.Services.AddScoped<IRoomService, RoomService>();
 builder.Services.AddScoped<IRoomRepository, RoomRepository>();
 builder.Services.AddScoped<IBookService, BookService>();
 builder.Services.AddScoped<IBookRepository, BookRepository>();
+builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
+builder.Services.AddScoped<INotificationService, NotificationService>();
 
 builder.Services.ConfigureApplicationCookie(options =>
 {

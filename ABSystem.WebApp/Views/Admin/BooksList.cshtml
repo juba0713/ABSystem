@@ -61,7 +61,6 @@
             <div class="main-content">
                 <div class="sub-header border-radius-5">
                     <div>Bookings</div>
-                    <a asp-controller="AdminRoom" asp-action="AddRoomScreen" class="action-btn"><img src="~/icons/add.svg" alt="add" />ADD ROOM</a>
                 </div>
                 <div class="sub-content border-radius-5">
                     <div class="filter-container">
@@ -110,7 +109,7 @@
                                 {
                                     foreach (var book in Model)
                                     {
-                                        <tr>
+                                        <tr class="rowLink" bookId="@book.Id">
                                             <td>@book.Id</td>
                                             <td>@book.Room.Name</td>
                                             <td>@book.FirstName @book.LastName</td>
@@ -137,16 +136,26 @@
                                                     <div class="status pending">@CommonConstant.COMPLETED</div>
                                                 }
                                             </td>
-                                            <td class="group-button">
-                                                <a class="edit-btn action-btn border-radius-5" asp-controller="AdminRoom" asp-action="EditRoomScreen" asp-route-roomId="@book.Id">
-                                                    <img src="~/icons/edit.svg" alt="edit"/>
-                                                    <div>APPROVE</div>
-                                                </a>
-                                                <div class="delete-btn action-btn border-radius-5" data-toggle="modal" data-target="#exampleModalCenter" data-id="@book.Id">
-                                                    <img src="~/icons/delete.svg" alt="delete" />
-                                                    <div>REJECT</div>
-                                                </div>
-                                            </td>
+                                            @if(book.Status == CommonConstant.PENDING){
+                                                <td class="group-button">
+                                                    @* <form asp-controller="AdminBook" asp-action="ApproveBook" method="POST"> *@
+                                                        @* <input type="hidden" name="bookId" value="@book.Id" /> *@
+                                                        <button class="edit-btn action-btn border-radius-5" data-toggle="modal" bookId="@book.Id" data-target="#acceptModal" name="approve">
+                                                            <img src="~/icons/edit.svg" alt="edit" />
+                                                            APPROVE
+                                                        </button>
+                                                    @* </form> *@
+                                                    @* <form asp-controller="AdminBook" asp-action="RejectBook" method="POST"> *@
+                                                        @* <input type="hidden" name="bookId" value="@book.Id" /> *@
+                                                        <button class="delete-btn action-btn border-radius-5" bookId="@book.Id" data-toggle="modal" data-target="#rejectModal" name="reject">
+                                                            <img src="~/icons/delete.svg" alt="delete" />
+                                                            REJECT
+                                                        </button>
+                                                    @* </form> *@
+                                                </td>
+                                            }else{
+                                                <td></td>
+                                            }                                       
                                         </tr>
                                     }
                                 }
@@ -167,19 +176,38 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="acceptModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">             
                 <div class="modal-body">
-                    <form asp-controller="AdminRoom" asp-action="DeleteRoom" method="POST" class="gap-20 flex-column">
-                        <input type="hidden" name="roomId" value="0" id="roomId" />
+                    <form asp-controller="AdminBook" asp-action="ApproveBook" method="POST" class="gap-20 flex-column">
+                        <input type="hidden" name="bookId" id="approveHiddenId" value="0" />
                         <div>
-                            <div class="centered">Are you sure you want to delete this room?</div>
+                            <div class="centered">Are you sure you want to accept this booking?</div>
                             <div class="centered">This action is permanent and cannot be undone.</div>
                         </div>
                         <div class="group-button">
                             <button class="action-btn blue-btn">Cancel</button>
-                            <button class="action-btn red-btn">Delete</button>
+                            <button class="action-btn red-btn">Confirm</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="rejectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form asp-controller="AdminBook" asp-action="RejectBook" method="POST" class="gap-20 flex-column">
+                        <input type="hidden" name="bookId" id="rejectHiddenId" value="0" />
+                        <div>
+                            <div class="centered">Are you sure you want to reject this booking?</div>
+                            <div class="centered">This action is permanent and cannot be undone.</div>
+                        </div>
+                        <div class="group-button">
+                            <button class="action-btn blue-btn">Cancel</button>
+                            <button class="action-btn red-btn">Confirm</button>
                         </div>
                     </form>
                 </div>
@@ -194,6 +222,25 @@
             document.querySelector("#roomId").setAttribute('value', btn.getAttribute('data-id'));
         }));
 
+        document.querySelectorAll('.rowLink').forEach(row => row.addEventListener('click', function (ev) {
+
+            if (ev.srcElement.classList.contains('action-btn')) {
+                return;
+            }
+
+            window.location.href = "/admin/books-list/book-details?bookId=" + this.getAttribute('bookId');
+        }));
+
+        document.querySelectorAll(".action-btn").forEach(btn => btn.addEventListener('click', function () {
+            if (this.name === 'approve') {
+                document.querySelector("#approveHiddenId").value = this.getAttribute('bookId');
+            } else if (this.name === 'reject') {
+                document.querySelector("#rejectHiddenId").value = this.getAttribute('bookId');
+            }
+        }));
+
+   
+    
     </script>
     <script src="~/js/common.js"></script>
 </body>

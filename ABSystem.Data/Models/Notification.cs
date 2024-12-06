@@ -12,6 +12,8 @@ namespace ABSystem.Data.Models
 
         public string UserId { get; set; } = string.Empty;
 
+        public int BookingId { get; set; }
+
         public int RoomId { get; set; }
 
         public string Message { get; set; } = string.Empty;

@@ -13,11 +13,21 @@ namespace ABSystem.Data.Interfaces
         /*
          * This method is for adding a booking to the database
          */
-        public void AddBook(Book book);
+        public int AddBook(Book book);
 
         /*
          * This method is for getting all the booking
          */
         public IEnumerable<Book> GetBooks();
+
+        /*
+         * This method is for updating the booking status
+         */
+        public void UpdateBookStatus(Book book);
+
+        /*
+         * This method is for getting the book by its id
+         */
+        public Book GetBookById(int bookId);
     }
 }
