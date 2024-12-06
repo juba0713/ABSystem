@@ -48,6 +48,7 @@ namespace ABSystem.WebApp.Controllers
                 _logger.LogError(ex, MessageConstant.BOOK_APPROVED_ERROR);
             }
 
+            TempData["SuccessMessage"] = MessageConstant.BOOK_APPROVED;
             return RedirectToAction("BookingsListScreen");
         }
 
@@ -64,7 +65,7 @@ namespace ABSystem.WebApp.Controllers
             {
                 _logger.LogError(ex, MessageConstant.BOOK_REJECTED_ERROR);
             }
-
+            TempData["SuccessMessage"] = MessageConstant.BOOK_REJECTED;
             return RedirectToAction("BookingsListScreen");
         }
 

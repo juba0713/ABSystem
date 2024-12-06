@@ -53,7 +53,9 @@ namespace ABSystem.Services.Services
 
             this._roomRepository.EditRoom(existingRoom);
 
+      
             SaveRoomImages(dto.Images, dto.Id);
+            
         }
 
         public RoomDto GetRoomById(int roomId)
@@ -127,6 +129,11 @@ namespace ABSystem.Services.Services
          */
         public void SaveRoomImages(List<IFormFile>? images, int roomId)
         {
+            if (images == null || images.Count == 0)
+            {
+                Console.WriteLine("No images to save.");
+                return; // Exit the method if no images are provided
+            }
 
             string specificRoomFolderPath = CommonConstant.RoomPath;
 

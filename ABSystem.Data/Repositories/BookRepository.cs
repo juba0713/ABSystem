@@ -50,6 +50,14 @@ namespace ABSystem.Data.Repositories
                 .ToList();
         }
 
+        public IEnumerable<Book> GetBooksByUserId(string userId)
+        {
+            return this._context.Books
+                .Include(b => b.Room)
+                .Where(book => book.UserId == userId)
+                .ToList();
+        }
+
         public void UpdateBookStatus(Book book)
         {
             this._context.Books.Update(book);

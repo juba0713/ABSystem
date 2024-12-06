@@ -29,5 +29,12 @@ namespace ABSystem.Data.Interfaces
          * This method is for getting the book by its id
          */
         public Book GetBookById(int bookId);
+
+        /*
+         * This method is for getting books by user id
+         */
+        public IEnumerable<Book> GetBooksByUserId(string userId);
+
+ 
     }
 }

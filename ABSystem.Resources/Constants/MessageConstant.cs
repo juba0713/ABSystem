@@ -64,6 +64,15 @@ namespace ABSystem.Resources.Constants
 
         public const string DELETED_ROOM = "A room has been deleted successfully";
 
+        public const string BOOK_APPROVED = "The room booking has been approved successfully";
+
+        public const string BOOK_REJECTED = "The room booking has been rejected";
+
+        public const string BOOK_CANCELED = "The room booking has been canceled";
+
+        public const string BOOK_COMPLETED = "The room booking has been completed successfully";
+
+
         /*
          * THROW MESSAGE
          */

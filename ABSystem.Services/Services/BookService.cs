@@ -96,6 +96,29 @@ namespace ABSystem.Services.Services
             return this._bookRepository.GetBooks();
         }
 
+        public IEnumerable<UserBookDto> GetBooksByUserId()
+        {
+            string loggedInUserId = _httpContextAccessor.HttpContext?.Session.GetString("UserId")!;
+
+            if (string.IsNullOrEmpty(loggedInUserId))
+            {
+                throw new InvalidOperationException("User is not logged in.");
+            }
+
+            List<UserBookDto> listBooks = new List<UserBookDto>();
+
+            var books = this._bookRepository.GetBooksByUserId(loggedInUserId);
+
+            foreach (var book in books)
+            {
+                UserBookDto userBookDto = new UserBookDto();
+                _mapper.Map(book, userBookDto);
+                listBooks.Add(userBookDto);
+            }
+
+            return listBooks;
+        }
+
         public void UpdateBookStatus(int bookId, string status)
         {
             var book = this._bookRepository.GetBookById(bookId);
@@ -103,7 +126,31 @@ namespace ABSystem.Services.Services
             book.Status = status;
             book.UpdateDate = DateTime.Now;
 
-            this._bookRepository.UpdateBookStatus(book);
+            //this._bookRepository.UpdateBookStatus(book);
+
+            var room = this._roomRepository.GetRoomById(bookId);
+
+            Notification notification = new Notification();
+
+            DateTime startDateTime = DateTime.Today.Add(book.StartTime);
+            DateTime endDateTime = DateTime.Today.Add(book.EndTime);
+
+            notification.UserId = book.UserId;
+            notification.BookingId = bookId;
+            notification.RoomId = room.Id;
+            notification.Message = "Your booking for " +
+                       room.Name + " on " +
+                       book.BookDate.ToString("MMM dd, yyyy") + " from " +
+                       startDateTime.ToString("hh:mm tt") + " to " +
+                       endDateTime.ToString("hh:mm tt") +
+                       " has been confirmed by the admin.";
+
+            notification.CreatedDate = DateTime.Now;
+            notification.UpdateDate = DateTime.Now;
+            notification.IsRead = 0;
+            notification.IsDeleted = 0;
+
+            this._notificationRepository.AddNotification(notification);
         }
     }
 }
