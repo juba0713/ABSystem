@@ -35,5 +35,7 @@ namespace ABSystem.Data.Objects
         public int IsDeleted { get; set; }
 
         public string? RoomName { get; set; }
+
+        public int JanBookingCount {  get; set; }
     }
 }

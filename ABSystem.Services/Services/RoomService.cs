@@ -251,5 +251,10 @@ namespace ABSystem.Services.Services
 
             return roomsDto;
         }
+
+        public int CountRooms()
+        {
+            return this._roomRepository.CountRooms();
+        }
     }
 }

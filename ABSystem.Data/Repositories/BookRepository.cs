@@ -76,5 +76,25 @@ namespace ABSystem.Data.Repositories
             this._context.Books.Update(book);
             this._context.SaveChanges();
         }
+
+        public int CountBooking()
+        {
+            return this._context.Books.Count(b => b.IsDeleted == 0 && (!b.IsRecurrence || b.RecurrenceNumber == 1));
+        }
+
+        public int CountPendingBooking()
+        {
+            return this._context.Books.Count(b => b.IsDeleted == 0 && (!b.IsRecurrence || b.RecurrenceNumber == 1) && b.Status.Equals("Pending"));
+        }
+
+        public int CountAcceptedBooking()
+        {
+            return this._context.Books.Count(b => b.IsDeleted == 0 && (!b.IsRecurrence || b.RecurrenceNumber == 1) && b.Status.Equals("Accepted"));
+        }
+
+        public int CountRejectedBooking()
+        {
+            return this._context.Books.Count(b => b.IsDeleted == 0 && (!b.IsRecurrence || b.RecurrenceNumber == 1) && b.Status.Equals("Rejected"));
+        } 
     }
 }

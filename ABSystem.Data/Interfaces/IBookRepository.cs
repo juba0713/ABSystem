@@ -37,6 +37,14 @@ namespace ABSystem.Data.Interfaces
          */
         public IEnumerable<Book> GetBooksByUserId(string userId);
 
+        public int CountBooking();
+
+        public int CountPendingBooking();
+
+        public int CountAcceptedBooking();
+
+        public int CountRejectedBooking();
+
         
     }
 }

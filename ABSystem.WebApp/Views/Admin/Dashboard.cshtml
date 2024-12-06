@@ -1,4 +1,6 @@
-﻿<html>
+﻿@using ABSystem.Services.Dto
+@model ViewDto
+<html>
 <head>
     <title>Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,7 +35,7 @@
                                 <span class="label">Users</span>
                                 
                             </div>
-                            <div class="value">1000</div>
+                            <div class="value">@Model.CountUsers</div>
                         </div>
                         <div class="data-item">
                             <div>
@@ -50,7 +52,7 @@
                                 <div class="label">Rooms</div>
                                 
                             </div>         
-                            <span class="value">1000</span>
+                            <span class="value">@Model.CountRooms</span>
                         </div>
                         <div class="data-item">
                             <div>
@@ -59,7 +61,7 @@
                             </svg>                        
                                 <span class="label">Bookings</span>                              
                             </div>        
-                            <div class="value">1000</div>
+                            <div class="value">@Model.CountBookings</div>
                         </div>
                         <div class="data-item">
                             <div>
@@ -69,7 +71,18 @@
                                 </svg>                           
                                 <span class="label">Pending</span>                             
                             </div>    
-                            <div class="value">1000</div>
+                            <div class="value">@Model.CountPendingBookings</div>
+                        </div>
+                        <div class="data-item">
+                            <div>
+                                <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M22.3633 11.4715V12.3915C22.3621 14.5479 21.6638 16.6461 20.3726 18.3733C19.0814 20.1004 17.2666 21.3639 15.1986 21.9754C13.1307 22.5868 10.9205 22.5134 8.89775 21.7661C6.87496 21.0187 5.14794 19.6376 3.97424 17.8285C2.80055 16.0195 2.24307 13.8795 2.38496 11.7278C2.52684 9.57603 3.36049 7.52779 4.76156 5.88854C6.16263 4.24929 8.05607 3.10685 10.1595 2.63161C12.2629 2.15638 14.4635 2.3738 16.4333 3.25147" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M22.3633 4.3916L12.3633 14.4016L9.36328 11.4016" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+
+                                <span class="label">Accepted</span>
+                            </div>
+                            <div class="value">@Model.CountAcceptedBookings</div>
                         </div>
                         <div class="data-item"> 
                             <div>
@@ -83,7 +96,7 @@
                                 <span class="label">Rejected</span>
                                 
                             </div>
-                            <div class="value">1000</div>
+                            <div class="value">@Model.CountRejectedBookings</div>
                         </div>
                     </div>
                     <div class="dashboard-data-1">

@@ -23,5 +23,17 @@ namespace ABSystem.Services.Dto
         public List<RoomDto>? Rooms { get; set; } = new List<RoomDto>();
 
         public List<RoomDto>? PopularRooms {  get; set; } = new List<RoomDto> ();
+
+        public int CountRooms {  get; set; }
+
+        public int CountBookings {  get; set; }
+
+        public int CountPendingBookings {  get; set; }
+
+        public int CountAcceptedBookings {  get; set; }
+
+        public int CountRejectedBookings {  get; set; }
+
+        public int CountUsers {  get; set; }
     }
 }
