@@ -25,7 +25,7 @@ namespace ABSystem.WebApp.Controllers
 
 			try
 			{
-				var books = this._bookService.GetBooksByUserId();
+				var books = this._bookService.GetCalendarBooks();
 
 				viewDto.UserBooks = books;
 			}

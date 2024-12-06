@@ -20,6 +20,8 @@ namespace ABSystem.Data.Interfaces
          */
         public IEnumerable<Book> GetBooks();
 
+        public IEnumerable<Book> GetCalendarBooks(string userId);
+
         /*
          * This method is for updating the booking status
          */

@@ -35,5 +35,10 @@ namespace ABSystem.Services.Interfaces
          * This method is for getting books by user id
          */
         public IEnumerable<UserBookDto> GetBooksByUserId();
+
+        /*
+         * This method is for getting books by user id
+         */
+        public IEnumerable<UserBookDto> GetCalendarBooks();
     }
 }

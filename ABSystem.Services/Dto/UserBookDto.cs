@@ -42,7 +42,13 @@ namespace ABSystem.Services.Dto
 
         public Room? Room { get; set; }
 
-        
+        public bool IsRecurrence {  get; set; }
+
+        public string RecurrenceType { get; set; } = string.Empty;
+
+        public int RecurrenceRepeat {  get; set; }
+
+        public List<DateTime> BookDates { get; set; } = new List<DateTime>();
 
     }
 }

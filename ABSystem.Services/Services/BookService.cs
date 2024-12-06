@@ -44,16 +44,49 @@ namespace ABSystem.Services.Services
                 throw new InvalidOperationException("User is not logged in.");
             }
 
-            Book book = new Book();
+            int bookId = 0;
 
-            _mapper.Map(dto, book);
-            book.Status = CommonConstant.PENDING;
-            book.CreatedDate = DateTime.Now;
-            book.UpdateDate = DateTime.Now;
-            book.IsDeleted = 0;
-            book.UserId = loggedInUserId;
+            if (!dto.IsRecurrence)
+            {
+                Book book = new Book();
 
-            int bookId = this._bookRepository.AddBook(book);
+                _mapper.Map(dto, book);
+                book.Status = CommonConstant.PENDING;
+                book.CreatedDate = DateTime.Now;
+                book.UpdateDate = DateTime.Now;
+                book.IsDeleted = 0;
+                book.UserId = loggedInUserId;
+                book.IsRecurrence = false;
+
+                bookId = this._bookRepository.AddBook(book);
+            }
+            else
+            {
+                Guid guid = Guid.NewGuid();
+                int sequence = 1;
+                foreach(var date in dto.BookDates)
+                {
+                    Book book = new Book();
+
+                    _mapper.Map(dto, book);
+                    book.BookDate = date;
+                    book.Status = CommonConstant.PENDING;
+                    book.CreatedDate = DateTime.Now;
+                    book.UpdateDate = DateTime.Now;
+                    book.IsDeleted = 0;
+                    book.UserId = loggedInUserId;
+                    book.RecurrenceNumber = sequence;
+                    book.RecurrenceType = dto.RecurrenceType;
+                    book.IsRecurrence = true;
+                    book.RecurrenceGroupId = guid.ToString();
+
+                    bookId = this._bookRepository.AddBook(book);
+
+                    sequence++;
+                }
+            }
+
+            
             
             var room = this._roomRepository.GetRoomById(dto.RoomId);
          
@@ -108,6 +141,29 @@ namespace ABSystem.Services.Services
             List<UserBookDto> listBooks = new List<UserBookDto>();
 
             var books = this._bookRepository.GetBooksByUserId(loggedInUserId);
+
+            foreach (var book in books)
+            {
+                UserBookDto userBookDto = new UserBookDto();
+                _mapper.Map(book, userBookDto);
+                listBooks.Add(userBookDto);
+            }
+
+            return listBooks;
+        }
+
+        public IEnumerable<UserBookDto> GetCalendarBooks()
+        {
+            string loggedInUserId = _httpContextAccessor.HttpContext?.Session.GetString("UserId")!;
+
+            if (string.IsNullOrEmpty(loggedInUserId))
+            {
+                throw new InvalidOperationException("User is not logged in.");
+            }
+
+            List<UserBookDto> listBooks = new List<UserBookDto>();
+
+            var books = this._bookRepository.GetCalendarBooks(loggedInUserId);
 
             foreach (var book in books)
             {

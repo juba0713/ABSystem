@@ -373,3 +373,12 @@
 .alert{
     margin-top: -5vw !important; 
 }
+
+.recurrence-choices{
+    gap: 0.5vw !important;
+}
+
+.recurrence-repeat {
+    display: flex !important;
+    flex-direction: row !important;
+}
