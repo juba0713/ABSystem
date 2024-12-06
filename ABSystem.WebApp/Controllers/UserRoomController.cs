@@ -20,7 +20,7 @@ namespace ABSystem.WebApp.Controllers
         }
 
         [HttpGet]
-        [Route("/rooms")]
+        [Route("/rooms-list")]
         public IActionResult RoomsListScreen()
         {
 

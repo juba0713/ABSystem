@@ -83,6 +83,7 @@
     flex-direction: column;
     gap: 0.5vw;
     font-size: 0.8vw;
+    overflow-y: auto;
 }
 
 .notification-title {

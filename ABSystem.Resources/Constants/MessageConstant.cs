@@ -93,6 +93,8 @@ namespace ABSystem.Resources.Constants
 
         public const string BOOK_RETRIEVAL_ERROR = "Error occured while retrieving a book";
 
+        public const string BOOK_CANCELED_ERROR = "Error occured while canceling a book";
+
         public const string NOTIFICATION_RETRIEVAL_ERROR = "Error occured while retrieving a notifications";
     }
 }

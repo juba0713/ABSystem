@@ -1,8 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@using ABSystem.Services.Dto
-@using ABSystem.Resources.Constants
+﻿@using ABSystem.Services.Dto
 @model ViewDto
 <html>
 <head>
@@ -11,7 +7,7 @@
     <link rel="stylesheet" href="~/css/common.css" />
     <link rel="stylesheet" href="~/css/header.css" />
     <link rel="stylesheet" href="~/css/sidebar.css" />
-    <link rel="stylesheet" href="~/css/user/bookslist.css" />
+    <link rel="stylesheet" href="~/css/user/calendar.css" />
 </head>
 <body>
     <div class="container">
@@ -20,110 +16,189 @@
             <partial name="Sidebar" />
             <div class="main-content">
                 <div class="sub-header">
-                    Bookings
+                    Calendar
                     <a class="action-btn back-btn border-radius-5" href="/admin/users-list"><img src="~/icons/back.svg" alt="add" />BACK</a>
                 </div>
                 <div class="content">
-                    <form class="main-form">
-                        <div class="filter-btn">
-                            <button class="action-btn">All (0)</button>
-                            <button class="action-btn">Accepted (0)</button>
-                            <button class="action-btn">Rejected (0)</button>
-                            <button class="action-btn">Canceled (0)</button>
-                        </div>
-                        <div class="sort-btn">
-                            <div>
-                                <div class="sort-by">Sort by</div>
-                                <select>
-                                    <option>Name (Ascending)</option>
-                                    <option>Name (Descending)</option>
-                                    <option>Date (Ascending)</option>
-                                    <option>Date (Descending)</option>
-                                </select>
-                            </div>
-                            <div class="items">
-                                11 Items
-                            </div>
-                        </div>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Room</th>
-                                    <th>User</th>
-                                    <th>Date</th>
-                                    <th>Start Time</th>
-                                    <th>End Time</th>
-                                    <th>Status</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @if (Model.UserBooks != null && Model.UserBooks.Any())
-                                {
-                                    foreach (var book in Model.UserBooks)
-                                    {
-                                        <tr class="rowLink" bookId="@book.Id">
-                                            <td>@book.Id</td>
-                                            <td>@book.Room.Name</td>
-                                            <td>@book.FirstName @book.LastName</td>
-                                            <td>@book.BookDate.ToString("MMM dd, yyyy")</td>
-                                            <td>@(new DateTime(book.StartTime.Ticks).ToString("hh:mm tt"))</td>
-                                            <td>@(new DateTime(book.EndTime.Ticks).ToString("hh:mm tt"))</td>
-                                            <td>
-                                                @if (book.Status == CommonConstant.PENDING)
-                                                {
-                                                    <div class="status pending">@CommonConstant.PENDING</div>
-                                                }
-                                                else if (book.Status == CommonConstant.ACCEPTED)
-                                                {
-                                                    <div class="status accepted">@CommonConstant.ACCEPTED</div>
-                                                }
-                                                else if (book.Status == CommonConstant.REJECTED)
-                                                {
-                                                    <div class="status rejected">@CommonConstant.REJECTED</div>
-                                                }
-                                                else if (book.Status == CommonConstant.CANCELED)
-                                                {
-                                                    <div class="status pending">@CommonConstant.CANCELED</div>
-                                                }
-                                                else if (book.Status == CommonConstant.COMPLETED)
-                                                {
-                                                    <div class="status pending">@CommonConstant.COMPLETED</div>
-                                                }
-                                            </td>
-                                            @if (book.Status == CommonConstant.PENDING)
-                                            {
-                                                <td>
-                                                    <button class="cancel-btn action-btn border-radius-5" data-toggle="modal" bookId="@book.Id" data-target="#acceptModal" name="approve">
-                                                        <img src="~/icons/edit.svg" alt="cancel" />
-                                                        CANCEL
-                                                    </button>
-                                                </td>
-                                            }
-                                            else
-                                            {
-                                                <td></td>
-                                            }
-                                        </tr>
-                                    }
-                                }
-                                else
-                                {
-                                    <tr>
-                                        <td colspan="7" class="text-center">No rooms found.</td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </form>
+					<div class="calendar-header">
+						<h1 class="current-date">February 2022</h1>
+						<div>
+							<button class="action-btn prev-btn">PREV</button>
+							<button class="action-btn next-btn">NEXT</button>
+						</div>
+					</div>	
+					<ul class="calendar-days">
+						<li>Sun</li>
+						<li>Mon</li>
+						<li>Tue</li>
+						<li>Wed</li>
+						<li>Thu</li>
+						<li>Fri</li>
+						<li>Sat</li>
+					</ul>
+					<ul class="calendar">
+						@* <li><time datetime="2022-02-01">1</time>Dark Chocolate Day</li>
+						<li><time datetime="2022-02-02">2</time>Groundhog Day</li>
+						<li><time datetime="2022-02-03">3</time>Carrot Cake Day</li>
+						<li><time datetime="2022-02-04">4</time>Wear Red Day</li>
+						<li><time datetime="2022-02-05">5</time>Weatherperson's Day</li>
+						<li><time datetime="2022-02-06">6</time>Chopsticks Day</li>
+						<li><time datetime="2022-02-07">7</time>Periodic Table Day</li>
+						<li><time datetime="2022-02-08">8</time>Kite Flying Day</li>
+						<li><time datetime="2022-02-09">9</time>Pizza Day</li>
+						<li><time datetime="2022-02-10">10</time>Umbrella Day</li>
+						<li><time datetime="2022-02-11">11</time>Inventor's Day</li>
+						<li><time datetime="2022-02-12">12</time>Global Movie Day</li>
+						<li><time datetime="2022-02-13">13</time>Tortellini Day</li>
+						<li><time datetime="2022-02-14">14</time>Valentine's Day</li>
+						<li><time datetime="2022-02-15">15</time>Gumdrop Day</li>
+						<li><time datetime="2022-02-16">16</time>Do a Grouch a Favor Day</li>
+						<li><time datetime="2022-02-17">17</time>Cabbage Day</li>
+						<li><time datetime="2022-02-18">18</time>Battery Day</li>
+						<li class="today"><time datetime="2022-02-19">19</time>Chocolate Mint Day</li>
+						<li><time datetime="2022-02-20">20</time>Love Your Pet Day</li>
+						<li><time datetime="2022-02-21">21</time>President's Day</li>
+						<li><time datetime="2022-02-22">22</time>Cook a Sweet Potato Day</li>
+						<li><time datetime="2022-02-23">23</time>Tile Day</li>
+						<li><time datetime="2022-02-24">24</time>Toast Day</li>
+						<li><time datetime="2022-02-25">25</time>Clam Chowder Day</li>
+						<li><time datetime="2022-02-26">26</time>Pistachio Day</li>
+						<li><time datetime="2022-02-27">27</time>Polar Bear Day</li>
+						<li><time datetime="2022-02-28">28</time>Tooth Fairy Day</li> *@
+					</ul>
                 </div>
+                    
             </div>
         </main>
     </div>
     <script src="~/js/common.js"></script>
     <script>
-        console.log(@Json.Serialize(@Model));
+
+        const model = @Json.Serialize(@Model);
+        const bookings = model.userBooks;
+        console.log(bookings);
+    
+        let currentDate = new Date();
+
+        // Convert month index to a readable month name
+        const months = [
+            'January', 'February', 'March', 'April', 'May', 'June',
+            'July', 'August', 'September', 'October', 'November', 'December'
+        ];
+
+        function renderCalendar(date) {
+            const year = date.getFullYear();
+            const monthIndex = date.getMonth();
+
+            const formattedDate = `${months[monthIndex]} ${year}`;
+            document.querySelector(".current-date").innerHTML = formattedDate;
+
+            const firstDay = new Date(year, monthIndex, 1).getDay();
+
+            const daysInMonth = new Date(year, monthIndex + 1, 0).getDate();
+
+            const daysInPrevMonth = new Date(year, monthIndex, 0).getDate();
+
+            const calendar = document.querySelector(".calendar");
+
+            calendar.innerHTML = '';
+
+            for (let i = firstDay; i > 0; i--) {
+                const li = document.createElement("li");
+                li.classList.add("calendar-inactive"); // Add a class for styling inactive days
+                li.textContent = daysInPrevMonth - i + 1;
+                calendar.appendChild(li);
+            }
+
+            // Add current month's days
+            for (let day = 1; day <= daysInMonth; day++) {
+                const li = document.createElement("li");
+                const time = document.createElement("time");
+                time.setAttribute("datetime", `${year}-${String(monthIndex + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`);
+                time.textContent = day;
+                li.appendChild(time);
+                //li.appendChild(document.createTextNode(` - Day ${day} Event`));
+                calendar.appendChild(li);
+            }
+
+            // Add next month's leading days to complete the week
+            const totalCells = firstDay + daysInMonth;
+            const nextMonthDays = 7 - (totalCells % 7);
+            if (nextMonthDays < 7) {
+                for (let i = 1; i <= nextMonthDays; i++) {
+                    const li = document.createElement("li");
+                    li.classList.add("calendar-inactive");
+                    li.textContent = i;
+                    calendar.appendChild(li);
+                }
+            }
+
+            if (bookings) {
+                for (let booking of bookings) {
+                    const bookDate = new Date(booking.bookDate); 
+                    const calendarItems = document.querySelectorAll(".calendar li time");
+
+                    calendarItems.forEach((timeElement) => {
+                        const timeDate = new Date(timeElement.getAttribute("datetime")); 
+
+                        // Check if the date matches
+                        if (
+                            bookDate.getFullYear() === timeDate.getFullYear() &&
+                            bookDate.getMonth() === timeDate.getMonth() &&
+                            bookDate.getDate() === timeDate.getDate()
+                        ) {
+                            const li = timeElement.parentElement;
+
+                            // Format StartTime and EndTime (e.g., "12:00 AM - 12:00 AM")
+                            const startTime = booking.startTime; 
+                            const endTime = booking.endTime; 
+
+                            const formatTime = (timeSpan) => {
+                                const [hours, minutes] = timeSpan.split(":");
+                                const date = new Date(0, 0, 0, hours, minutes);
+                                return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                            };
+
+                            const startTimeFormatted = formatTime(startTime);
+                            const endTimeFormatted = formatTime(endTime);
+       
+                            const bookingContainer = document.createElement('div');
+                            bookingContainer.classList.add("booking-details");
+
+                            bookingContainer.innerHTML = `
+                            <div class="booking-room">${booking.room.name}</div>
+                            <div class="booking-time">${startTimeFormatted} - ${endTimeFormatted}</div>
+                        `;
+
+                            li.appendChild(bookingContainer);
+                        }
+                    });
+                }
+            }
+
+
+        }
+
+        // Function to go to the previous month
+        function prevMonth() {
+            currentDate.setMonth(currentDate.getMonth() - 1);
+            renderCalendar(currentDate);
+        }
+
+        // Function to go to the next month
+        function nextMonth() {
+            currentDate.setMonth(currentDate.getMonth() + 1);
+            renderCalendar(currentDate);
+        }
+
+        // Add event listeners to the buttons
+        document.querySelector(".prev-btn").addEventListener("click", prevMonth);
+        document.querySelector(".next-btn").addEventListener("click", nextMonth);
+
+        // Initial render of the calendar
+        renderCalendar(currentDate);
     </script>
+
+
 </body>
 </html>
