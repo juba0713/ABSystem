@@ -44,5 +44,10 @@ namespace ABSystem.Services.Interfaces
          * This method is for getting a room by its id from the database with bookings
          */
         public RoomDto GetRoomByIdWithBookings(int roomId);
+
+        /*
+         * This method is for getting a popular room
+         */
+        public List<RoomDto> GetPopularRoomsWithImage();
     }
 }
