@@ -51,6 +51,13 @@ namespace ABSystem.WebApp.Controllers
 
             try
             {
+                // Check for email uniqueness
+                if (!await _userService.IsEmailUniqueAsync(dto.Email))
+                {
+                    ModelState.AddModelError("Email", "*Email is already in use.");
+                    return PartialView(CommonConstant.A_USERS_ADD_HTML, dto);
+                }
+
                 await _userService.AddUser(dto);
             }
             catch (Exception ex)
