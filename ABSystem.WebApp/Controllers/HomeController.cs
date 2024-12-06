@@ -57,6 +57,7 @@ namespace ABSystem.WebApp.Controllers
             viewDto.CountAcceptedBookings = this._bookService.CountAcceptedBooking();
             viewDto.CountRejectedBookings = this._bookService.CountRejectedBooking();
             viewDto.CountUsers = await this._userManager.Users.CountAsync();
+            viewDto.MonthlyCountBookings = this._bookService.MonthlyCountBooking();
 
 
 

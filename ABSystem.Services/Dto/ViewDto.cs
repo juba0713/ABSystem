@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ABSystem.Data.Objects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -35,5 +36,7 @@ namespace ABSystem.Services.Dto
         public int CountRejectedBookings {  get; set; }
 
         public int CountUsers {  get; set; }
+
+        public BookObj? MonthlyCountBookings { get; set; }
     }
 }
