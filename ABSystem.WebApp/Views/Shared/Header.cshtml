@@ -110,12 +110,18 @@
                     const formattedDate = createdDate.toLocaleDateString('en-US');
 
                     const notificationDiv = document.createElement('a');
-                    notificationDiv.href = "/";
+                    notificationDiv.href = "/books-list/book-details?bookId=" + notification.bookingId + "&notifyId=" + notification.id + "&read=true";
                     notificationDiv.classList.add('notification-details');
                     notificationDiv.innerHTML = `
-                                <div>${formattedDate}</div>
-                                <div>${notification.message}</div>
-                `;
+                        <div>${formattedDate}</div>
+                        <div>${notification.message}</div>
+                    `;
+
+                    if(notification.isRead){
+                        notificationDiv.classList.add('read');
+                    }else{
+                        notificationDiv.classList.add('unread');
+                    }
                     notificationContainer.appendChild(notificationDiv);
                 });
 

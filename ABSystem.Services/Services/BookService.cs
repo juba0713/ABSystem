@@ -54,9 +54,9 @@ namespace ABSystem.Services.Services
             book.UserId = loggedInUserId;
 
             int bookId = this._bookRepository.AddBook(book);
-
+            
             var room = this._roomRepository.GetRoomById(dto.RoomId);
-
+         
             Notification notification = new Notification();
 
             DateTime startDateTime = DateTime.Today.Add(dto.StartTime);
@@ -126,9 +126,9 @@ namespace ABSystem.Services.Services
             book.Status = status;
             book.UpdateDate = DateTime.Now;
 
-            //this._bookRepository.UpdateBookStatus(book);
+            this._bookRepository.UpdateBookStatus(book);
 
-            var room = this._roomRepository.GetRoomById(bookId);
+            var room = this._roomRepository.GetRoomById(book.RoomId);
 
             Notification notification = new Notification();
 
@@ -138,17 +138,38 @@ namespace ABSystem.Services.Services
             notification.UserId = book.UserId;
             notification.BookingId = bookId;
             notification.RoomId = room.Id;
-            notification.Message = "Your booking for " +
+          
+            notification.CreatedDate = DateTime.Now;
+            notification.UpdateDate = DateTime.Now;
+            notification.IsRead = 0;
+            notification.IsDeleted = 0;
+
+            if (status.Equals(CommonConstant.ACCEPTED))
+            {
+                notification.Message = "Your booking for " +
                        room.Name + " on " +
                        book.BookDate.ToString("MMM dd, yyyy") + " from " +
                        startDateTime.ToString("hh:mm tt") + " to " +
                        endDateTime.ToString("hh:mm tt") +
                        " has been confirmed by the admin.";
-
-            notification.CreatedDate = DateTime.Now;
-            notification.UpdateDate = DateTime.Now;
-            notification.IsRead = 0;
-            notification.IsDeleted = 0;
+            }else if (status.Equals(CommonConstant.REJECTED))
+            {
+                notification.Message = "Your booking for " +
+                       room.Name + " on " +
+                       book.BookDate.ToString("MMM dd, yyyy") + " from " +
+                       startDateTime.ToString("hh:mm tt") + " to " +
+                       endDateTime.ToString("hh:mm tt") +
+                       " has been rejected by the admin.";
+            }else if (status.Equals(CommonConstant.CANCELED))
+            {
+                notification.UserId = "";
+                notification.Message = book.FirstName + " " + book.LastName +"'s booking for " +
+                       room.Name + " on " +
+                       book.BookDate.ToString("MMM dd, yyyy") + " from " +
+                       startDateTime.ToString("hh:mm tt") + " to " +
+                       endDateTime.ToString("hh:mm tt") +
+                       " has been canceled.";
+            }
 
             this._notificationRepository.AddNotification(notification);
         }

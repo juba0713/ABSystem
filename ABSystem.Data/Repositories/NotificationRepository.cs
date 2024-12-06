@@ -30,7 +30,9 @@ namespace ABSystem.Data.Repositories
 
         public IEnumerable<Notification> GetNotifications()
         {
-            return this._context.Notifications.ToList();
+            return this._context.Notifications
+                .OrderByDescending(notification => notification.CreatedDate)
+                .ToList();
         }
 
         public IEnumerable<Notification> GetNotificationsByUserId(string userId)

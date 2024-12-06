@@ -102,5 +102,22 @@ namespace ABSystem.WebApp.Controllers
             return PartialView(CommonConstant.A_BOOK_DETAILS_HTML, book);
         }
 
+        [HttpPost]
+        [Route("/book/cancel")]
+        public IActionResult CancelBook(int bookId)
+        {
+            Console.WriteLine("Book Id: " + bookId);
+            try
+            {
+                this._bookService.UpdateBookStatus(bookId, CommonConstant.CANCELED);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, MessageConstant.BOOK_CANCELED_ERROR);
+            }
+            TempData["SuccessMessage"] = MessageConstant.BOOK_REJECTED;
+            return RedirectToAction("BookingListScreen");
+        }
+
     }
 }

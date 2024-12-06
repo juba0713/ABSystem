@@ -115,29 +115,10 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-body">
-                    <form asp-controller="AdminBook" asp-action="ApproveBook" method="POST" class="gap-20 flex-column">
+                    <form asp-controller="UserBook" asp-action="CancelBook" method="POST" class="gap-20 flex-column">
                         <input type="hidden" name="bookId" id="approveHiddenId" value="0" />
                         <div>
                             <div class="centered">Are you sure you want to accept this booking?</div>
-                            <div class="centered">This action is permanent and cannot be undone.</div>
-                        </div>
-                        <div class="group-button">
-                            <button class="action-btn blue-btn">Cancel</button>
-                            <button class="action-btn red-btn">Confirm</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="rejectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <form asp-controller="AdminBook" asp-action="RejectBook" method="POST" class="gap-20 flex-column">
-                        <input type="hidden" name="bookId" id="rejectHiddenId" value="0" />
-                        <div>
-                            <div class="centered">Are you sure you want to reject this booking?</div>
                             <div class="centered">This action is permanent and cannot be undone.</div>
                         </div>
                         <div class="group-button">
