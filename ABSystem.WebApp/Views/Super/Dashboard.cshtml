@@ -12,6 +12,53 @@
     <link rel="stylesheet" href="~/css/adminsidebar.css" />
     <link rel="stylesheet" href="~/css/admin/dashboard.css" />
 </head>
+<style>
+    .dashboard-data {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1vw;
+        padding: 0.2vw;
+        background: transparent;
+        border-radius: 0.5vw;
+        box-sizing: border-box;
+    }
+
+    .data-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5vw;
+        font-size: 1.04vw;
+        padding: 0.5vw 1vw;
+        background: transparent;
+        text-align: center;
+        flex: 1;
+        position: relative;
+    }
+
+        .data-item:not(:last-child) {
+            border-right: 0.05vw solid #ccc;
+        }
+
+        .data-item img {
+            width: 1.04vw;
+            height: 1.04vw;
+        }
+
+    .label {
+        font-size: 0.83vw;
+    }
+
+    .value {
+        font-size: 1.25vw;
+        font-weight: bold;
+    }
+
+    .dashboard-data .data-item {
+        margin-bottom: 0.5vw;
+    }
+</style>
 <body>
     <div class="container">
         <partial name="Header" />
@@ -22,6 +69,107 @@
                     <div>Dashboard (SuperAdmin)</div>
                 </div>
                 <div class="sub-content">
+                    <div class="dashboard-data">
+                        <div class="data-item">
+                            <img src="path/to/users-icon.png" alt="Users">
+                            <div class="label">Users</div>
+                            <div class="value">1000</div>
+                        </div>
+                        <div class="data-item">
+                            <img src="path/to/rooms-icon.png" alt="Rooms">
+                            <div class="label">Rooms</div>
+                            <div class="value">1000</div>
+                        </div>
+                        <div class="data-item">
+                            <img src="path/to/bookings-icon.png" alt="Bookings">
+                            <div class="label">Bookings</div>
+                            <div class="value">1000</div>
+                        </div>
+                        <div class="data-item">
+                            <img src="path/to/pending-icon.png" alt="Pending">
+                            <div class="label">Pending</div>
+                            <div class="value">1000</div>
+                        </div>
+                        <div class="data-item">
+                            <img src="path/to/completed-icon.png" alt="Completed">
+                            <div class="label">Completed</div>
+                            <div class="value">1000</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sub-content">
+                    Recently Created User
+                    <table>
+                        <tr>
+                            <td>1</td>
+                            <td>Sample User</td>
+                            <td>sample@email.com</td>
+                            <td>admin</td>
+                            <td>admin</td>
+                            <td>10/05/2024</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Sample User</td>
+                            <td>sample@email.com</td>
+                            <td>admin</td>
+                            <td>admin</td>
+                            <td>10/05/2024</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Sample User</td>
+                            <td>sample@email.com</td>
+                            <td>admin</td>
+                            <td>admin</td>
+                            <td>10/05/2024</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Sample User</td>
+                            <td>sample@email.com</td>
+                            <td>admin</td>
+                            <td>admin</td>
+                            <td>10/05/2024</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="sub-content">
+                    Recently Booked Room
+                    <table>
+                        <tr>
+                            <td>1</td>
+                            <td>Greatest Room</td>
+                            <td>1 Hour</td>
+                            <td>October 10, 2024</td>
+                            <td>Sample User</td>
+                            <td>Pending</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Greatest Room</td>
+                            <td>1 Hour</td>
+                            <td>October 10, 2024</td>
+                            <td>Sample User</td>
+                            <td>Pending</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Greatest Room</td>
+                            <td>1 Hour</td>
+                            <td>October 10, 2024</td>
+                            <td>Sample User</td>
+                            <td>Pending</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Greatest Room</td>
+                            <td>1 Hour</td>
+                            <td>October 10, 2024</td>
+                            <td>Sample User</td>
+                            <td>Pending</td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
