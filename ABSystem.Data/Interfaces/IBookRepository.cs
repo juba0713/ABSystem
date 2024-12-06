@@ -45,6 +45,6 @@ namespace ABSystem.Data.Interfaces
 
         public int CountRejectedBooking();
 
-        
+        public BookObj MonthlyCountBooking();
     }
 }

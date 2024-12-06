@@ -95,6 +95,35 @@ namespace ABSystem.Data.Repositories
         public int CountRejectedBooking()
         {
             return this._context.Books.Count(b => b.IsDeleted == 0 && (!b.IsRecurrence || b.RecurrenceNumber == 1) && b.Status.Equals("Rejected"));
-        } 
+        }
+
+        public BookObj MonthlyCountBooking()
+        {
+            // Query the database to group bookings by month and count them
+            var monthlyCounts = _context.Books
+                .Where(b => b.IsDeleted == 0) // Include only non-deleted bookings
+                .GroupBy(b => b.CreatedDate.Month)
+                .Select(g => new { Month = g.Key, Count = g.Count() })
+                .ToDictionary(x => x.Month, x => x.Count);
+
+            // Populate BookObj with counts for each month
+            var bookObj = new BookObj
+            {
+                JanBookingCount = monthlyCounts.ContainsKey(1) ? monthlyCounts[1] : 0,
+                FebBookingCount = monthlyCounts.ContainsKey(2) ? monthlyCounts[2] : 0,
+                MarBookingCount = monthlyCounts.ContainsKey(3) ? monthlyCounts[3] : 0,
+                AprBookingCount = monthlyCounts.ContainsKey(4) ? monthlyCounts[4] : 0,
+                MayBookingCount = monthlyCounts.ContainsKey(5) ? monthlyCounts[5] : 0,
+                JunBookingCount = monthlyCounts.ContainsKey(6) ? monthlyCounts[6] : 0,
+                JulBookingCount = monthlyCounts.ContainsKey(7) ? monthlyCounts[7] : 0,
+                AugBookingCount = monthlyCounts.ContainsKey(8) ? monthlyCounts[8] : 0,
+                SepBookingCount = monthlyCounts.ContainsKey(9) ? monthlyCounts[9] : 0,
+                OctBookingCount = monthlyCounts.ContainsKey(10) ? monthlyCounts[10] : 0,
+                NovBookingCount = monthlyCounts.ContainsKey(11) ? monthlyCounts[11] : 0,
+                DecBookingCount = monthlyCounts.ContainsKey(12) ? monthlyCounts[12] : 0
+            };
+
+            return bookObj;
+        }
     }
 }

@@ -196,6 +196,11 @@ namespace ABSystem.Services.Services
             return listBooks;
         }
 
+        public BookObj MonthlyCountBooking()
+        {
+            return this._bookRepository.MonthlyCountBooking();
+        }
+
         public void UpdateBookStatus(int bookId, string status)
         {
             var book = this._bookRepository.GetBookById(bookId);

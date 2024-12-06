@@ -36,6 +36,17 @@ namespace ABSystem.Data.Objects
 
         public string? RoomName { get; set; }
 
-        public int JanBookingCount {  get; set; }
+        public int JanBookingCount { get; set; }
+        public int FebBookingCount { get; set; }
+        public int MarBookingCount { get; set; }
+        public int AprBookingCount { get; set; }
+        public int MayBookingCount { get; set; }
+        public int JunBookingCount { get; set; }
+        public int JulBookingCount { get; set; }
+        public int AugBookingCount { get; set; }
+        public int SepBookingCount { get; set; }
+        public int OctBookingCount { get; set; }
+        public int NovBookingCount { get; set; }
+        public int DecBookingCount { get; set; }
     }
 }

@@ -117,13 +117,33 @@
     </div>
 
     <script src="~/js/common.js"></script>
-
     <script>
+        console.log(@Json.Serialize(@Model));
+
+
+    </script>
+    <script>
+
+        const dto = @Json.Serialize(@Model);
+
         const monthlyData = {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
             datasets: [{
                 label: 'Bookings',
-                data: [1000, 1200, 1500, 1300, 1100, 1400, 1150, 1250, 1400, 1300, 1550, 1600],
+                data: [
+                    dto.monthlyCountBookings.janBookingCount,
+                    dto.monthlyCountBookings. febBookingCount,
+                    dto.monthlyCountBookings.marBookingCount,
+                    dto.monthlyCountBookings.aprBookingCount,
+                    dto.monthlyCountBookings.mayBookingCount,
+                    dto.monthlyCountBookings.junBookingCount,
+                    dto.monthlyCountBookings.julBookingCount,
+                    dto.monthlyCountBookings.augBookingCount,
+                    dto.monthlyCountBookings.sepBookingCount,
+                    dto.monthlyCountBookings.octBookingCount,
+                    dto.monthlyCountBookings.novBookingCount,
+                    dto.monthlyCountBookings.decBookingCount,             
+                ],
                 backgroundColor: [
                     '#BEE9E8', '#62B6CB', '#F4373A', '#BEE9E8', '#62B6CB', '#F4373A',
                     '#BEE9E8', '#62B6CB', '#F4373A', '#BEE9E8', '#62B6CB', '#F4373A'
