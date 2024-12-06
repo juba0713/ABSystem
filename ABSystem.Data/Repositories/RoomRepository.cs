@@ -48,7 +48,7 @@ namespace ABSystem.Data.Repositories
 
         public IEnumerable<Room> GetRooms()
         {
-            return this._context.Rooms.ToList();
+            return this._context.Rooms.Where(r => r.IsDeleted == 0).ToList();
         }
 
         public Room GetRoomByIdWithBookings(int roomId)
@@ -67,6 +67,11 @@ namespace ABSystem.Data.Repositories
                 .OrderByDescending(r => r.Bookings.Count) // Order by the number of bookings
                 .Take(4) // Limit to top 4 rooms
                 .ToList(); // Execute the query and return as a list
+        }
+
+        public int CountRooms()
+        {
+            return this._context.Rooms.Count(r => r.IsDeleted == 0);
         }
     }
 }

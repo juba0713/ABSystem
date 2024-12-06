@@ -1,7 +1,12 @@
+using ABSystem.Data.Models;
 using ABSystem.Resources.Constants;
+using ABSystem.Services.Dto;
+using ABSystem.Services.Interfaces;
 using ABSystem.WebApp.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 /**
@@ -14,10 +19,19 @@ namespace ABSystem.WebApp.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IBookService _bookService;
+        private readonly IRoomService _roomService;
+        private readonly UserManager<User> _userManager;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, 
+            IRoomService roomService, 
+            IBookService bookService,
+            UserManager<User> userManager)
         {
             _logger = logger;
+            _roomService = roomService;
+            _bookService = bookService; 
+            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -33,16 +47,20 @@ namespace ABSystem.WebApp.Controllers
         [Authorize(Roles = CommonConstant.Admin)]
         [HttpGet]
         [Route("/admin/dashboard")]
-        public IActionResult AdminDashboard()
+        public async Task<IActionResult> AdminDashboard()
         {
-            // Get user details from session
-            var userId = HttpContext.Session.GetString("UserId");
-            var userEmail = HttpContext.Session.GetString("UserEmail");
-            var userRoles = HttpContext.Session.GetString("UserRoles");
-            Console.WriteLine("User ID: " + userId);
-            Console.WriteLine("User Email: " + userEmail);
-            Console.WriteLine("User Roles: " + userRoles);
-            return PartialView("~/Views/Admin/Dashboard.cshtml");
+            ViewDto viewDto = new ViewDto();
+
+            viewDto.CountRooms = this._roomService.CountRooms();
+            viewDto.CountBookings = this._bookService.CountBooking();
+            viewDto.CountPendingBookings = this._bookService.CountPendingBooking();
+            viewDto.CountAcceptedBookings = this._bookService.CountAcceptedBooking();
+            viewDto.CountRejectedBookings = this._bookService.CountRejectedBooking();
+            viewDto.CountUsers = await this._userManager.Users.CountAsync();
+
+
+
+            return PartialView("~/Views/Admin/Dashboard.cshtml", viewDto);
         }
 
         [Authorize(Roles = CommonConstant.Super)]

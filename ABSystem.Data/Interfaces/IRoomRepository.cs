@@ -40,6 +40,10 @@ namespace ABSystem.Data.Interfaces
         public Room GetRoomByIdWithBookings(int roomId);
 
         public IEnumerable<Room> GetPopularRooms();
+        /*
+         * Count Rooms
+         */
+        public int CountRooms();
 
     }
 }

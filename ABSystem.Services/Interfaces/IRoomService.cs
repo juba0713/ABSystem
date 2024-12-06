@@ -49,5 +49,10 @@ namespace ABSystem.Services.Interfaces
          * This method is for getting a popular room
          */
         public List<RoomDto> GetPopularRoomsWithImage();
+
+        /*
+         *  Count Rooms
+         */
+        public int CountRooms();
     }
 }

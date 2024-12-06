@@ -113,6 +113,27 @@ namespace ABSystem.Services.Services
 
         }
 
+        public int CountAcceptedBooking()
+        {
+            return this._bookRepository.CountAcceptedBooking();
+
+        }
+
+        public int CountBooking()
+        {
+            return this._bookRepository.CountBooking();
+        }
+
+        public int CountPendingBooking()
+        {
+            return this._bookRepository.CountPendingBooking();
+        }
+
+        public int CountRejectedBooking()
+        {
+            return this._bookRepository.CountRejectedBooking();
+        }
+
         public UserBookDto GetBookById(int bookId)
         {
             UserBookDto userBookDto = new UserBookDto();
