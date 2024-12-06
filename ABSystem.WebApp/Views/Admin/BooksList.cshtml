@@ -1,0 +1,247 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@using ABSystem.Data.Objects;
+@using ABSystem.Data.Models;
+@using ABSystem.Resources.Constants;
+@model IEnumerable<Book>;
+
+<html>
+<head>
+    <title>Rooms List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/css/common.css" />
+    <link rel="stylesheet" href="~/css/header.css" />
+    <link rel="stylesheet" href="~/css/adminsidebar.css" />
+    <link rel="stylesheet" href="~/css/admin/bookslist.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css"/>
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
+    
+    
+</head>
+<body>
+    <div class="container">
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success">
+                <div class="icon__wrapper">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10.2908 3.8602L1.82075 18.0002C1.64612 18.3026 1.55372 18.6455 1.55274 18.9947C1.55176 19.3439 1.64224 19.6873 1.81518 19.9907C1.98812 20.2941 2.23748 20.547 2.53846 20.7241C2.83944 20.9012 3.18155 20.9964 3.53075 21.0002H20.4708C20.82 20.9964 21.1621 20.9012 21.463 20.7241C21.764 20.547 22.0134 20.2941 22.1863 19.9907C22.3593 19.6873 22.4497 19.3439 22.4488 18.9947C22.4478 18.6455 22.3554 18.3026 22.1808 18.0002L13.7108 3.8602C13.5325 3.56631 13.2815 3.32332 12.9819 3.15469C12.6824 2.98605 12.3445 2.89746 12.0008 2.89746C11.657 2.89746 11.3191 2.98605 11.0196 3.15469C10.72 3.32332 10.469 3.56631 10.2908 3.8602Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M12 9V13" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M12 17H12.01" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <p>@TempData["SuccessMessage"]</p>
+                <span class="mdi mdi-open-in-new open"></span>
+                <span class="mdi mdi-close close"></span>
+            </div>
+        } 
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-error">
+                <div class="icon__wrapper">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10.2908 3.8602L1.82075 18.0002C1.64612 18.3026 1.55372 18.6455 1.55274 18.9947C1.55176 19.3439 1.64224 19.6873 1.81518 19.9907C1.98812 20.2941 2.23748 20.547 2.53846 20.7241C2.83944 20.9012 3.18155 20.9964 3.53075 21.0002H20.4708C20.82 20.9964 21.1621 20.9012 21.463 20.7241C21.764 20.547 22.0134 20.2941 22.1863 19.9907C22.3593 19.6873 22.4497 19.3439 22.4488 18.9947C22.4478 18.6455 22.3554 18.3026 22.1808 18.0002L13.7108 3.8602C13.5325 3.56631 13.2815 3.32332 12.9819 3.15469C12.6824 2.98605 12.3445 2.89746 12.0008 2.89746C11.657 2.89746 11.3191 2.98605 11.0196 3.15469C10.72 3.32332 10.469 3.56631 10.2908 3.8602Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M12 9V13" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M12 17H12.01" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <p>@TempData["ErrorMessage"]</p>
+                <span class="mdi mdi-open-in-new open"></span>
+                <span class="mdi mdi-close close"></span>
+            </div>
+        }       
+        <partial name="Header" />
+        <div class="content">
+            <partial name="AdminSidebar" />
+            <div class="main-content">
+                <div class="sub-header border-radius-5">
+                    <div>Bookings</div>
+                </div>
+                <div class="sub-content border-radius-5">
+                    <div class="filter-container">
+                        <div class="filters">
+                            <div class="search-field">
+                                <span><img src="~/icons/search.svg" alt="search" /></span>
+                                <input type="text" class="border-radius-5" placeholder="Search..." />
+                            </div>        
+                            <div class="search-field">
+                                <select>
+                                    <option value="All">All</option>
+                                    <option value="@CommonConstant.PENDING">@CommonConstant.PENDING</option>
+                                    <option value="@CommonConstant.ACCEPTED">@CommonConstant.ACCEPTED</option>
+                                    <option value="@CommonConstant.REJECTED">@CommonConstant.REJECTED</option>
+                                    <option value="@CommonConstant.CANCELED">@CommonConstant.CANCELED</option>
+                                    <option value="@CommonConstant.COMPLETED">@CommonConstant.COMPLETED</option>
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="group-button prev-next">
+                            <button class="action-btn border-radius-5"><img src="~/icons/arrow-left-circle.svg" alt="add" />PREV</button>
+                            <select>
+                                <option>1</option>
+                            </select>
+                            <button class="action-btn border-radius-5">NEXT <img src="~/icons/arrow-right-circle.svg" alt="add" /></button>
+                        </div>
+                    </div>
+                    <div class="table-content">
+                        <table id="user-table">
+                            
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Room</th>
+                                    <th>User</th>                                  
+                                    <th>Date</th>                                                                                                    
+                                    <th>Start Time</th>
+                                    <th>End Time</th>
+                                    <th>Status</th>
+                                    <th></th>
+                                </tr>                          
+                            </thead>
+                            <tbody>                         
+                                @if (Model != null && Model.Any())
+                                {
+                                    foreach (var book in Model)
+                                    {
+                                        <tr class="rowLink" bookId="@book.Id">
+                                            <td>@book.Id</td>
+                                            <td>@book.Room.Name</td>
+                                            <td>@book.FirstName @book.LastName</td>
+                                            <td>@book.BookDate.ToString("MMM dd, yyyy")</td>
+                                            <td>@(new DateTime(book.StartTime.Ticks).ToString("hh:mm tt"))</td>
+                                            <td>@(new DateTime(book.EndTime.Ticks).ToString("hh:mm tt"))</td>
+                                            <td>
+                                                @if(book.Status == CommonConstant.PENDING)
+                                                { 
+                                                    <div class="status pending">@CommonConstant.PENDING</div>
+                                                }else if(book.Status == CommonConstant.ACCEPTED)
+                                                {
+                                                    <div class="status accepted">@CommonConstant.ACCEPTED</div>
+                                                }
+                                                else if (book.Status == CommonConstant.REJECTED)
+                                                {
+                                                    <div class="status rejected">@CommonConstant.REJECTED</div>
+                                                }
+                                                else if (book.Status == CommonConstant.CANCELED)
+                                                {
+                                                    <div class="status pending">@CommonConstant.CANCELED</div>
+                                                }else if (book.Status == CommonConstant.COMPLETED)
+                                                {
+                                                    <div class="status pending">@CommonConstant.COMPLETED</div>
+                                                }
+                                            </td>
+                                            @if(book.Status == CommonConstant.PENDING){
+                                                <td class="group-button">
+                                                    @* <form asp-controller="AdminBook" asp-action="ApproveBook" method="POST"> *@
+                                                        @* <input type="hidden" name="bookId" value="@book.Id" /> *@
+                                                        <button class="edit-btn action-btn border-radius-5" data-toggle="modal" bookId="@book.Id" data-target="#acceptModal" name="approve">
+                                                            <img src="~/icons/edit.svg" alt="edit" />
+                                                            APPROVE
+                                                        </button>
+                                                    @* </form> *@
+                                                    @* <form asp-controller="AdminBook" asp-action="RejectBook" method="POST"> *@
+                                                        @* <input type="hidden" name="bookId" value="@book.Id" /> *@
+                                                        <button class="delete-btn action-btn border-radius-5" bookId="@book.Id" data-toggle="modal" data-target="#rejectModal" name="reject">
+                                                            <img src="~/icons/delete.svg" alt="delete" />
+                                                            REJECT
+                                                        </button>
+                                                    @* </form> *@
+                                                </td>
+                                            }else{
+                                                <td></td>
+                                            }                                       
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="7" class="text-center">No rooms found.</td>
+                                    </tr>
+                                }                               
+                            </tbody>
+                        </table>
+                       
+                    </div>                 
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="acceptModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">             
+                <div class="modal-body">
+                    <form asp-controller="AdminBook" asp-action="ApproveBook" method="POST" class="gap-20 flex-column">
+                        <input type="hidden" name="bookId" id="approveHiddenId" value="0" />
+                        <div>
+                            <div class="centered">Are you sure you want to accept this booking?</div>
+                            <div class="centered">This action is permanent and cannot be undone.</div>
+                        </div>
+                        <div class="group-button">
+                            <button class="action-btn blue-btn">Cancel</button>
+                            <button class="action-btn red-btn">Confirm</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="rejectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form asp-controller="AdminBook" asp-action="RejectBook" method="POST" class="gap-20 flex-column">
+                        <input type="hidden" name="bookId" id="rejectHiddenId" value="0" />
+                        <div>
+                            <div class="centered">Are you sure you want to reject this booking?</div>
+                            <div class="centered">This action is permanent and cannot be undone.</div>
+                        </div>
+                        <div class="group-button">
+                            <button class="action-btn blue-btn">Cancel</button>
+                            <button class="action-btn red-btn">Confirm</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script>
+        document.querySelectorAll('.delete-btn').forEach(btn => btn.addEventListener('click', function () {
+            document.querySelector("#roomId").setAttribute('value', btn.getAttribute('data-id'));
+        }));
+
+        document.querySelectorAll('.rowLink').forEach(row => row.addEventListener('click', function (ev) {
+
+            if (ev.srcElement.classList.contains('action-btn')) {
+                return;
+            }
+
+            window.location.href = "/admin/books-list/book-details?bookId=" + this.getAttribute('bookId');
+        }));
+
+        document.querySelectorAll(".action-btn").forEach(btn => btn.addEventListener('click', function () {
+            if (this.name === 'approve') {
+                document.querySelector("#approveHiddenId").value = this.getAttribute('bookId');
+            } else if (this.name === 'reject') {
+                document.querySelector("#rejectHiddenId").value = this.getAttribute('bookId');
+            }
+        }));
+
+   
+    
+    </script>
+    <script src="~/js/common.js"></script>
+</body>
+</html>

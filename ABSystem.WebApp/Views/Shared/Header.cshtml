@@ -1,15 +1,144 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using Microsoft.AspNetCore.Identity
+@using ABSystem.Data.Models
+@inject SignInManager<User> signInManager
+@inject UserManager<User> userManager
+@inject RoleManager<IdentityRole> roleManager
+
 @{
+    // Get the logged-in user using UserManager
+    User loggedInUser = await userManager.FindByEmailAsync(User.Identity.Name ?? "");
+
+    var roles = await userManager.GetRolesAsync(loggedInUser);
+
+    string roleName = roles.FirstOrDefault() ?? "No Role Assigned"; 
 }
 <div class="header">
-    <div>
+    <div class="header-icons">
         <img src="/images/AB.png" alt="logo"/>
     </div>
-    <div>
+    <div class="header-icons">
         <img src="/images/darklightmode.png" alt="darklight" id="theme-toggle" />
-        <img src="/icons/notification.svg" alt="notification" />
+        <img src="/icons/notification.svg" alt="notification" class="notification-icon" />
         <img src="/icons/profile.svg" alt="notification" />
+        <div class="new-notification-count">0</div>
     </div>
+
+    <div class="notification-content" style="display: none;">
+        <div class="notification-title">Notifications</div>
+        <div class="notification-list">
+
+        </div>
+    </div>
+    <script>
+        async function fetchAdminNotifications() {
+            try {
+                const response = await fetch('/admin/notification/retrieve');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                const notifications = await response.json();
+
+                console.log(notifications);
+                
+                let newNotificationCount = 0;
+
+                const notificationContainer = document.querySelector('.notification-list');
+                notificationContainer.innerHTML = '';
+
+                notifications.forEach(notification => {
+
+                    if(notification.isRead == 0){
+                        newNotificationCount++;
+                    }
+
+                    const createdDate = new Date(notification.createdDate);
+
+                    const formattedDate = createdDate.toLocaleDateString('en-US');
+
+                    const notificationDiv = document.createElement('a');
+                    notificationDiv.href = "/admin/books-list/book-details?bookId=" + notification.bookingId + "&notifyId=" + notification.id + "&read=true";
+                    notificationDiv.classList.add('notification-details');
+                    notificationDiv.innerHTML = `
+                        <div>${formattedDate}</div>
+                        <div>${notification.message}</div>
+                    `;
+
+                    if(notification.isRead){
+                        notificationDiv.classList.add('read');
+                    }else{
+                        notificationDiv.classList.add('unread');
+                    }
+
+                    notificationContainer.appendChild(notificationDiv);
+                });
+
+                if (newNotificationCount > 0){
+                    document.querySelector('.new-notification-count').innerHTML = newNotificationCount;
+                }else{
+                    document.querySelector('.new-notification-count').style.display = 'none';
+                }
+
+                notificationContainer.style.display = 'block';
+            } catch (error) {
+                console.error('Error fetching notifications:', error);
+            }
+        }
+
+        async function fetchNotifications() {
+            try {
+                const response = await fetch('/notification/retrieve');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                const notifications = await response.json();
+
+                let newNotificationCount = 0;
+
+                const notificationContainer = document.querySelector('.notification-list');
+                notificationContainer.innerHTML = '';
+
+                notifications.forEach(notification => {
+
+                    if (notification.isRead == 0) {
+                        newNotificationCount++;
+                    }
+
+                    const createdDate = new Date(notification.createdDate);
+
+                    const formattedDate = createdDate.toLocaleDateString('en-US');
+
+                    const notificationDiv = document.createElement('a');
+                    notificationDiv.href = "/";
+                    notificationDiv.classList.add('notification-details');
+                    notificationDiv.innerHTML = `
+                                <div>${formattedDate}</div>
+                                <div>${notification.message}</div>
+                `;
+                    notificationContainer.appendChild(notificationDiv);
+                });
+
+                if (newNotificationCount > 0) {
+                    document.querySelector('.new-notification-count').innerHTML = newNotificationCount;
+                } else {
+                    document.querySelector('.new-notification-count').style.display = 'none';
+                }
+
+                notificationContainer.style.display = 'block';
+            } catch (error) {
+                console.error('Error fetching notifications:', error);
+            }
+        }
+
+        const role = @Json.Serialize(@roleName);
+        console.log(role);
+
+        if (role === 'User') {
+            fetchNotifications();
+        } else if (role === 'Super' || role === 'Admin') {
+            fetchAdminNotifications();
+        }
+
+    </script>
 </div>

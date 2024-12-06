@@ -1,9 +1,10 @@
 ﻿@using ABSystem.Services.Dto;
+@using ABSystem.Resources.Constants;
 
-@model UserDto
+@model RoomDto
 <html>
 <head>
-    <title>Users List</title>
+    <title>Room Add</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="~/css/common.css" />
@@ -35,60 +36,59 @@
             <div class="main-content">
                 <div class="sub-header border-radius-5">
                     <div>Room - Add</div>
-                    <a class="action-btn back-btn border-radius-5" asp-controller="Room" asp-action="RoomsListScreen"><img src="~/icons/back.svg" alt="add" />BACK</a>
+                    <a class="action-btn back-btn border-radius-5" asp-controller="AdminRoom" asp-action="RoomsListScreen"><img src="~/icons/back.svg" alt="add" />BACK</a>
                 </div>
                 <div class="sub-content border-radius-5">
-                    <form asp-controller="User" asp-action="AddUser" method="POST">
+                    <form asp-controller="AdminRoom" asp-action="AddRoom" method="POST" enctype="multipart/form-data">
                         <div class="outer-container">
                             <div class="input-group">
-                                <div class="input-center">
-                                    <div>
-                                        <label>Room Name <span style="color: red;">*</span></label>
-                                        <input type="text" asp-for="Email" class="border-radius-5" />
-
-                                        <span asp-validation-for="Email" class="error"></span>
-                                    </div>
-                                    <div>
-                                        <label>Facility <span style="color: red;">*</span></label>
-                                        <input type="text" asp-for="FirstName" class="border-radius-5" />
-                                        <span asp-validation-for="FirstName" class="error"></span>
-                                    </div>
-                                    <div>
-                                        <label>Capacity <span style="color: red;">*</span></label>
-                                        <input type="number" asp-for="LastName" class="border-radius-5" />
-                                        <span asp-validation-for="LastName" class="error"></span>
-                                    </div>
-                                    <div>
-                                        <label>Address <span style="color: red;">*</span></label>
-                                        <input type="password" asp-for="Password" class="border-radius-5" />
-                                        <span asp-validation-for="Password" class="error"></span>
-                                    </div>
-                                    <div>
-                                        <label>Description <span style="color: red;">*</span></label>
-                                        <textarea></textarea>
-                                        <span asp-validation-for="Password" class="error"></span>
+                                
+                                <div>
+                                    <label>@Constant.ctRoomName<span style="color: red;">*</span></label>
+                                    <input type="text" asp-for="Name" class="border-radius-5" />
+                                    <span asp-validation-for="Name" class="error"></span>
+                                </div>
+                                <div>
+                                    <label>@Constant.ctFacility <span style="color: red;">*</span></label>
+                                    <input type="text" asp-for="Facility" class="border-radius-5" />
+                                    <span asp-validation-for="Facility" class="error"></span>
+                                </div>
+                                <div>
+                                    <label>@Constant.ctCapacity <span style="color: red;">*</span></label>
+                                    <input type="number" asp-for="Capacity" class="border-radius-5" />
+                                    <span asp-validation-for="Capacity" class="error"></span>
+                                </div>
+                                <div>
+                                    <label>@Constant.ctAddress <span style="color: red;">*</span></label>
+                                    <input type="text" asp-for="Address" class="border-radius-5" />
+                                    <span asp-validation-for="Address" class="error"></span>
+                                </div>
+                                <div>
+                                    <label>@Constant.ctDescription <span style="color: red;">*</span></label>
+                                    <textarea asp-for="Description"></textarea>
+                                    <span asp-validation-for="Description" class="error"></span>
+                                </div>
+                                                             
+                            </div>
+                            <div class="input-images">   
+                                <div>@Constant.ctImages</div>
+                                <div class="scrollable">
+                                    <div class="preview-container">
+                                        <img src="~/images/noimage.png" class="no-img" />
                                     </div>
                                 </div>                               
-                            </div>
-                            <div class="input-images">
-                                <div>
-                                    <label>Images</label>
-                                    <img src="~/images/noimage.png" alt="noimage" class="big-img image" data-toggle="modal" data-target="#viewImageModal" />
-                                    <div class="small-imgs" >
-                                        <img src="~/images/noimage.png" alt="noimage image" data-toggle="modal" data-target="#viewImageModal" />
-                                        <img src="~/images/noimage.png" alt="noimage image" data-toggle="modal" data-target="#viewImageModal" />
-                                        <img src="~/images/noimage.png" alt="noimage image" data-toggle="modal" data-target="#viewImageModal" />
-                                        <img src="~/images/noimage.png" alt="noimage image" data-toggle="modal" data-target="#viewImageModal" />
-                                        <img src="~/images/noimage.png" alt="noimage image" data-toggle="modal" data-target="#viewImageModal" />
-                                    </div>
-                                    
+                                <div class="upload-img-btn">
+                                    <div class="action-btn upload-btn">
+                                        Upload Images
+                                        <input style="display: none;" type="file" id="imageUpload" asp-for="Images" multiple accept="image/*">
+                                    </div>  
+                                    <span class="file-name">@Constant.ctNoFilesUploaded</span>
+                                </div>                        
 
-                                    <span asp-validation-for="Role" class="error"></span>
-                                </div>
                             </div>
                         </div>
                         <div class="left-button">
-                            <button type="submit" class="action-btn">SAVE</button>
+                            <button type="submit" class="action-btn">@Constant.ctSave</button>
                         </div>
                     </form>
                 </div>
@@ -109,12 +109,48 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="~/js/common.js"></script>
     <script>
-        let images = document.querySelectorAll('.image').forEach(image => image.addEventListener('click', function () {
-            const modalImage = document.getElementById("view-image");
-            console.log(modalImage);
-            // Set the modal image source to the clicked image's source
-            modalImage.src = this.src;
-        }));
+
+        document.querySelector('.upload-btn').addEventListener('click', function(){
+            document.querySelector('#imageUpload').click();
+        });
+
+        document.getElementById('imageUpload').addEventListener('change', function (event) {
+            const files = event.target.files;
+            const previewContainer = document.querySelector('.preview-container');
+
+            previewContainer.innerHTML = "";
+
+            const fileCountDisplay = document.querySelector('.file-name');
+
+            const fileCount = files.length;
+            fileCountDisplay.textContent = fileCount > 0
+                ? `${fileCount} file(s) uploaded`
+                : 'No Files Uploaded';
+
+            Array.from(files).forEach(file => {
+
+                const reader = new FileReader();
+               
+                reader.onload = function (e) {
+
+                    const imgContainer = document.createElement('div');
+                    imgContainer.classList.add("img-container");
+                 
+
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.className = 'image-preview';
+
+                    imgContainer.appendChild(img);
+
+                    previewContainer.appendChild(imgContainer);
+                };
+
+               
+                reader.readAsDataURL(file);
+            });
+        });
+        
     </script>
 </body>
 </html>

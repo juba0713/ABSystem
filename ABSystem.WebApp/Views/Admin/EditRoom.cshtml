@@ -1,0 +1,169 @@
+﻿@using ABSystem.Services.Dto;
+@using ABSystem.Resources.Constants;
+
+@model RoomDto
+<html>
+<head>
+    <title>Room Add</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/css/common.css" />
+    <link rel="stylesheet" href="~/css/header.css" /> 
+    <link rel="stylesheet" href="~/css/adminsidebar.css" />
+    <link rel="stylesheet" href="~/css/admin/addroom.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        @if (ViewData["Error"] != null)
+        {
+            <div class="alert alert-error">
+                <div class="icon__wrapper">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10.2908 3.8602L1.82075 18.0002C1.64612 18.3026 1.55372 18.6455 1.55274 18.9947C1.55176 19.3439 1.64224 19.6873 1.81518 19.9907C1.98812 20.2941 2.23748 20.547 2.53846 20.7241C2.83944 20.9012 3.18155 20.9964 3.53075 21.0002H20.4708C20.82 20.9964 21.1621 20.9012 21.463 20.7241C21.764 20.547 22.0134 20.2941 22.1863 19.9907C22.3593 19.6873 22.4497 19.3439 22.4488 18.9947C22.4478 18.6455 22.3554 18.3026 22.1808 18.0002L13.7108 3.8602C13.5325 3.56631 13.2815 3.32332 12.9819 3.15469C12.6824 2.98605 12.3445 2.89746 12.0008 2.89746C11.657 2.89746 11.3191 2.98605 11.0196 3.15469C10.72 3.32332 10.469 3.56631 10.2908 3.8602Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M12 9V13" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M12 17H12.01" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <p>@ViewData["Error"]</p>
+                <span class="mdi mdi-open-in-new open"></span>
+                <span class="mdi mdi-close close"></span>
+            </div>
+        }
+        <partial name="Header" />
+        <div class="content">
+            <partial name="AdminSidebar" />
+            <div class="main-content">
+                <div class="sub-header border-radius-5">
+                    <div>Room - Add</div>
+                    <a class="action-btn back-btn border-radius-5" asp-controller="AdminRoom" asp-action="RoomsListScreen"><img src="~/icons/back.svg" alt="add" />BACK</a>
+                </div>
+                <div class="sub-content border-radius-5">
+                    <form asp-controller="AdminRoom" asp-action="EditRoom" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" asp-for="Id" />
+                        <div class="outer-container">
+                            <div class="input-group">
+                                
+                                <div>
+                                    <label>@Constant.ctRoomName<span style="color: red;">*</span></label>
+                                    <input type="text" asp-for="Name" class="border-radius-5" />
+                                    <span asp-validation-for="Name" class="error"></span>
+                                </div>
+                                <div>
+                                    <label>@Constant.ctFacility <span style="color: red;">*</span></label>
+                                    <input type="text" asp-for="Facility" class="border-radius-5" />
+                                    <span asp-validation-for="Facility" class="error"></span>
+                                </div>
+                                <div>
+                                    <label>@Constant.ctCapacity <span style="color: red;">*</span></label>
+                                    <input type="number" asp-for="Capacity" class="border-radius-5" />
+                                    <span asp-validation-for="Capacity" class="error"></span>
+                                </div>
+                                <div>
+                                    <label>@Constant.ctAddress <span style="color: red;">*</span></label>
+                                    <input type="text" asp-for="Address" class="border-radius-5" />
+                                    <span asp-validation-for="Address" class="error"></span>
+                                </div>
+                                <div>
+                                    <label>@Constant.ctDescription <span style="color: red;">*</span></label>
+                                    <textarea asp-for="Description"></textarea>
+                                    <span asp-validation-for="Description" class="error"></span>
+                                </div>
+                                                             
+                            </div>
+                            <div class="input-images">   
+                                <div>@Constant.ctImages</div>
+                                <div class="scrollable">
+                                    <div class="preview-container">
+                                        @if(Model.ImagesPath.Count != 0)
+                                        {
+                                            foreach(var imagePath in Model.ImagesPath)
+                                            {
+                                                <div class="img-container">
+                                                    <img class="image-preview" src="@imagePath" />
+                                                </div>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <img src="~/images/noimage.png" class="no-img" />
+                                        }                 
+                                    </div>
+                                </div>                               
+                                <div class="upload-img-btn">
+                                    <div class="action-btn upload-btn">
+                                        Upload Images
+                                        <input style="display: none;" type="file" id="imageUpload" asp-for="Images" multiple accept="image/*">
+                                    </div>  
+                                    <span class="file-name">@Constant.ctNoFilesUploaded</span>
+                                </div>                        
+
+                            </div>
+                        </div>
+                        <div class="left-button">
+                            <button type="submit" class="action-btn">@Constant.ctSave</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="viewImageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">             
+                <div class="modal-body">
+                   <img id="view-image" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="~/js/common.js"></script>
+    <script>
+
+        document.querySelector('.upload-btn').addEventListener('click', function(){
+            document.querySelector('#imageUpload').click();
+        });
+
+        document.getElementById('imageUpload').addEventListener('change', function (event) {
+            const files = event.target.files;
+            const previewContainer = document.querySelector('.preview-container');
+
+            previewContainer.innerHTML = "";
+
+            const fileCountDisplay = document.querySelector('.file-name');
+
+            const fileCount = files.length;
+            fileCountDisplay.textContent = fileCount > 0
+                ? `${fileCount} file(s) uploaded`
+                : 'No Files Uploaded';
+
+            Array.from(files).forEach(file => {
+
+                const reader = new FileReader();
+               
+                reader.onload = function (e) {
+
+                    const imgContainer = document.createElement('div');
+                    imgContainer.classList.add("img-container");
+                 
+
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.className = 'image-preview';
+
+                    imgContainer.appendChild(img);
+
+                    previewContainer.appendChild(imgContainer);
+                };
+
+               
+                reader.readAsDataURL(file);
+            });
+        });
+        
+    </script>
+</body>
+</html>

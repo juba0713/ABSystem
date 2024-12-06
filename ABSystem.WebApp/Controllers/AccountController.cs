@@ -58,11 +58,15 @@ namespace ABSystem.WebApp.Controllers
             }
 
             // Get the logged-in user
-            var user = await _userManager.FindByEmailAsync(dto.Email);
+            var user = await _userManager.FindByEmailAsync(dto.Email!);
             if (user == null)
             {
                 return PartialView("~/Views/Login.cshtml");
             }
+
+            HttpContext.Session.SetString("UserId", user.Id);
+            HttpContext.Session.SetString("UserEmail", user.Email!);
+            HttpContext.Session.SetString("UserFullName", user.FirstName + ' ' + user.LastName);
 
             var roles = await _userManager.GetRolesAsync(user);
 
@@ -74,7 +78,7 @@ namespace ABSystem.WebApp.Controllers
             {
                 return RedirectToAction("SuperDashboard", "Home");
             }
-
+            Console.WriteLine("HELLO");
             // Default redirect if no roles match
             return RedirectToAction("Dashboard", "Home");
         }
@@ -102,6 +106,7 @@ namespace ABSystem.WebApp.Controllers
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 ViewData["Error"] = MessageConstant.ERROR;
                 return PartialView("~/Views/Register.cshtml");
             }
@@ -114,6 +119,7 @@ namespace ABSystem.WebApp.Controllers
         public async Task<IActionResult> Logout()
         {
             await this._signInManager.SignOutAsync();
+            HttpContext.Session.Clear();
             return RedirectToAction("Login", "Account");
         }
     }

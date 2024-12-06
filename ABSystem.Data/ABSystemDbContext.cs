@@ -1,4 +1,4 @@
-﻿using ABSystem.Data.Models;
+using ABSystem.Data.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -16,7 +16,12 @@ namespace ABSystem.Data
 
 
         //public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<Room> Rooms { get; set; }
+
+        public DbSet<Room> Rooms { get; set; }
+
+        public DbSet<Book> Books { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

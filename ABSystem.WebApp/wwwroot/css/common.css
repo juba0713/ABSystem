@@ -50,6 +50,7 @@ main {
     width: 100%; 
     background: none;
     overflow: auto;
+    position: relative;
 
 }
 
@@ -99,7 +100,9 @@ body.dark-mode .sub-header,
 body.dark-mode .sub-content,
 body.dark-mode .booking,
 body.dark-mode .book,
-body.dark-mode .booking-content{
+body.dark-mode .booking-content,
+body.dark-mode .popular-room,
+body.dark-mode .room-details{
     background-color: #191919;
     color: #ffffff;
 }
@@ -109,19 +112,39 @@ body.dark-mode .vertical-line {
     background-color: #191919;
 }
 
-body.dark-mode td,
-body.dark-mode th {
-    color: #ffffff;
-}
+    body.dark-mode td,
+    body.dark-mode th,
+    body.dark-mode .room-title,
+    body.dark-mode .details-container .d-1:nth-child(1),
+    body.dark-mode .details-container .d-1:nth-child(2) div:nth-child(1),
+    body.dark-mode .details-container .d-1:nth-child(2) div:nth-child(2),
+    body.dark-mode .details-container .d-1:nth-child(3) div:nth-child(1),
+    body.dark-mode .details-container .d-1:nth-child(3) div:nth-child(2),
+    body.dark-mode .details-container .d-1:nth-child(4) div:nth-child(1),
+    body.dark-mode .details-container .d-1:nth-child(4) div:nth-child(2),
+    body.dark-mode .details-container .d-1:nth-child(5) div:nth-child(1),
+    body.dark-mode .details-container .d-1:nth-child(5) div:nth-child(2),
+    body.dark-mode .sort-by{
+        color: #ffffff;
+    }
 
 body.dark-mode a {
     color: #90F0EE;
-
 }
 
-    body.dark-mode .book svg path{
-        fill: #fff !important;
-    }
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select{ 
+    background: #2c2c2c;
+    border: 0.052vw solid #191919;
+    color: #fff;
+}
+
+body.dark-mode .book svg path,
+body.dark-mode .details-container svg path{
+    fill: #fff !important;
+}
+
 
 .sub-header,
 .sub-content,
@@ -133,10 +156,19 @@ img,
 textarea,
 .booking,
 .calendar,
-.upcoming{
+.upcoming,
+.book-details,
+.room-header,
+.popular-room,
+.notification-content,
+.notification-details,
+.input-images,
+.preview-container,
+.modal-body,
+.notification-title,
+.items {
     border-radius: 0.2vw;
     font-size: 0.8vw;
-
 }
 
 select {
@@ -144,9 +176,24 @@ select {
     font-size: 0.8rem;
     padding: 0.3vw 0.6vw;
     box-sizing: border-box;
+    height: 2vw;
 }
 
-.left-button{
+select,
+input{
+    height: 2vw;
+    padding: 0.521vw;
+    border: 0.052vw solid #A9A9A9;
+    box-sizing: border-box;
+}
+
+textarea {
+    padding: 0.521vw;
+    border: 0.052vw solid #A9A9A9;
+    box-sizing: border-box;
+}
+
+.left-button {
     display: flex;
     justify-content: flex-end;
     width: 100%;
@@ -186,7 +233,45 @@ tbody tr:hover {
     background: #D3D3D3;
 }
 
+a{
+    text-decoration: none;
+    color: #000;
+}
 
+a:hover{
+    text-decoration: none;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 0.3vw;
+    height: 0.3vw;
+}    
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.red-btn {
+    background: #90F0EE;
+    color: #000;
+}
+
+.blue-btn {
+    background: #FD4F4F;
+    color: #000;
+}
 
 
 
@@ -254,6 +339,7 @@ tbody tr:hover {
 .modal-body .group-button{
     display: flex;
     gap: 1vw;
+    justify-content: center; 
 }
 
 /*
@@ -261,7 +347,7 @@ tbody tr:hover {
 */
 .error {
     color: #FF0000;
-    font-size: 0.9vw;
+    font-size: 0.8vw; 
 }
 
 
@@ -300,6 +386,7 @@ tbody tr:hover {
     top: 0.5vw;
     left: 50%;
     transform: translate(-50%);
+    z-index: 150;
 }
 
 .alert-warning {
@@ -388,3 +475,4 @@ tbody tr:hover {
 ::-webkit-scrollbar-button {
     display: none;
 }
+

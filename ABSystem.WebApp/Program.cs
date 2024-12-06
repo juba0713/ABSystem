@@ -8,6 +8,9 @@ using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
+using ABSystem.WebApp;
+using Microsoft.Extensions.FileProviders;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,15 +32,32 @@ builder.Services.AddIdentity<User, IdentityRole>(
         options.Password.RequiredLength = 6;
         options.Password.RequireNonAlphanumeric = false;
         options.Password.RequireLowercase = false;
+        options.User.RequireUniqueEmail = true;
     }
     )
     .AddEntityFrameworkStores<ABSystemDbContext>().AddDefaultTokenProviders();
 
+builder.Services.AddDistributedMemoryCache();  // Use in-memory cache for sessions
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);  // Set session timeout
+    options.Cookie.HttpOnly = true; // Set HttpOnly flag for session cookie
+    options.Cookie.IsEssential = true;  // Mark cookie as essential
+});
+
 //Adding  Services and Repository
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+builder.Services.AddHttpContextAccessor();
+
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IRoomService, RoomService>();
+builder.Services.AddScoped<IRoomRepository, RoomRepository>();
+builder.Services.AddScoped<IBookService, BookService>();
+builder.Services.AddScoped<IBookRepository, BookRepository>();
+builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
+builder.Services.AddScoped<INotificationService, NotificationService>();
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
@@ -46,7 +66,19 @@ builder.Services.ConfigureApplicationCookie(options =>
     //other properties
 });
 
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = null;
+});
+
+builder.Services.Configure<CookieTempDataProviderOptions>(options => {
+    options.Cookie.IsEssential = true;
+});
+
+
 var app = builder.Build();
+
+
 
 using (var scope = app.Services.CreateScope())
 {
@@ -56,10 +88,10 @@ using (var scope = app.Services.CreateScope())
         var context = services.GetRequiredService<ABSystemDbContext>();
 
         // Ensure database exists (use only for development/testing environments)
-        context.Database.EnsureCreated();
+        //context.Database.EnsureCreated();
 
         // Seed admin user
-        SeedAdminUser(context);
+        Seeder.Seed(context);
     }
     catch (Exception ex)
     {
@@ -77,9 +109,14 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(@"C:\ABSystem\Rooms"),
+    RequestPath = "/Rooms"
+});
 
 app.UseRouting();
-
+app.UseSession();
 app.UseAuthentication();
 app.UseAuthorization();
 
@@ -95,7 +132,7 @@ app.MapControllerRoute(
 
 app.Run();
 
-void SeedAdminUser(ABSystemDbContext context)
+/*void SeedAdminUser(ABSystemDbContext context)
 {
 
     // Check if the 'Admin' role exists
@@ -247,4 +284,4 @@ void SeedAdminUser(ABSystemDbContext context)
         context.SaveChanges();
         Console.WriteLine("User assigned to User role successfully.");
     }
-}
+}*/

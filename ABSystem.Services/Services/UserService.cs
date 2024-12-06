@@ -5,6 +5,7 @@ using ABSystem.Services.Dto;
 using ABSystem.Services.Interfaces;
 using ABSystem.Services.Objects;
 using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -25,16 +26,32 @@ namespace ABSystem.Services.Services
         private readonly IMapper _mapper;
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
         public UserService(IUserRepository userRepository, 
             IMapper mapper, 
             UserManager<User> userManager, 
-            RoleManager<IdentityRole> roleManager)
+            RoleManager<IdentityRole> roleManager,
+            IHttpContextAccessor httpContextAccessor)
         {
             _userRepository = userRepository;
             _mapper = mapper;
             _userManager = userManager;
             _roleManager = roleManager;
+            _httpContextAccessor = httpContextAccessor;
+        }
+
+        public string GetLoggedInUserId()
+        {
+            // Get the user ID from the HttpContext
+            var userId = _userManager.GetUserId(_httpContextAccessor.HttpContext.User);
+
+            if (string.IsNullOrEmpty(userId))
+            {
+                throw new UnauthorizedAccessException(MessageConstant.NO_USER_LOGIN);
+            }
+
+            return userId;
         }
 
         public async Task RegisterUser(RegisterDto dto)
@@ -77,7 +94,7 @@ namespace ABSystem.Services.Services
 
             Console.WriteLine("-------------Id 1: " + user.Id);
         
-            user.Id = Guid.NewGuid().ToString(); // Assign a new ID if not auto-generated
+            user.Id = Guid.NewGuid().ToString();
            
             Console.WriteLine("-------------Id 2: " + user.Id);
 
@@ -214,5 +231,6 @@ namespace ABSystem.Services.Services
             return usersList;
         }
 
+     
     }
 }

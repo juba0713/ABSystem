@@ -1,0 +1,36 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using ABSystem.Services.Dto
+@using ABSystem.Resources.Constants
+@model ViewDto
+<html>
+<head>
+    <title>Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/common.css" />
+    <link rel="stylesheet" href="~/css/header.css" />
+    <link rel="stylesheet" href="~/css/sidebar.css" />
+    <link rel="stylesheet" href="~/css/user/bookslist.css" />
+</head>
+<body>
+    <div class="container">
+        <partial name="Header" />
+        <main>
+            <partial name="Sidebar" />
+            <div class="main-content">
+                <div class="sub-header">
+                    Calendar
+                    <a class="action-btn back-btn border-radius-5" href="/admin/users-list"><img src="~/icons/back.svg" alt="add" />BACK</a>
+                </div>
+                
+                    
+            </div>
+        </main>
+    </div>
+    <script src="~/js/common.js"></script>
+    <script>
+        console.log(@Json.Serialize(@Model));
+    </script>
+</body>
+</html>

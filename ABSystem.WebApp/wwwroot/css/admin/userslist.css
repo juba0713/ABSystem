@@ -15,10 +15,9 @@
     flex-direction: column;
     width: 100%;
     background: #fff;
-    height: 93%;
     padding: 1vw;
     box-sizing: border-box;
-    gap: 0.521vw;
+    gap: 0.521vw; 
 }
 
 .filter-container {
@@ -48,6 +47,7 @@
     border: 0.052vw solid #A9A9A9;
     box-sizing: border-box;
     border-radius: 0 0.26vw 0.26vw 0;
+    height: 2vw;
 }
 
 .filter-container select {

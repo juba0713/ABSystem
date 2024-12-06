@@ -1,0 +1,14 @@
+﻿.content {
+    height: auto;
+    position: relative;
+}
+
+.sub-header {
+    background: #fff;
+    padding: 0.5vw;
+    font-size: 1vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+

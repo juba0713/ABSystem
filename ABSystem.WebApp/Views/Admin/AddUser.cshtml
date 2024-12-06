@@ -43,39 +43,62 @@
                 <div class="sub-content border-radius-5">
                     <form asp-controller="User" asp-action="AddUser" method="POST">
                         <div class="outer-container">
-                            <div class="input-group">
-                                <div>
-                                    <label>Email <span style="color: red;">*</span></label>
-                                    <input type="text" asp-for="Email" class="border-radius-5" />
-
-                                    <span asp-validation-for="Email" class="error"></span>
+                            <div class="input-groups">
+                                <div class="input-group">
+                                    <div>
+                                        <label>Email <sup style="color: red;">*</sup> <span asp-validation-for="Email" class="error"></span></label>
+                                        <input type="text" asp-for="Email" class="border-radius-5" />                                     
+                                    </div>
+                                    <div>
+                                        <label>Phone Number <sup style="color: red;">(Optional)</sup> <span asp-validation-for="PhoneNumber" class="error"></span></label>
+                                        <input type="text" asp-for="PhoneNumber" class="border-radius-5" pattern="^[0-9]*$" oninput="this.value = this.value.replace(/[^0-9]/g, '')"/>                                   
+                                    </div>
+                                    
                                 </div>
-                                <div>
-                                    <label>First Name <span style="color: red;">*</span></label>
-                                    <input type="text" asp-for="FirstName" class="border-radius-5" />
-                                    <span asp-validation-for="FirstName" class="error"></span>
+                                <div class="input-group">
+                                    <div>
+                                        <label>First Name <sup style="color: red;">*</sup> <span asp-validation-for="FirstName" class="error"></span></label>
+                                        <input type="text" asp-for="FirstName" class="border-radius-5" />                                       
+                                    </div>
+                                    <div>
+                                        <label>Last Name <sup style="color: red;">*</sup>  <span asp-validation-for="LastName" class="error"></span></label>
+                                        <input type="text" asp-for="LastName" class="border-radius-5" />                                      
+                                    </div>
+                                    
                                 </div>
-                                <div>
-                                    <label>Last Name <span style="color: red;">*</span></label>
-                                    <input type="text" asp-for="LastName" class="border-radius-5" />
-                                    <span asp-validation-for="LastName" class="error"></span>
+                                <div class="input-group">
+                                    <div>
+                                        <label>Address <sup style="color: red;">(Optional)</sup>  <span asp-validation-for="Address" class="error"></span></label>
+                                        <textarea asp-for="Address"></textarea>                                       
+                                    </div>
                                 </div>
-                                <div>
-                                    <label>Password <span style="color: red;">*</span></label>
-                                    <input type="password" asp-for="Password" class="border-radius-5" />
-                                    <span asp-validation-for="Password" class="error"></span>
+                                <div class="input-group">
+                                    <div>
+                                        <label>Password <sup style="color: red;">*</sup> <span asp-validation-for="Password" class="error"></span></label>
+                                        <input type="password" asp-for="Password" class="border-radius-5" />                                       
+                                    </div>
+                                    <div>
+                                        <label>Confirm Password <sup style="color: red;">*</sup> <span asp-validation-for="ConfirmPassword" class="error"></span></label>
+                                        <input type="password" asp-for="ConfirmPassword" class="border-radius-5" />                                       
+                                    </div>
                                 </div>
                             </div>
-                            <div class="input-group">
-                                <div>
-                                    <label>User Role</label>
+                            <div class="select-groups">
+                                <div >
+                                    <label>Gender <sup style="color: red;">(Optional)</sup>  <span asp-validation-for="Gender" class="error"></span>></label>
+                                    <select asp-for="Gender">
+                                        <option value="">Select a Gender</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+                                </div>
+                                <div >
+                                    <label>User Role <sup style="color: red;">*</sup> <span asp-validation-for="Role" class="error"></span></label>
                                     <select asp-for="Role">
                                         <option value="">Select a Role</option>
                                         <option value="Admin">Admin</option>
                                         <option value="User">User</option>
                                     </select>
-
-                                    <span asp-validation-for="Role" class="error"></span>
                                 </div>
                             </div>
                         </div>

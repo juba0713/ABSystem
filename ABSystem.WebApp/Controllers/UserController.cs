@@ -28,14 +28,14 @@ namespace ABSystem.WebApp.Controllers
 
             var users = await this._userService.GetUsers();
 
-            return PartialView("~/Views/Admin/UsersList.cshtml", users);
+            return PartialView(CommonConstant.A_USERS_LIST_HTML, users);
         }
 
         [HttpGet]
         [Route("/admin/users-list/add-user")]
         public IActionResult AddUserScreen()
         {
-            return PartialView("~/Views/Admin/AddUser.cshtml");
+            return PartialView(CommonConstant.A_USERS_ADD_HTML);
         }
 
         [HttpPost]
@@ -46,7 +46,7 @@ namespace ABSystem.WebApp.Controllers
             if (!ModelState.IsValid)
             {
 
-                return PartialView("~/Views/Admin/AddUser.cshtml", dto);
+                return PartialView(CommonConstant.A_USERS_ADD_HTML, dto);
             }
 
             try
@@ -55,8 +55,9 @@ namespace ABSystem.WebApp.Controllers
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 ViewData["Error"] = MessageConstant.ERROR;
-                return PartialView("~/Views/Admin/AddUser.cshtml", dto);
+                return PartialView(CommonConstant.A_USERS_ADD_HTML, dto);
             }
             TempData["SuccessMessage"] = MessageConstant.ADDED_USER;
             return RedirectToAction("UsersListScreen");
@@ -76,7 +77,7 @@ namespace ABSystem.WebApp.Controllers
                 return RedirectToAction("UsersListScreen");
             }
 
-            return PartialView("~/Views/Admin/EditUser.cshtml", userDto);
+            return PartialView(CommonConstant.A_USERS_EDIT_HTML, userDto);
         }
 
         [HttpPost]
@@ -87,7 +88,7 @@ namespace ABSystem.WebApp.Controllers
             if (!ModelState.IsValid)
             {
 
-                return PartialView("~/Views/Admin/EditUser.cshtml", dto);
+                return PartialView(CommonConstant.A_USERS_EDIT_HTML, dto);
             }
 
             try
@@ -96,8 +97,9 @@ namespace ABSystem.WebApp.Controllers
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 ViewData["Error"] = MessageConstant.ERROR;
-                return PartialView("~/Views/Admin/EditUser.cshtml", dto);
+                return PartialView(CommonConstant.A_USERS_EDIT_HTML, dto);
             }
             TempData["SuccessMessage"] = MessageConstant.EDITED_USER;
             return RedirectToAction("UsersListScreen");
