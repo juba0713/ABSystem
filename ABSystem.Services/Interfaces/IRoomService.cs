@@ -18,7 +18,7 @@ namespace ABSystem.Services.Interfaces
         /*
          * This method is for getting all the rooms from the database
          */
-        public IEnumerable<Room> GetRooms();
+        public List<RoomDto> GetRooms();
 
         /*
          * This method is for getting a room by its id from the database

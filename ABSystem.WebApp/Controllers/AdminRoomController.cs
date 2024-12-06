@@ -109,5 +109,29 @@ namespace ABSystem.WebApp.Controllers
 
             return RedirectToAction("RoomsListScreen");
         }
+
+        [HttpGet]
+        [Route("/admin/rooms-list/room-details")]
+        public IActionResult RoomDetailsScreen(int roomId)
+        {
+            RoomDto roomDto = null!;
+
+            try
+            {
+                roomDto = this._roomService.GetRoomById(roomId);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, MessageConstant.ROOM_NOT_FOUND);
+            }
+
+            if (roomDto == null)
+            {
+                TempData["ErrorMessage"] = MessageConstant.ROOM_NOT_FOUND;
+                return RedirectToAction("RoomsListScreen");
+            }
+
+            return PartialView(CommonConstant.A_ROOM_DETAILS_HTML, roomDto);
+        }
     }
 }

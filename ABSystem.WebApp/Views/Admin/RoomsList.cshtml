@@ -3,8 +3,8 @@
 *@
 @{
 }
-@using ABSystem.Data.Models;
-@model IEnumerable<Room>;
+@using ABSystem.Services.Dto;
+@model List<RoomDto>;
 
 <html>
 <head>
@@ -107,7 +107,7 @@
                                 {
                                     foreach (var room in Model)
                                     {
-                                        <tr>
+                                        <tr class="rowLink" roomId="@room.Id">
                                             <td>@room.Name</td>
                                             <td>@room.Facility</td>
                                             <td>@room.Capacity</td>
@@ -119,10 +119,15 @@
                                                     <img src="~/icons/edit.svg" alt="edit"/>
                                                     <div>EDIT</div>
                                                 </a>
-                                                <div class="delete-btn action-btn border-radius-5" data-toggle="modal" data-target="#exampleModalCenter" data-id="@room.Id">
-                                                    <img src="~/icons/delete.svg" alt="delete" />
-                                                    <div>DELETE</div>
-                                                </div>
+                                                @if (room.Bookings != null && !room.Bookings.Any())
+                                                {
+                                                    <div class="delete-btn action-btn border-radius-5" data-toggle="modal" data-target="#exampleModalCenter" data-id="@room.Id">
+                                                        <img src="~/icons/delete.svg" alt="delete" />
+                                                        <div class="dbtn">DELETE</div>
+                                                    </div>
+                                                }
+
+                                                
                                             </td>
                                         </tr>
                                     }
@@ -170,7 +175,16 @@
         document.querySelectorAll('.delete-btn').forEach(btn => btn.addEventListener('click', function () {
             document.querySelector("#roomId").setAttribute('value', btn.getAttribute('data-id'));
         }));
+        console.log(@Json.Serialize(@Model));
 
+        document.querySelectorAll('.rowLink').forEach(row => row.addEventListener('click', function (ev) {
+            console.log(ev.srcElement);
+            if (ev.srcElement.classList.contains('action-btn') || ev.srcElement.classList.contains('dbtn')) {
+                return;
+            }
+
+            window.location.href = "/admin/rooms-list/room-details?roomId=" + this.getAttribute('roomId');
+        }));
     </script>
     <script src="~/js/common.js"></script>
 </body>

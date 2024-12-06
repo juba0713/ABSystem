@@ -59,9 +59,12 @@
         public const string A_ROOMS_LIST_HTML = "~/Views/Admin/RoomsList.cshtml";
         public const string A_ROOMS_ADD_HTML = "~/Views/Admin/AddRoom.cshtml";
         public const string A_ROOMS_EDIT_HTML = "~/Views/Admin/EditRoom.cshtml";
+        public const string A_ROOM_DETAILS_HTML = "~/Views/Admin/RoomDetails.cshtml";
 
         public const string A_BOOKS_LIST_HTML = "~/Views/Admin/BooksList.cshtml";
         public const string A_BOOK_DETAILS_HTML = "~/Views/Admin/BookDetails.cshtml";
+
+        public const string A_SETTINGS_HTML = "~/Views/Admin/Settings.cshtml";
         
 
         public const string U_ROOMS_DETAILS_HTML = "~/Views/User/RoomDetails.cshtml";

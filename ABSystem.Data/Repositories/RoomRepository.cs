@@ -48,7 +48,7 @@ namespace ABSystem.Data.Repositories
 
         public IEnumerable<Room> GetRooms()
         {
-            return this._context.Rooms.Where(r => r.IsDeleted == 0).ToList();
+            return this._context.Rooms.Include(r => r.Bookings).Where(r => r.IsDeleted == 0).ToList();
         }
 
         public Room GetRoomByIdWithBookings(int roomId)

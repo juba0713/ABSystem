@@ -46,5 +46,9 @@ namespace ABSystem.Services.Dto
          *  This is DTO for booking
          */
         public UserBookDto UserBookDto { get; set; } = new UserBookDto();
+
+        public DateTime CreatedDate { get; set; }
+
+        public DateTime UpdatedDate { get; set; }
     }
 }
