@@ -231,6 +231,10 @@ namespace ABSystem.Services.Services
             return usersList;
         }
 
-     
+        public async Task<bool> IsEmailUniqueAsync(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            return user == null;
+        }
     }
 }

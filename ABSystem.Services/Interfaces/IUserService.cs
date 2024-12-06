@@ -29,5 +29,7 @@ namespace ABSystem.Services.Interfaces
         public Task DeleteUser(string userId);
 
         public Task<UserDto> GetUserById(string userId);
+
+        public Task<bool> IsEmailUniqueAsync(string email);
     }
 }

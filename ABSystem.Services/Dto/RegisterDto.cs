@@ -19,8 +19,8 @@ namespace ABSystem.Services.Dto
         [StringLength(100, MinimumLength = 6, ErrorMessage = "*" + MessageConstant.PASSWORD_LENGTH)]
         public string? Password { get; set; }
 
-        [Required(ErrorMessage = "*" + MessageConstant.PASSWORD_REQUIRED)]
-        [StringLength(100, MinimumLength = 6, ErrorMessage = "*" + MessageConstant.PASSWORD_LENGTH)]
+        [Required(ErrorMessage = "*" + MessageConstant.CONFIRM_PASSWORD_REQUIRED)]
+        [Compare("Password", ErrorMessage = "*" + MessageConstant.PASSWORD_MISMATCH)]
         public string? ConfirmPassword { get; set; }
 
         [Required(ErrorMessage = "*" + MessageConstant.FIRST_NAME_REQUIRED)]

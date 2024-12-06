@@ -25,9 +25,15 @@ namespace ABSystem.Resources.Constants
 
         public const string EMAIL_FORMAT = "Invalid email address format";
 
+        public const string EMAIL_IN_USE = "Email in use";
+
         public const string PASSWORD_REQUIRED = "Password is required";
 
+        public const string CONFIRM_PASSWORD_REQUIRED = "Confirm Password is required";
+
         public const string PASSWORD_LENGTH = "Password must be between 6 and 100 characters";
+
+        public const string PASSWORD_MISMATCH = "Passwords do not match.";
 
         public const string FIRST_NAME_REQUIRED = "First name is required";
 

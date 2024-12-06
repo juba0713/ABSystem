@@ -35,6 +35,8 @@ namespace ABSystem.Services.Dto
 
         public string? Address { get; set; }
 
+        [Required(ErrorMessage = "*" + MessageConstant.CONFIRM_PASSWORD_REQUIRED)]
+        [Compare("Password", ErrorMessage = "*" + MessageConstant.PASSWORD_MISMATCH)]
         public string? ConfirmPassword {  get; set; }
 
         public string? Gender {  get; set; }

@@ -102,6 +102,14 @@ namespace ABSystem.WebApp.Controllers
             }
             try
             {
+
+                // Check for email uniqueness
+                if (!await _userService.IsEmailUniqueAsync(dto.Email))
+                {
+                    ModelState.AddModelError("Email", "*Email is already in use.");
+                    return PartialView("~/Views/Register.cshtml", dto);
+                }
+
                 await _userService.RegisterUser(dto); 
             }
             catch (Exception ex)
