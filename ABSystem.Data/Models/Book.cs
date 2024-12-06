@@ -49,5 +49,15 @@ namespace ABSystem.Data.Models
         public DateTime UpdateDate {  get; set; }
 
         public int IsDeleted { get; set; }
+
+
+
+        public bool IsRecurrence { get; set; }
+
+        public string RecurrenceType { get; set; } = string.Empty;
+
+        public int RecurrenceNumber { get; set; }
+
+        public string? RecurrenceGroupId {  get; set; }
     }
 }

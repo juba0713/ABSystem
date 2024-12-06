@@ -45,16 +45,29 @@ namespace ABSystem.Data.Repositories
         public IEnumerable<Book> GetBooks()
         {
 
+
             return this._context.Books
-                .Include(b => b.Room) 
+                .Include(b => b.Room)
+                .Where(b => b.IsDeleted == 0 && (!b.IsRecurrence || b.RecurrenceNumber == 1))
+                .OrderBy(b => b.BookDate)
                 .ToList();
         }
-
+        
         public IEnumerable<Book> GetBooksByUserId(string userId)
         {
             return this._context.Books
                 .Include(b => b.Room)
-                .Where(book => book.UserId == userId)
+                .Where(b => b.IsDeleted == 0 && (!b.IsRecurrence || b.RecurrenceNumber == 1) && b.UserId.Equals(userId))
+                .OrderBy(b => b.BookDate)
+                .ToList();
+        }
+
+        public IEnumerable<Book> GetCalendarBooks(string userId)
+        {
+            return this._context.Books
+                .Include(b => b.Room)
+                .Where(b => b.IsDeleted == 0 && b.UserId.Equals(userId))
+                .OrderBy(b => b.BookDate)
                 .ToList();
         }
 

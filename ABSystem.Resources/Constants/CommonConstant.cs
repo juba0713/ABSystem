@@ -38,6 +38,14 @@
 
         public const string COMPLETED = "Completed";
 
+        public const string NO_RECURRENCE = "NoRecurrence";
+
+        public const string WEEKLY_RECURRENCE = "WeeklyRecurrence";
+
+        public const string MONTHLY_RECURRENCE = "MonthlyRecurrence";
+
+        public const string YEARLY_RECURRENCE = "YearlyRecurrence";
+
 
 
         /*

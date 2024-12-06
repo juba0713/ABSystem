@@ -74,8 +74,16 @@ namespace ABSystem.WebApp.Controllers
             Console.WriteLine("Address: " +  userBookDto.Address);
             Console.WriteLine("StartTime: " +  userBookDto.StartTime);
             Console.WriteLine("EndTime: " +  userBookDto.EndTime);
+            Console.WriteLine("Is it currence: " +  userBookDto.IsRecurrence);
+            Console.WriteLine("Recurrence Type: " +  userBookDto.RecurrenceType);
+            Console.WriteLine("Recurrence Repeat: " +  userBookDto.RecurrenceRepeat);
             Console.WriteLine("Request: " +  userBookDto.Request);
             Console.WriteLine("BookDate: " +  userBookDto.BookDate);
+            foreach(var date in userBookDto.BookDates)
+            {
+                Console.WriteLine("BookDates: " + date);
+            }
+            
 
             return RedirectToAction("RoomsListScreen", "UserRoom");
         }
