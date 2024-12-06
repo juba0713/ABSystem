@@ -1,9 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-<html>
+﻿<html>
 <head>
     <title>Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +6,88 @@
     <link rel="stylesheet" href="~/css/header.css" />
     <link rel="stylesheet" href="~/css/adminsidebar.css" />
     <link rel="stylesheet" href="~/css/admin/dashboard.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
+<style>
+    .dashboard-data {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1vw;
+        padding: 0.2vw;
+        background: transparent;
+        border-radius: 0.5vw;
+        box-sizing: border-box;
+    }
+
+    .data-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5vw;
+        font-size: 20px;
+        padding: 0.5vw 1vw;
+        background: transparent;
+        text-align: center;
+        flex: 1;
+        position: relative;
+        margin: 0;
+    }
+
+        .data-item:not(:last-child) {
+            border-right: 1px solid #ccc;
+        }
+
+        .data-item img {
+            width: 20px;
+            height: 20px;
+        }
+
+    .label {
+        font-size: 16px;
+    }
+
+    .value {
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .dashboard-data .data-item {
+        margin-bottom: 0.5vw;
+    }
+
+    .m-booking {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 1vw;
+        gap: 1vw;
+        background: transparent;
+        border-radius: 0.5vw;
+        box-sizing: border-box;
+    }
+
+    #monthlyBookingChart {
+        max-width: 1200px;
+        max-height: 250px;
+        width: 100%;
+    }
+
+    .content-horizontal {
+        display: flex;
+        gap: 2vw;
+        justify-content: flex-start;
+    }
+
+    .activities, .bookings {
+        padding: 1vw;
+        background: transparent;
+        border-radius: 0.5vw;
+        box-sizing: border-box;
+    }
+</style>
+
 <body>
     <div class="container">
         <partial name="Header" />
@@ -22,10 +98,108 @@
                     <div>Dashboard</div>
                 </div>
                 <div class="sub-content">
+                    <div class="dashboard-data">
+                        <div class="data-item">
+                            <img src="path/to/users-icon.png" alt="Users">
+                            <div class="label">Users</div>
+                            <div class="value">1000</div>
+                        </div>
+                        <div class="data-item">
+                            <img src="path/to/rooms-icon.png" alt="Rooms">
+                            <div class="label">Rooms</div>
+                            <div class="value">1000</div>
+                        </div>
+                        <div class="data-item">
+                            <img src="path/to/bookings-icon.png" alt="Bookings">
+                            <div class="label">Bookings</div>
+                            <div class="value">1000</div>
+                        </div>
+                        <div class="data-item">
+                            <img src="path/to/pending-icon.png" alt="Pending">
+                            <div class="label">Pending</div>
+                            <div class="value">1000</div>
+                        </div>
+                        <div class="data-item">
+                            <img src="path/to/completed-icon.png" alt="Completed">
+                            <div class="label">Completed</div>
+                            <div class="value">1000</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sub-content">
+                    <div>Monthly Booking</div>
+                    <div class="m-booking">
+                        <canvas id="monthlyBookingChart"></canvas>
+                    </div>
+                </div>
+                <div class="content-horizontal">
+                    <div class="sub-content">
+                        <div class="activities">
+                            <div>Activities</div>
+                            test
+                        </div>
+                    </div>
+                    <div class="sub-content">
+                        <div class="bookings">
+                            <div>Bookings</div>
+                            test
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
     <script src="~/js/common.js"></script>
+
+    <script>
+        const monthlyData = {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+            datasets: [{
+                label: 'Bookings',
+                data: [1000, 1200, 1500, 1300, 1100, 1400, 1150, 1250, 1400, 1300, 1550, 1600],
+                backgroundColor: [
+                    '#BEE9E8', '#62B6CB', '#F4373A', '#BEE9E8', '#62B6CB', '#F4373A',
+                    '#BEE9E8', '#62B6CB', '#F4373A', '#BEE9E8', '#62B6CB', '#F4373A'
+                ],
+                borderColor: [
+                    '#BEE9E8', '#62B6CB', '#F4373A', '#BEE9E8', '#62B6CB', '#F4373A',
+                    '#BEE9E8', '#62B6CB', '#F4373A', '#BEE9E8', '#62B6CB', '#F4373A'
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        const config = {
+            type: 'bar',
+            data: monthlyData,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        enabled: true
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: {
+                            autoSkip: false,
+                            maxRotation: 90,
+                            minRotation: 45
+                        }
+                    },
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        };
+
+        const ctx = document.getElementById('monthlyBookingChart').getContext('2d');
+        const monthlyBookingChart = new Chart(ctx, config);
+    </script>
 </body>
 </html>

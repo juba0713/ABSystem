@@ -1,4 +1,4 @@
-﻿using ABSystem.Data.Interfaces;
+using ABSystem.Data.Interfaces;
 using ABSystem.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
