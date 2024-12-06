@@ -114,6 +114,14 @@ namespace ABSystem.WebApp.Controllers
 
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("/user_profile")]
+        public IActionResult Profile()
+        {
+            return PartialView("~/Views/User/Profile.cshtml");
+        }
+
         [AllowAnonymous]
         public async Task<IActionResult> Logout()
         {
