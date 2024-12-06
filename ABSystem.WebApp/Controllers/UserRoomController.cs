@@ -24,21 +24,25 @@ namespace ABSystem.WebApp.Controllers
         public IActionResult RoomsListScreen()
         {
 
-            List<RoomDto> rooms = null;
+            ViewDto viewDto = new ViewDto();
 
             RoomListDto roomListDto = new RoomListDto();
 
             try
             {
-                rooms = this._roomService.GetRoomsWithImage();
+                var rooms = this._roomService.GetRoomsWithImage();
+                var popularRooms = this._roomService.GetPopularRoomsWithImage();
+
+                viewDto.Rooms = rooms;
+                viewDto.PopularRooms = popularRooms;
             }
             catch(Exception ex)
             {
                 _logger.LogError(ex, MessageConstant.ROOM_NOT_FOUND);
             }
 
-            roomListDto.Rooms = rooms;
-            return PartialView("~/Views/User/RoomList.cshtml", roomListDto);
+            //roomListDto.Rooms = rooms;
+            return PartialView("~/Views/User/RoomList.cshtml", viewDto);
         }
 
         [HttpGet]

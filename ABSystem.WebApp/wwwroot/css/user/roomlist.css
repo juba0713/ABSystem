@@ -67,15 +67,15 @@
 .room-list{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-around; 
     width: 100%;
     gap: 1vw;
     flex-wrap: wrap;
 }
 
     .room img {
-        width: 12vw;
-        height: 10vw;
+        width: 20vw;
+        height: 15vw;
     }
 
     .room .room-name{

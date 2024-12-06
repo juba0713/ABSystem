@@ -59,5 +59,14 @@ namespace ABSystem.Data.Repositories
                 .FirstOrDefault()!;
         }
 
+        public IEnumerable<Room> GetPopularRooms()
+        {
+            return this._context.Rooms
+        .Include(r => r.Bookings) // Include related bookings
+        .Where(r => r.IsDeleted == 0) // Exclude deleted rooms
+        .OrderByDescending(r => r.Bookings.Count) // Order by the number of bookings
+        .Take(4) // Limit to top 4 rooms
+        .ToList(); // Execute the query and return as a list
+        }
     }
 }

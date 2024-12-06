@@ -12,11 +12,14 @@ namespace ABSystem.WebApp.Controllers
     public class UserBookController : Controller
     {
         private readonly IBookService _bookService;
+        private readonly INotificationService _notificationService;
         private readonly ILogger<UserBookController> _logger;
 
-        public UserBookController (ILogger<UserBookController> logger, IBookService bookService) {
+        public UserBookController (ILogger<UserBookController> logger, IBookService bookService, INotificationService notificationService)
+        {
             _bookService = bookService;
             _logger = logger;
+            _notificationService = notificationService; 
         }
 
         [HttpGet]
@@ -90,7 +93,7 @@ namespace ABSystem.WebApp.Controllers
 
                 if (read)
                 {
-                    //this._notificationService.UpdateNotificationRead(notifyId);
+                    this._notificationService.UpdateNotificationRead(notifyId);
                 }
             }
             catch (Exception ex)

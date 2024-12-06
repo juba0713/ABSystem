@@ -25,6 +25,16 @@ chatgpt-sidebar, chatgpt-sidebar-popups {
     margin: 0;
 }
 
+.admin-content {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 1vw;
+    box-sizing: border-box;
+    gap: 1vw;
+    overflow: hidden;
+}
+
 .content {
     height: 100%;
     display: flex;
@@ -52,6 +62,16 @@ main {
     overflow: auto;
     position: relative;
 
+}
+
+.admin-main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
+    width: 100%;
+    background: none;
+    position: relative;
+    overflow: hidden;
 }
 
 .action-btn {
@@ -96,16 +116,18 @@ body.dark-mode {
     color: #000000;
 }
 
-body.dark-mode .sub-header,
-body.dark-mode .sub-content,
-body.dark-mode .booking,
-body.dark-mode .book,
-body.dark-mode .booking-content,
-body.dark-mode .popular-room,
-body.dark-mode .room-details{
-    background-color: #191919;
-    color: #ffffff;
-}
+    body.dark-mode .sub-header,
+    body.dark-mode .sub-content,
+    body.dark-mode .booking,
+    body.dark-mode .book,
+    body.dark-mode .booking-content,
+    body.dark-mode .popular-room,
+    body.dark-mode .room-details,
+    body.dark-mode .dashboard-data,
+    body.dark-mode .dashboard-data-1 {
+        background-color: #191919;
+        color: #ffffff;
+    }
 
 body.dark-mode .vertical-line {
     border-top: 0.05vw dashed #fff;
@@ -140,10 +162,11 @@ body.dark-mode select{
     color: #fff;
 }
 
-body.dark-mode .book svg path,
-body.dark-mode .details-container svg path{
-    fill: #fff !important;
-}
+    body.dark-mode .book svg path,
+    body.dark-mode .details-container svg path,
+    body.dark-mode .dashboard-data svg path{
+        fill: #fff !important;
+    }
 
 
 .sub-header,
@@ -166,7 +189,9 @@ textarea,
 .preview-container,
 .modal-body,
 .notification-title,
-.items {
+.items,
+.dashboard-data,
+.dashboard-data-1 {
     border-radius: 0.2vw;
     font-size: 0.8vw;
 }
@@ -179,12 +204,11 @@ select {
     height: 2vw;
 }
 
-select,
 input{
     height: 2vw;
     padding: 0.521vw;
     border: 0.052vw solid #A9A9A9;
-    box-sizing: border-box;
+    box-sizing: border-box; 
 }
 
 textarea {
@@ -211,9 +235,18 @@ select::-ms-expand {
     display: none;
 }
 
+.table-content{
+    overflow-y: auto;
+}
+
+thead tr{
+    position: sticky;
+    top: 0;
+}
 
 table{
     font-size: 0.8vw;
+    position: relative;
 }
 
 td,

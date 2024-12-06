@@ -7,7 +7,7 @@
 @inject SignInManager<User> signInManager
 @inject UserManager<User> userManager
 @inject RoleManager<IdentityRole> roleManager
-@model RoomListDto
+@model ViewDto
 @{
     // Get the logged-in user using UserManager
     User loggedInUser = await userManager.FindByEmailAsync(User.Identity.Name ?? "");
@@ -71,77 +71,33 @@
                 </div>
                 <div class="popular-room">
                     <div class="popular-title"><span>Popular</span><a href="/">View All</a></div>
-                    <div class="room-list">
-                        <div class="room">
-                            <img src="~/images/noimage.png" />
-                            <div class="room-details">
-                                <div>
-                                    <div class="room-name">Room1</div>
-                                    <div class="facility-name">Facility</div>
-                                </div>
-                                <div>
-                                    <div>1</div>
-                                </div>
-                            </div>
-                        </div> <div class="room">
-                            <img src="~/images/noimage.png" />
-                            <div class="room-details">
-                                <div>
-                                    <div class="room-name">Room1</div>
-                                    <div class="facility-name">Facility</div>
-                                </div>
-                                <div>
-                                    <div>1</div>
-                                </div>
-                            </div>
-                        </div> <div class="room">
-                            <img src="~/images/noimage.png" />
-                            <div class="room-details">
-                                <div>
-                                    <div class="room-name">Room1</div>
-                                    <div class="facility-name">Facility</div>
-                                </div>
-                                <div>
-                                    <div>1</div>
-                                </div>
-                            </div>
-                        </div> <div class="room">
-                            <img src="~/images/noimage.png" />
-                            <div class="room-details">
-                                <div>
-                                    <div class="room-name">Room1</div>
-                                    <div class="facility-name">Facility</div>
-                                </div>
-                                <div>
-                                    <div>1</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="room">
-                            <img src="~/images/noimage.png" />
-                            <div class="room-details">
-                                <div>
-                                    <div class="room-name">Room1</div>
-                                    <div class="facility-name">Facility</div>
-                                </div>
-                                <div>
-                                    <div>1</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="room">
-                            <img src="~/images/noimage.png" />
-                            <div class="room-details">
-                                <div>
-                                    <div class="room-name">Room1</div>
-                                    <div class="facility-name">Facility</div>
-                                </div>
-                                <div>
-                                    <div>1</div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="room-list">                       
+                        @if (Model.PopularRooms != null && Model.PopularRooms.Any())
+                        {
+                            foreach (var room in Model.PopularRooms)
+                            {
+                                <a class="room" href="/rooms/room-details?roomId=@room.Id">
+                                    <img src="@room.ImagePath" />
+                                    <div class="room-details">
+                                        <div>
+                                            <div class="room-name">@room.Name</div>
+                                            <div class="facility-name">@room.Facility</div>
+                                        </div>
+                                        <div>
+                                            <div>@room.Capacity</div>
+                                        </div>
+                                    </div>
+                                </a>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="7" class="text-center">No rooms found.</td>
+                            </tr>
+                        }
                     </div>
+                    
                     
                 </div>
                 <div class="room-content">
