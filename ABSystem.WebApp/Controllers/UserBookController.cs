@@ -20,10 +20,23 @@ namespace ABSystem.WebApp.Controllers
         }
 
         [HttpGet]
-        [Route("/book")]
+        [Route("/books-list")]
         public IActionResult BookingListScreen()
         {
-            return PartialView("~/Views/User/RoomList.cshtml");
+            ViewDto viewDto = new ViewDto();
+
+            try
+            {
+                var books = this._bookService.GetBooksByUserId();
+
+                viewDto.UserBooks = books;
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError(ex, MessageConstant.BOOK_RETRIEVAL_ERROR);
+            }
+
+            return PartialView(CommonConstant.U_BOOKS_LIST_HTML, viewDto);
         }
 
         [HttpPost]
@@ -64,6 +77,30 @@ namespace ABSystem.WebApp.Controllers
             return RedirectToAction("RoomsListScreen", "UserRoom");
         }
 
-        
+        [HttpGet]
+        [Route("/books-list/book-details")]
+        public IActionResult BookingDetailsScreen(int bookId, int notifyId = 0, bool read = false)
+        {
+
+            UserBookDto book = null!;
+
+            try
+            {
+                book = this._bookService.GetBookById(bookId);
+
+                if (read)
+                {
+                    //this._notificationService.UpdateNotificationRead(notifyId);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, MessageConstant.BOOK_RETRIEVAL_ERROR);
+            }
+
+
+            return PartialView(CommonConstant.A_BOOK_DETAILS_HTML, book);
+        }
+
     }
 }

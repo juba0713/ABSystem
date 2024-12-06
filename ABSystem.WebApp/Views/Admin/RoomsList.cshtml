@@ -23,7 +23,7 @@
 </head>
 <body>
     <div class="container">
-        @if (TempData["SuccessMessage"] != null)
+        @if (TempData.Peek("SuccessMessage") != null)
         {
             <div class="alert alert-success">
                 <div class="icon__wrapper">

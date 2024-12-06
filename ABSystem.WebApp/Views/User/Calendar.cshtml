@@ -1,0 +1,129 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using ABSystem.Services.Dto
+@using ABSystem.Resources.Constants
+@model ViewDto
+<html>
+<head>
+    <title>Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/common.css" />
+    <link rel="stylesheet" href="~/css/header.css" />
+    <link rel="stylesheet" href="~/css/sidebar.css" />
+    <link rel="stylesheet" href="~/css/user/bookslist.css" />
+</head>
+<body>
+    <div class="container">
+        <partial name="Header" />
+        <main>
+            <partial name="Sidebar" />
+            <div class="main-content">
+                <div class="sub-header">
+                    Bookings
+                    <a class="action-btn back-btn border-radius-5" href="/admin/users-list"><img src="~/icons/back.svg" alt="add" />BACK</a>
+                </div>
+                <div class="content">
+                    <form class="main-form">
+                        <div class="filter-btn">
+                            <button class="action-btn">All (0)</button>
+                            <button class="action-btn">Accepted (0)</button>
+                            <button class="action-btn">Rejected (0)</button>
+                            <button class="action-btn">Canceled (0)</button>
+                        </div>
+                        <div class="sort-btn">
+                            <div>
+                                <div class="sort-by">Sort by</div>
+                                <select>
+                                    <option>Name (Ascending)</option>
+                                    <option>Name (Descending)</option>
+                                    <option>Date (Ascending)</option>
+                                    <option>Date (Descending)</option>
+                                </select>
+                            </div>
+                            <div class="items">
+                                11 Items
+                            </div>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Room</th>
+                                    <th>User</th>
+                                    <th>Date</th>
+                                    <th>Start Time</th>
+                                    <th>End Time</th>
+                                    <th>Status</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.UserBooks != null && Model.UserBooks.Any())
+                                {
+                                    foreach (var book in Model.UserBooks)
+                                    {
+                                        <tr class="rowLink" bookId="@book.Id">
+                                            <td>@book.Id</td>
+                                            <td>@book.Room.Name</td>
+                                            <td>@book.FirstName @book.LastName</td>
+                                            <td>@book.BookDate.ToString("MMM dd, yyyy")</td>
+                                            <td>@(new DateTime(book.StartTime.Ticks).ToString("hh:mm tt"))</td>
+                                            <td>@(new DateTime(book.EndTime.Ticks).ToString("hh:mm tt"))</td>
+                                            <td>
+                                                @if (book.Status == CommonConstant.PENDING)
+                                                {
+                                                    <div class="status pending">@CommonConstant.PENDING</div>
+                                                }
+                                                else if (book.Status == CommonConstant.ACCEPTED)
+                                                {
+                                                    <div class="status accepted">@CommonConstant.ACCEPTED</div>
+                                                }
+                                                else if (book.Status == CommonConstant.REJECTED)
+                                                {
+                                                    <div class="status rejected">@CommonConstant.REJECTED</div>
+                                                }
+                                                else if (book.Status == CommonConstant.CANCELED)
+                                                {
+                                                    <div class="status pending">@CommonConstant.CANCELED</div>
+                                                }
+                                                else if (book.Status == CommonConstant.COMPLETED)
+                                                {
+                                                    <div class="status pending">@CommonConstant.COMPLETED</div>
+                                                }
+                                            </td>
+                                            @if (book.Status == CommonConstant.PENDING)
+                                            {
+                                                <td>
+                                                    <button class="cancel-btn action-btn border-radius-5" data-toggle="modal" bookId="@book.Id" data-target="#acceptModal" name="approve">
+                                                        <img src="~/icons/edit.svg" alt="cancel" />
+                                                        CANCEL
+                                                    </button>
+                                                </td>
+                                            }
+                                            else
+                                            {
+                                                <td></td>
+                                            }
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="7" class="text-center">No rooms found.</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="~/js/common.js"></script>
+    <script>
+        console.log(@Json.Serialize(@Model));
+    </script>
+</body>
+</html>

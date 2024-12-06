@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Data;
 using ABSystem.WebApp;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -70,6 +71,9 @@ builder.Services.AddControllers().AddJsonOptions(options =>
     options.JsonSerializerOptions.ReferenceHandler = null;
 });
 
+builder.Services.Configure<CookieTempDataProviderOptions>(options => {
+    options.Cookie.IsEssential = true;
+});
 
 
 var app = builder.Build();

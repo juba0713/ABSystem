@@ -17,5 +17,7 @@ namespace ABSystem.Services.Dto
          *  This is Dto for Showing Booking Details
          */
         public RoomDto RoomDto { get; set; } = new RoomDto();
+
+        public IEnumerable<UserBookDto> UserBooks { get; set; } = new List<UserBookDto>();
     }
 }

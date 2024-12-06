@@ -58,5 +58,7 @@
 
         public const string U_ROOMS_DETAILS_HTML = "~/Views/User/RoomDetails.cshtml";
         public const string U_BOOKS_LIST_HTML = "~/Views/User/BooksList.cshtml";
+        public const string U_BOOK_DETAILS_HTML = "~/Views/User/BookDetails.cshtml";
+        public const string U_CALENDAR_HTML = "~/Views/User/Calendar.cshtml";
     }
 }
