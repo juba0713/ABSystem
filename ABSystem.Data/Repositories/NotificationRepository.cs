@@ -23,6 +23,11 @@ namespace ABSystem.Data.Repositories
             this._context.SaveChanges();
         }
 
+        public IEnumerable<Notification> GetAllNotifications()
+        {
+            return this._context.Notifications.OrderByDescending(o => o.CreatedDate).Take(5).ToList();
+        }
+
         public Notification GetNotificationByNotificationId(int notificationId)
         {
             return this._context.Notifications.Find(notificationId)!;
@@ -41,6 +46,11 @@ namespace ABSystem.Data.Repositories
                    .Where(notification => notification.UserId == userId) 
                    .OrderByDescending(notification => notification.CreatedDate)
                    .ToList(); 
+        }
+
+        public IEnumerable<Notification> GetRecentlyUserNotifications()
+        {
+            return this._context.Notifications.Where(n => n.UserId.Equals("")).OrderByDescending(o => o.CreatedDate).Take(5).ToList();
         }
 
         public void UpdateNotificationRead(Notification notification)

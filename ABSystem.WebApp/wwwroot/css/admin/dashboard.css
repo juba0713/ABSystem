@@ -116,3 +116,14 @@
     border-radius: 0.5vw;
     box-sizing: border-box;
 }
+
+.notification-column{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5vw; 
+}
+
+.notification-row{
+    display: flex;
+    gap: 1vw;
+}

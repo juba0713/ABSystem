@@ -1,8 +1,5 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@using ABSystem.Services.Dto
+@model ViewDto
 <html>
 <head>
     <title>Dashboard</title>
@@ -11,168 +8,208 @@
     <link rel="stylesheet" href="~/css/header.css" />
     <link rel="stylesheet" href="~/css/adminsidebar.css" />
     <link rel="stylesheet" href="~/css/admin/dashboard.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<style>
-    .dashboard-data {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 1vw;
-        padding: 0.2vw;
-        background: transparent;
-        border-radius: 0.5vw;
-        box-sizing: border-box;
-    }
 
-    .data-item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 0.5vw;
-        font-size: 1.04vw;
-        padding: 0.5vw 1vw;
-        background: transparent;
-        text-align: center;
-        flex: 1;
-        position: relative;
-    }
-
-        .data-item:not(:last-child) {
-            border-right: 0.05vw solid #ccc;
-        }
-
-        .data-item img {
-            width: 1.04vw;
-            height: 1.04vw;
-        }
-
-    .label {
-        font-size: 0.83vw;
-    }
-
-    .value {
-        font-size: 1.25vw;
-        font-weight: bold;
-    }
-
-    .dashboard-data .data-item {
-        margin-bottom: 0.5vw;
-    }
-</style>
 <body>
     <div class="container">
         <partial name="Header" />
-        <div class="content">
+        <div class="admin-content">
             <partial name="AdminSidebar" />
-            <div class="main-content">
+            <div class="admin-main-content">
                 <div class="sub-header">
-                    <div>Dashboard (SuperAdmin)</div>
+                    <div>Dashboard</div>
                 </div>
-                <div class="sub-content">
+                <div class="sub-content-dashboard">
                     <div class="dashboard-data">
                         <div class="data-item">
-                            <img src="path/to/users-icon.png" alt="Users">
-                            <div class="label">Users</div>
-                            <div class="value">1000</div>
+                            <div>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M9 11C11.2091 11 13 9.20914 13 7C13 4.79086 11.2091 3 9 3C6.79086 3 5 4.79086 5 7C5 9.20914 6.79086 11 9 11Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M23 21.0009V19.0009C22.9993 18.1146 22.7044 17.2536 22.1614 16.5532C21.6184 15.8527 20.8581 15.3524 20 15.1309" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M16 3.13086C16.8604 3.35116 17.623 3.85156 18.1676 4.55317C18.7122 5.25478 19.0078 6.11769 19.0078 7.00586C19.0078 7.89403 18.7122 8.75694 18.1676 9.45855C17.623 10.1602 16.8604 10.6606 16 10.8809" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+
+                            
+                                <span class="label">Users</span>
+                                
+                            </div>
+                            <div class="value">@Model.CountUsers</div>
                         </div>
                         <div class="data-item">
-                            <img src="path/to/rooms-icon.png" alt="Rooms">
-                            <div class="label">Rooms</div>
-                            <div class="value">1000</div>
+                            <div>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M21 15.9999V7.9999C20.9996 7.64918 20.9071 7.30471 20.7315 7.00106C20.556 6.69742 20.3037 6.44526 20 6.2699L13 2.2699C12.696 2.09437 12.3511 2.00195 12 2.00195C11.6489 2.00195 11.304 2.09437 11 2.2699L4 6.2699C3.69626 6.44526 3.44398 6.69742 3.26846 7.00106C3.09294 7.30471 3.00036 7.64918 3 7.9999V15.9999C3.00036 16.3506 3.09294 16.6951 3.26846 16.9987C3.44398 17.3024 3.69626 17.5545 4 17.7299L11 21.7299C11.304 21.9054 11.6489 21.9979 12 21.9979C12.3511 21.9979 12.696 21.9054 13 21.7299L20 17.7299C20.3037 17.5545 20.556 17.3024 20.7315 16.9987C20.9071 16.6951 20.9996 16.3506 21 15.9999Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M7.5 4.21094L12 6.81094L16.5 4.21094" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M7.5 19.79V14.6L3 12" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M21 12L16.5 14.6V19.79" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M3.26953 6.96094L11.9995 12.0109L20.7295 6.96094" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M12 22.08V12" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+
+                            
+                                <div class="label">Rooms</div>
+                                
+                            </div>         
+                            <span class="value">@Model.CountRooms</span>
                         </div>
                         <div class="data-item">
-                            <img src="path/to/bookings-icon.png" alt="Bookings">
-                            <div class="label">Bookings</div>
-                            <div class="value">1000</div>
+                            <div>
+                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M31.6667 31.666H8.33333V13.3327H31.6667M26.6667 1.66602V4.99935H13.3333V1.66602H10V4.99935H8.33333C6.48333 4.99935 5 6.48268 5 8.33268V31.666C5 32.5501 5.35119 33.3979 5.97631 34.023C6.60143 34.6482 7.44928 34.9993 8.33333 34.9993H31.6667C32.5507 34.9993 33.3986 34.6482 34.0237 34.023C34.6488 33.3979 35 32.5501 35 31.666V8.33268C35 7.44863 34.6488 6.60078 34.0237 5.97566C33.3986 5.35054 32.5507 4.99935 31.6667 4.99935H30V1.66602M28.3333 19.9993H20V28.3327H28.3333V19.9993Z" fill="black" />
+                            </svg>                        
+                                <span class="label">Bookings</span>                              
+                            </div>        
+                            <div class="value">@Model.CountBookings</div>
                         </div>
                         <div class="data-item">
-                            <img src="path/to/pending-icon.png" alt="Pending">
-                            <div class="label">Pending</div>
-                            <div class="value">1000</div>
+                            <div>
+                                <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12.4453 22.7578C17.9682 22.7578 22.4453 18.2807 22.4453 12.7578C22.4453 7.23496 17.9682 2.75781 12.4453 2.75781C6.92246 2.75781 2.44531 7.23496 2.44531 12.7578C2.44531 18.2807 6.92246 22.7578 12.4453 22.7578Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M12.4453 6.75781V12.7578L16.4453 14.7578" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>                           
+                                <span class="label">Pending</span>                             
+                            </div>    
+                            <div class="value">@Model.CountPendingBookings</div>
                         </div>
                         <div class="data-item">
-                            <img src="path/to/completed-icon.png" alt="Completed">
-                            <div class="label">Completed</div>
-                            <div class="value">1000</div>
+                            <div>
+                                <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M22.3633 11.4715V12.3915C22.3621 14.5479 21.6638 16.6461 20.3726 18.3733C19.0814 20.1004 17.2666 21.3639 15.1986 21.9754C13.1307 22.5868 10.9205 22.5134 8.89775 21.7661C6.87496 21.0187 5.14794 19.6376 3.97424 17.8285C2.80055 16.0195 2.24307 13.8795 2.38496 11.7278C2.52684 9.57603 3.36049 7.52779 4.76156 5.88854C6.16263 4.24929 8.05607 3.10685 10.1595 2.63161C12.2629 2.15638 14.4635 2.3738 16.4333 3.25147" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M22.3633 4.3916L12.3633 14.4016L9.36328 11.4016" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+
+                                <span class="label">Accepted</span>
+                            </div>
+                            <div class="value">@Model.CountAcceptedBookings</div>
+                        </div>
+                        <div class="data-item"> 
+                            <div>
+                                <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12.4277 22.1875C17.9506 22.1875 22.4277 17.7103 22.4277 12.1875C22.4277 6.66465 17.9506 2.1875 12.4277 2.1875C6.90489 2.1875 2.42773 6.66465 2.42773 12.1875C2.42773 17.7103 6.90489 22.1875 12.4277 22.1875Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M15.4277 9.1875L9.42773 15.1875" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M9.42773 9.1875L15.4277 15.1875" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+
+                            
+                                <span class="label">Rejected</span>
+                                
+                            </div>
+                            <div class="value">@Model.CountRejectedBookings</div>
                         </div>
                     </div>
-                </div>
-                <div class="sub-content">
-                    Recently Created User
-                    <table>
-                        <tr>
-                            <td>1</td>
-                            <td>Sample User</td>
-                            <td>sample@email.com</td>
-                            <td>admin</td>
-                            <td>admin</td>
-                            <td>10/05/2024</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Sample User</td>
-                            <td>sample@email.com</td>
-                            <td>admin</td>
-                            <td>admin</td>
-                            <td>10/05/2024</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Sample User</td>
-                            <td>sample@email.com</td>
-                            <td>admin</td>
-                            <td>admin</td>
-                            <td>10/05/2024</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Sample User</td>
-                            <td>sample@email.com</td>
-                            <td>admin</td>
-                            <td>admin</td>
-                            <td>10/05/2024</td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="sub-content">
-                    Recently Booked Room
-                    <table>
-                        <tr>
-                            <td>1</td>
-                            <td>Greatest Room</td>
-                            <td>1 Hour</td>
-                            <td>October 10, 2024</td>
-                            <td>Sample User</td>
-                            <td>Pending</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Greatest Room</td>
-                            <td>1 Hour</td>
-                            <td>October 10, 2024</td>
-                            <td>Sample User</td>
-                            <td>Pending</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Greatest Room</td>
-                            <td>1 Hour</td>
-                            <td>October 10, 2024</td>
-                            <td>Sample User</td>
-                            <td>Pending</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Greatest Room</td>
-                            <td>1 Hour</td>
-                            <td>October 10, 2024</td>
-                            <td>Sample User</td>
-                            <td>Pending</td>
-                        </tr>
-                    </table>
+                    <div class="dashboard-data-1">
+                        <div>Recently Activities</div>
+                        <div class="notification-column">
+                            @if (Model.Notifications != null && Model.Notifications.Any())
+                            {
+                                foreach (var notification in Model.Notifications)
+                                {
+                                    <div class="notification-row">
+                                    <div>@notification.CreatedDate</div>
+                                    <div>@notification.Message</div>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="dashboard-data-1">
+                        <div>Recently Booking</div>
+                        <div class="notification-column">
+                            @if (Model.UserNotifications != null && Model.UserNotifications.Any())
+                            {
+                                foreach (var notification in Model.UserNotifications)
+                                {
+                                    <div class="notification-row">
+                                        <div>@notification.CreatedDate</div>
+                                        <div>@notification.Message</div>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="dashboard-data-1">
+                        <div>Recently Created User</div>
+                        <div class="m-booking">
+                            <canvas id="monthlyBookingChart"></canvas>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script src="~/js/common.js"></script>
+    <script>
+        console.log(@Json.Serialize(@Model));
+
+
+    </script>
+    <script>
+
+        const dto = @Json.Serialize(@Model);
+
+        const monthlyData = {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+            datasets: [{
+                label: 'Bookings',
+                data: [
+                    dto.monthlyCountBookings.janBookingCount,
+                    dto.monthlyCountBookings. febBookingCount,
+                    dto.monthlyCountBookings.marBookingCount,
+                    dto.monthlyCountBookings.aprBookingCount,
+                    dto.monthlyCountBookings.mayBookingCount,
+                    dto.monthlyCountBookings.junBookingCount,
+                    dto.monthlyCountBookings.julBookingCount,
+                    dto.monthlyCountBookings.augBookingCount,
+                    dto.monthlyCountBookings.sepBookingCount,
+                    dto.monthlyCountBookings.octBookingCount,
+                    dto.monthlyCountBookings.novBookingCount,
+                    dto.monthlyCountBookings.decBookingCount,             
+                ],
+                backgroundColor: [
+                    '#BEE9E8', '#62B6CB', '#F4373A', '#BEE9E8', '#62B6CB', '#F4373A',
+                    '#BEE9E8', '#62B6CB', '#F4373A', '#BEE9E8', '#62B6CB', '#F4373A'
+                ],
+                borderColor: [
+                    '#BEE9E8', '#62B6CB', '#F4373A', '#BEE9E8', '#62B6CB', '#F4373A',
+                    '#BEE9E8', '#62B6CB', '#F4373A', '#BEE9E8', '#62B6CB', '#F4373A'
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        const config = {
+            type: 'bar',
+            data: monthlyData,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        enabled: true
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: {
+                            autoSkip: false,
+                            maxRotation: 90,
+                            minRotation: 45
+                        }
+                    },
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        };
+
+        const ctx = document.getElementById('monthlyBookingChart').getContext('2d');
+        const monthlyBookingChart = new Chart(ctx, config);
+    </script>
 </body>
 </html>
