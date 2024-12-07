@@ -196,6 +196,78 @@ namespace ABSystem.Services.Services
             return listBooks;
         }
 
+        public IEnumerable<UserBookDto> GetFiveRecentlyAcceptedBooking()
+        {
+
+            string loggedInUserId = _httpContextAccessor.HttpContext?.Session.GetString("UserId")!;
+
+            if (string.IsNullOrEmpty(loggedInUserId))
+            {
+                throw new InvalidOperationException("User is not logged in.");
+            }
+
+            List<UserBookDto> listBooks = new List<UserBookDto>();
+
+            var books = this._bookRepository.GetFiveRecentlyAcceptedBooking(loggedInUserId);
+
+            foreach (var book in books)
+            {
+                UserBookDto userBookDto = new UserBookDto();
+                _mapper.Map(book, userBookDto);
+                listBooks.Add(userBookDto);
+            }
+
+            return listBooks;
+
+        }
+
+        public IEnumerable<UserBookDto> GetFiveRecentlyPendingBooking()
+        {
+            string loggedInUserId = _httpContextAccessor.HttpContext?.Session.GetString("UserId")!;
+
+            if (string.IsNullOrEmpty(loggedInUserId))
+            {
+                throw new InvalidOperationException("User is not logged in.");
+            }
+
+            List<UserBookDto> listBooks = new List<UserBookDto>();
+
+            var books = this._bookRepository.GetFiveRecentlyPendingBooking(loggedInUserId);
+
+            foreach (var book in books)
+            {
+                UserBookDto userBookDto = new UserBookDto();
+                _mapper.Map(book, userBookDto);
+                listBooks.Add(userBookDto);
+            }
+
+            return listBooks;
+        }
+
+        public IEnumerable<UserBookDto> GetFiveUpComingBooking()
+        {
+
+            string loggedInUserId = _httpContextAccessor.HttpContext?.Session.GetString("UserId")!;
+
+            if (string.IsNullOrEmpty(loggedInUserId))
+            {
+                throw new InvalidOperationException("User is not logged in.");
+            }
+
+            List<UserBookDto> listBooks = new List<UserBookDto>();
+
+            var books = this._bookRepository.GetFiveUpComingBooking(loggedInUserId);
+
+            foreach (var book in books)
+            {
+                UserBookDto userBookDto = new UserBookDto();
+                _mapper.Map(book, userBookDto);
+                listBooks.Add(userBookDto);
+            }
+
+            return listBooks;
+        }
+
         public BookObj MonthlyCountBooking()
         {
             return this._bookRepository.MonthlyCountBooking();

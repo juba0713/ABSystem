@@ -49,5 +49,9 @@ namespace ABSystem.Services.Interfaces
 
         public int CountRejectedBooking();
         public BookObj MonthlyCountBooking();
+
+        public IEnumerable<UserBookDto> GetFiveRecentlyPendingBooking();
+        public IEnumerable<UserBookDto> GetFiveRecentlyAcceptedBooking();
+        public IEnumerable<UserBookDto> GetFiveUpComingBooking();
     }
 }
