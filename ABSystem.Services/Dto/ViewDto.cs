@@ -42,5 +42,9 @@ namespace ABSystem.Services.Dto
 
         public IEnumerable<Notification> Notifications { get; set; } = new List<Notification>();
         public IEnumerable<Notification> UserNotifications { get; set; } = new List<Notification>();
+
+        public IEnumerable<UserBookDto> FiveRecentlyPendingBooking { get ; set; } = new List<UserBookDto>();
+        public IEnumerable<UserBookDto> FiveRecentlyAcceptedBooking { get; set; } = new List<UserBookDto>();
+        public IEnumerable<UserBookDto> FiveUpComingBooking { get; set; } = new List<UserBookDto>();
     }
 }

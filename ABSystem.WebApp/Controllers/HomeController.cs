@@ -92,7 +92,23 @@ namespace ABSystem.WebApp.Controllers
         [Route("/dashboard")]
         public IActionResult Dashboard()
         {
-            return PartialView("~/Views/User/Dashboard.cshtml");
+            ViewDto viewDto = new ViewDto();
+            try
+            {
+
+                viewDto.FiveRecentlyPendingBooking = this._bookService.GetFiveRecentlyPendingBooking();
+                viewDto.FiveRecentlyAcceptedBooking = this._bookService.GetFiveRecentlyAcceptedBooking();
+                viewDto.FiveUpComingBooking = this._bookService.GetFiveUpComingBooking();
+
+
+                return PartialView("~/Views/User/Dashboard.cshtml", viewDto);
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError(ex, MessageConstant.ERROR);
+                return PartialView("~/Views/User/Dashboard.cshtml", viewDto);
+            }
+
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

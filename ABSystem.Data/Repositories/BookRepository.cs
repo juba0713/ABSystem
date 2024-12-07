@@ -125,5 +125,27 @@ namespace ABSystem.Data.Repositories
 
             return bookObj;
         }
+
+        public IEnumerable<Book> GetFiveRecentlyPendingBooking(string userId)
+        {
+            return this._context.Books.Include(b => b.Room).Where(b => b.UserId.Equals(userId) && b.Status.Equals("Pending")).Take(5).ToList();
+        }
+
+        public IEnumerable<Book> GetFiveRecentlyAcceptedBooking(string userId)
+        {
+            return this._context.Books.Include(b => b.Room).Where(b => b.UserId.Equals(userId) && b.Status.Equals("Accepted")).Take(5).ToList();
+        }
+
+        public IEnumerable<Book> GetFiveUpComingBooking(string userId)
+        {
+            DateTime now = DateTime.Now;
+
+            return this._context.Books.Include(b => b.Room)
+                .Where(b => b.UserId.Equals(userId) &&  b.Status.Equals("Accepted") && b.BookDate > now.Date || (b.BookDate == now.Date && b.StartTime > now.TimeOfDay)) // Future bookings
+                .OrderBy(b => b.BookDate)
+                .ThenBy(b => b.StartTime) // Closest first
+                .Take(5)
+                .ToList();
+        }
     }
 }
