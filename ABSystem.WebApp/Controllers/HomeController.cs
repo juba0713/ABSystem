@@ -83,7 +83,7 @@ namespace ABSystem.WebApp.Controllers
             viewDto.CountUsers = await this._userManager.Users.CountAsync();
             viewDto.Notifications = this._notificationService.GetAllNotifications();
             viewDto.UserNotifications = this._notificationService.GetRecentlyUserNotifications();
-
+            viewDto.MonthlyCountBookings = this._bookService.MonthlyCountBooking();
             return PartialView("~/Views/Super/Dashboard.cshtml", viewDto);
         }
 
