@@ -100,6 +100,8 @@
                                     <th>Date</th>                                                                                                    
                                     <th>Start Time</th>
                                     <th>End Time</th>
+                                    <th>Is Recurrence</th>
+                                    <th>Recurrence Type</th>
                                     <th>Status</th>
                                     <th></th>
                                 </tr>                          
@@ -116,6 +118,8 @@
                                             <td>@book.BookDate.ToString("MMM dd, yyyy")</td>
                                             <td>@(new DateTime(book.StartTime.Ticks).ToString("hh:mm tt"))</td>
                                             <td>@(new DateTime(book.EndTime.Ticks).ToString("hh:mm tt"))</td>
+                                            <td>@book.IsRecurrence</td>
+                                            <td>@book.RecurrenceType</td>
                                             <td>
                                                 @if(book.Status == CommonConstant.PENDING)
                                                 { 

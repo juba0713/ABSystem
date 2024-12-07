@@ -28,6 +28,28 @@
     }
     <div class="sidebar-2 border-radius-5">
         <div>
+            @if (roleName.Equals("SuperAdmin"))
+            {
+                <a asp-controller="Home" asp-action="SuperAdminDashboard">
+                    <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3.125 9.37565L12.5 2.08398L21.875 9.37565V20.834C21.875 21.3865 21.6555 21.9164 21.2648 22.3071C20.8741 22.6978 20.3442 22.9173 19.7917 22.9173H5.20833C4.6558 22.9173 4.12589 22.6978 3.73519 22.3071C3.34449 21.9164 3.125 21.3865 3.125 20.834V9.37565Z" stroke="#A9A9A9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M9.375 22.9167V12.5H15.625V22.9167" stroke="#A9A9A9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+
+                    <div class="a-text">Dashboard</div>
+                </a>
+            }
+            else
+            {
+                <a asp-controller="Home" asp-action="AdminDashboard">
+                    <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3.125 9.37565L12.5 2.08398L21.875 9.37565V20.834C21.875 21.3865 21.6555 21.9164 21.2648 22.3071C20.8741 22.6978 20.3442 22.9173 19.7917 22.9173H5.20833C4.6558 22.9173 4.12589 22.6978 3.73519 22.3071C3.34449 21.9164 3.125 21.3865 3.125 20.834V9.37565Z" stroke="#A9A9A9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M9.375 22.9167V12.5H15.625V22.9167" stroke="#A9A9A9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+
+                    <div class="a-text">Dashboard</div>
+                </a>
+            }
             <a asp-controller="Home" asp-action="AdminDashboard">
                 <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M3.125 9.37565L12.5 2.08398L21.875 9.37565V20.834C21.875 21.3865 21.6555 21.9164 21.2648 22.3071C20.8741 22.6978 20.3442 22.9173 19.7917 22.9173H5.20833C4.6558 22.9173 4.12589 22.6978 3.73519 22.3071C3.34449 21.9164 3.125 21.3865 3.125 20.834V9.37565Z" stroke="#A9A9A9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />

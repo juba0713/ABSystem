@@ -20,7 +20,12 @@ namespace ABSystem.Services.Services
         {
             _notificationRepository = notificationRepository;
             _httpContextAccessor = httpContextAccessor;
-        }   
+        }
+
+        public IEnumerable<Notification> GetAllNotifications()
+        {
+            return this._notificationRepository.GetAllNotifications();
+        }
 
         public IEnumerable<Notification> GetNotifications()
         {
@@ -42,6 +47,11 @@ namespace ABSystem.Services.Services
             notification.UpdateDate = DateTime.Now;
 
             this._notificationRepository.UpdateNotificationRead(notification);
+        }
+
+        public IEnumerable<Notification> GetRecentlyUserNotifications()
+        {
+            return this._notificationRepository.GetRecentlyUserNotifications();
         }
     }
 }

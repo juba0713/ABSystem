@@ -33,5 +33,8 @@ namespace ABSystem.Data.Interfaces
          * This method is to get notification by its id
          */
         public Notification GetNotificationByNotificationId(int notificationId);
+
+        public IEnumerable<Notification> GetAllNotifications();
+        public IEnumerable<Notification> GetRecentlyUserNotifications();
     }
 }

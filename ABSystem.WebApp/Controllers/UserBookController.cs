@@ -110,7 +110,7 @@ namespace ABSystem.WebApp.Controllers
             }
 
 
-            return PartialView(CommonConstant.A_BOOK_DETAILS_HTML, book);
+            return PartialView(CommonConstant.U_BOOK_DETAILS_HTML, book);
         }
 
         [HttpPost]

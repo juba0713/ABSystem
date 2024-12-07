@@ -1,4 +1,5 @@
-﻿using ABSystem.Data.Objects;
+﻿using ABSystem.Data.Models;
+using ABSystem.Data.Objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,5 +39,8 @@ namespace ABSystem.Services.Dto
         public int CountUsers {  get; set; }
 
         public BookObj? MonthlyCountBookings { get; set; }
+
+        public IEnumerable<Notification> Notifications { get; set; } = new List<Notification>();
+        public IEnumerable<Notification> UserNotifications { get; set; } = new List<Notification>();
     }
 }

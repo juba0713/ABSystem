@@ -23,5 +23,9 @@ namespace ABSystem.Services.Interfaces
          * This method is to update notification read which means it has been read by the user
          */
         public void UpdateNotificationRead(int notificationId);
+
+        public IEnumerable<Notification> GetAllNotifications();
+
+        public IEnumerable<Notification> GetRecentlyUserNotifications();
     }
 }

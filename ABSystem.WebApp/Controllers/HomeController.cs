@@ -22,16 +22,19 @@ namespace ABSystem.WebApp.Controllers
         private readonly IBookService _bookService;
         private readonly IRoomService _roomService;
         private readonly UserManager<User> _userManager;
+        private readonly INotificationService _notificationService;
 
         public HomeController(ILogger<HomeController> logger, 
             IRoomService roomService, 
             IBookService bookService,
-            UserManager<User> userManager)
+            UserManager<User> userManager,
+            INotificationService notificationService)
         {
             _logger = logger;
             _roomService = roomService;
             _bookService = bookService; 
             _userManager = userManager;
+            _notificationService = notificationService;
         }
 
         public IActionResult Index()
@@ -67,9 +70,21 @@ namespace ABSystem.WebApp.Controllers
         [Authorize(Roles = CommonConstant.Super)]
         [HttpGet]
         [Route("/super/dashboard")]
-        public IActionResult SuperDashboard()
+        public async Task<IActionResult> SuperDashboard()
         {
-            return PartialView("~/Views/Super/Dashboard.cshtml");
+
+            ViewDto viewDto = new ViewDto();
+
+            viewDto.CountRooms = this._roomService.CountRooms();
+            viewDto.CountBookings = this._bookService.CountBooking();
+            viewDto.CountPendingBookings = this._bookService.CountPendingBooking();
+            viewDto.CountAcceptedBookings = this._bookService.CountAcceptedBooking();
+            viewDto.CountRejectedBookings = this._bookService.CountRejectedBooking();
+            viewDto.CountUsers = await this._userManager.Users.CountAsync();
+            viewDto.Notifications = this._notificationService.GetAllNotifications();
+            viewDto.UserNotifications = this._notificationService.GetRecentlyUserNotifications();
+
+            return PartialView("~/Views/Super/Dashboard.cshtml", viewDto);
         }
 
         [Authorize(Roles = CommonConstant.User)]
